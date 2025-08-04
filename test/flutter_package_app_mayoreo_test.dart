@@ -1,7 +1,6 @@
+import 'package:flutter_package_app_mayoreo/src/widgets/buttons/primary_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 void main() {
   testWidgets('PrimaryButton displays correct text', (WidgetTester tester) async {
