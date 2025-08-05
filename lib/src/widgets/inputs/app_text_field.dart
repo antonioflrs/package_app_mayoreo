@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/colors/app_colors.dart';
 
 /// Custom text field widget for the app_mayoreo package
 class AppTextField extends StatefulWidget {
@@ -81,7 +82,6 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +91,8 @@ class _AppTextFieldState extends State<AppTextField> {
             widget.labelText!,
             style: theme.textTheme.labelLarge?.copyWith(
               color: _hasFocus 
-                  ? theme.colorScheme.primary 
-                  : theme.colorScheme.onSurfaceVariant,
+                  ? AppColors.orangeBrand
+                  : AppColors.grayMedium,
             ),
           ),
           const SizedBox(height: 8),
@@ -112,14 +112,14 @@ class _AppTextFieldState extends State<AppTextField> {
           maxLength: widget.maxLength,
           autofocus: widget.autofocus,
           style: _getTextStyle(theme),
-          decoration: _buildInputDecoration(theme, isDark),
+          decoration: _buildInputDecoration(theme),
         ),
         if (widget.helperText != null && widget.errorText == null) ...[
           const SizedBox(height: 4),
           Text(
             widget.helperText!,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+              color: AppColors.grayMedium,
             ),
           ),
         ],
@@ -130,32 +130,32 @@ class _AppTextFieldState extends State<AppTextField> {
   TextStyle _getTextStyle(ThemeData theme) {
     return theme.textTheme.bodyLarge?.copyWith(
       color: widget.enabled 
-          ? theme.colorScheme.onSurface 
-          : theme.colorScheme.onSurfaceVariant,
+          ? AppColors.black
+          : AppColors.grayMedium,
     ) ?? const TextStyle();
   }
 
-  InputDecoration _buildInputDecoration(ThemeData theme, bool isDark) {
+  InputDecoration _buildInputDecoration(ThemeData theme) {
     return InputDecoration(
       hintText: widget.hintText,
       hintStyle: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
+        color: AppColors.grayMedium,
       ),
       prefixIcon: widget.prefixIcon,
       suffixIcon: _buildSuffixIcon(theme),
       filled: true,
       fillColor: widget.enabled 
-          ? theme.colorScheme.surfaceContainerHighest 
-          : theme.colorScheme.surface,
-      border: _buildBorder(theme),
-      enabledBorder: _buildBorder(theme),
-      focusedBorder: _buildBorder(theme, isFocused: true),
-      errorBorder: _buildBorder(theme, isError: true),
-      focusedErrorBorder: _buildBorder(theme, isFocused: true, isError: true),
+          ? AppColors.softGray
+          : AppColors.backCards,
+      border: _buildBorder(),
+      enabledBorder: _buildBorder(),
+      focusedBorder: _buildBorder(isFocused: true),
+      errorBorder: _buildBorder(isError: true),
+      focusedErrorBorder: _buildBorder(isFocused: true, isError: true),
       contentPadding: _getContentPadding(),
       errorText: widget.errorText,
       errorStyle: theme.textTheme.bodySmall?.copyWith(
-        color: theme.colorScheme.error,
+        color: AppColors.digitalRed,
       ),
     );
   }
@@ -165,7 +165,7 @@ class _AppTextFieldState extends State<AppTextField> {
       return IconButton(
         icon: Icon(
           _obscureText ? Icons.visibility : Icons.visibility_off,
-          color: theme.colorScheme.onSurfaceVariant,
+          color: AppColors.grayMedium,
         ),
         onPressed: () {
           setState(() {
@@ -177,8 +177,7 @@ class _AppTextFieldState extends State<AppTextField> {
     return widget.suffixIcon;
   }
 
-  OutlineInputBorder _buildBorder(
-    ThemeData theme, {
+  OutlineInputBorder _buildBorder({
     bool isFocused = false,
     bool isError = false,
   }) {
@@ -186,12 +185,12 @@ class _AppTextFieldState extends State<AppTextField> {
     double borderWidth = 1;
 
     if (isError) {
-      borderColor = theme.colorScheme.error;
+      borderColor = AppColors.digitalRed;
     } else if (isFocused) {
-      borderColor = theme.colorScheme.primary;
+      borderColor = AppColors.orangeBrand;
       borderWidth = 2;
     } else {
-      borderColor = theme.colorScheme.outline;
+      borderColor = AppColors.silverGrayMedium;
     }
 
     return OutlineInputBorder(

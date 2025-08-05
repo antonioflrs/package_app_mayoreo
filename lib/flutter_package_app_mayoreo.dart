@@ -18,17 +18,19 @@ class FlutterPackageAppMayoreo {
   // Private constructor to prevent instantiation
   FlutterPackageAppMayoreo._();
 
-  /// Get the light theme
-  static ThemeData get lightTheme => AppTheme.light;
+  /// Get the main theme
+  static ThemeData get theme => AppTheme.theme;
 
-  /// Get the dark theme
-  static ThemeData get darkTheme => AppTheme.dark;
+  /// Legacy getters for backward compatibility
+  static ThemeData get lightTheme => AppTheme.theme;
+  static ThemeData get darkTheme => AppTheme.theme;
 
-  /// Get the light color scheme
-  static ColorScheme get lightColorScheme => AppColors.lightColorScheme;
+  /// Get the color scheme
+  static ColorScheme get colorScheme => AppColors.colorScheme;
 
-  /// Get the dark color scheme
-  static ColorScheme get darkColorScheme => AppColors.darkColorScheme;
+  /// Legacy getters for backward compatibility
+  static ColorScheme get lightColorScheme => AppColors.colorScheme;
+  static ColorScheme get darkColorScheme => AppColors.colorScheme;
 
   /// Get the text theme
   static TextTheme get textTheme => AppTypography.textTheme;

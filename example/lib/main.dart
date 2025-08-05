@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Package App Mayoreo Demo',
-      theme: FlutterPackageAppMayoreo.lightTheme,
-      darkTheme: FlutterPackageAppMayoreo.darkTheme,
+      theme: FlutterPackageAppMayoreo.theme,
       home: const MyHomePage(title: 'Flutter Package App Mayoreo Demo'),
     );
   }
@@ -31,7 +30,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isDarkMode = false;
 
   @override
   void dispose() {
@@ -42,47 +40,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: widget.title,
-      theme: _isDarkMode 
-          ? FlutterPackageAppMayoreo.darkTheme 
-          : FlutterPackageAppMayoreo.lightTheme,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-          actions: [
-            IconButton(
-              icon: Icon(_isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: () {
-                setState(() {
-                  _isDarkMode = !_isDarkMode;
-                });
-              },
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildSectionTitle('Temas y Colores'),
+            _buildThemeSection(),
+            
+            const SizedBox(height: 32),
+            _buildSectionTitle('Botones'),
+            _buildButtonsSection(),
+            
+            const SizedBox(height: 32),
+            _buildSectionTitle('Campos de Texto'),
+            _buildTextFieldSection(),
+            
+            const SizedBox(height: 32),
+            _buildSectionTitle('Tipografía'),
+            _buildTypographySection(),
           ],
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildSectionTitle('Temas y Colores'),
-              _buildThemeSection(),
-              
-              const SizedBox(height: 32),
-              _buildSectionTitle('Botones'),
-              _buildButtonsSection(),
-              
-              const SizedBox(height: 32),
-              _buildSectionTitle('Campos de Texto'),
-              _buildTextFieldSection(),
-              
-              const SizedBox(height: 32),
-              _buildSectionTitle('Tipografía'),
-              _buildTypographySection(),
-            ],
-          ),
         ),
       ),
     );

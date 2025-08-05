@@ -7,13 +7,13 @@ import 'icons/app_icons.dart';
 class AppTheme {
   static const String _fontFamily = 'Inter';
 
-  /// Light theme configuration
-  static ThemeData get light {
+  /// Main theme configuration (single theme)
+  static ThemeData get theme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: _fontFamily,
-      colorScheme: AppColors.lightColorScheme,
+      colorScheme: AppColors.colorScheme,
       textTheme: AppTypography.textTheme,
       iconTheme: AppIcons.iconTheme,
       appBarTheme: _buildAppBarTheme(),
@@ -26,46 +26,25 @@ class AppTheme {
     );
   }
 
-  /// Dark theme configuration
-  static ThemeData get dark {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      fontFamily: _fontFamily,
-      colorScheme: AppColors.darkColorScheme,
-      textTheme: AppTypography.textTheme,
-      iconTheme: AppIcons.iconTheme,
-      appBarTheme: _buildAppBarTheme(isDark: true),
-      elevatedButtonTheme: _buildElevatedButtonTheme(isDark: true),
-      outlinedButtonTheme: _buildOutlinedButtonTheme(isDark: true),
-      textButtonTheme: _buildTextButtonTheme(isDark: true),
-      inputDecorationTheme: _buildInputDecorationTheme(isDark: true),
-      cardTheme: _buildCardTheme(isDark: true),
-      dividerTheme: _buildDividerTheme(isDark: true),
-    );
-  }
+  /// Legacy getters for backward compatibility
+  static ThemeData get light => theme;
+  static ThemeData get dark => theme;
 
   /// AppBar theme configuration
-  static AppBarTheme _buildAppBarTheme({bool isDark = false}) {
+  static AppBarTheme _buildAppBarTheme() {
     return AppBarTheme(
       elevation: 0,
       centerTitle: true,
-      backgroundColor: isDark 
-          ? AppColors.darkColorScheme.surface 
-          : AppColors.lightColorScheme.surface,
-      foregroundColor: isDark 
-          ? AppColors.darkColorScheme.onSurface 
-          : AppColors.lightColorScheme.onSurface,
+      backgroundColor: AppColors.colorScheme.surface,
+      foregroundColor: AppColors.colorScheme.onSurface,
       titleTextStyle: AppTypography.headlineSmall?.copyWith(
-        color: isDark 
-            ? AppColors.darkColorScheme.onSurface 
-            : AppColors.lightColorScheme.onSurface,
+        color: AppColors.colorScheme.onSurface,
       ),
     );
   }
 
   /// ElevatedButton theme configuration
-  static ElevatedButtonThemeData _buildElevatedButtonTheme({bool isDark = false}) {
+  static ElevatedButtonThemeData _buildElevatedButtonTheme() {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 2,
@@ -73,18 +52,14 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        backgroundColor: isDark 
-            ? AppColors.darkColorScheme.primary 
-            : AppColors.lightColorScheme.primary,
-        foregroundColor: isDark 
-            ? AppColors.darkColorScheme.onPrimary 
-            : AppColors.lightColorScheme.onPrimary,
+        backgroundColor: AppColors.colorScheme.primary,
+        foregroundColor: AppColors.colorScheme.onPrimary,
       ),
     );
   }
 
   /// OutlinedButton theme configuration
-  static OutlinedButtonThemeData _buildOutlinedButtonTheme({bool isDark = false}) {
+  static OutlinedButtonThemeData _buildOutlinedButtonTheme() {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -92,67 +67,51 @@ class AppTheme {
           borderRadius: BorderRadius.circular(8),
         ),
         side: BorderSide(
-          color: isDark 
-              ? AppColors.darkColorScheme.outline 
-              : AppColors.lightColorScheme.outline,
+          color: AppColors.colorScheme.outline,
         ),
-        foregroundColor: isDark 
-            ? AppColors.darkColorScheme.primary 
-            : AppColors.lightColorScheme.primary,
+        foregroundColor: AppColors.colorScheme.primary,
       ),
     );
   }
 
   /// TextButton theme configuration
-  static TextButtonThemeData _buildTextButtonTheme({bool isDark = false}) {
+  static TextButtonThemeData _buildTextButtonTheme() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        foregroundColor: isDark 
-            ? AppColors.darkColorScheme.primary 
-            : AppColors.lightColorScheme.primary,
+        foregroundColor: AppColors.colorScheme.primary,
       ),
     );
   }
 
   /// InputDecoration theme configuration
-  static InputDecorationTheme _buildInputDecorationTheme({bool isDark = false}) {
+  static InputDecorationTheme _buildInputDecorationTheme() {
     return InputDecorationTheme(
       filled: true,
-      fillColor: isDark 
-          ? AppColors.darkColorScheme.surfaceContainerHighest 
-          : AppColors.lightColorScheme.surfaceContainerHighest,
+      fillColor: AppColors.colorScheme.surfaceContainerHighest,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: isDark 
-              ? AppColors.darkColorScheme.outline 
-              : AppColors.lightColorScheme.outline,
+          color: AppColors.colorScheme.outline,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: isDark 
-              ? AppColors.darkColorScheme.outline 
-              : AppColors.lightColorScheme.outline,
+          color: AppColors.colorScheme.outline,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: isDark 
-              ? AppColors.darkColorScheme.primary 
-              : AppColors.lightColorScheme.primary,
+          color: AppColors.colorScheme.primary,
           width: 2,
         ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: isDark 
-              ? AppColors.darkColorScheme.error 
-              : AppColors.lightColorScheme.error,
+          color: AppColors.colorScheme.error,
         ),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -160,24 +119,20 @@ class AppTheme {
   }
 
   /// Card theme configuration
-  static CardThemeData _buildCardTheme({bool isDark = false}) {
+  static CardThemeData _buildCardTheme() {
     return CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: isDark 
-          ? AppColors.darkColorScheme.surface 
-          : AppColors.lightColorScheme.surface,
+      color: AppColors.colorScheme.surface,
     );
   }
 
   /// Divider theme configuration
-  static DividerThemeData _buildDividerTheme({bool isDark = false}) {
+  static DividerThemeData _buildDividerTheme() {
     return DividerThemeData(
-      color: isDark 
-          ? AppColors.darkColorScheme.outline 
-          : AppColors.lightColorScheme.outline,
+      color: AppColors.colorScheme.outline,
       thickness: 1,
       space: 1,
     );

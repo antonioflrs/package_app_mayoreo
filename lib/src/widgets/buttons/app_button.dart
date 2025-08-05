@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/colors/app_colors.dart';
 
 /// Base button widget for the app_mayoreo package
 class AppButton extends StatelessWidget {
@@ -26,9 +27,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     
-    final buttonStyle = _getButtonStyle(theme, isDark);
+    final buttonStyle = _getButtonStyle(theme);
     final buttonSize = _getButtonSize();
     
     Widget buttonWidget;
@@ -88,14 +88,14 @@ class AppButton extends StatelessWidget {
   Color _getLoadingColor() {
     switch (variant) {
       case AppButtonVariant.primary:
-        return Colors.white;
+        return AppColors.white;
       case AppButtonVariant.secondary:
       case AppButtonVariant.text:
-        return Colors.grey;
+        return AppColors.grayMedium;
     }
   }
 
-  ButtonStyle _getButtonStyle(ThemeData theme, bool isDark) {
+  ButtonStyle _getButtonStyle(ThemeData theme) {
     final buttonSize = _getButtonSize();
     
     switch (variant) {
@@ -106,11 +106,11 @@ class AppButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           backgroundColor: isDisabled 
-              ? theme.colorScheme.surfaceContainerHighest 
-              : theme.colorScheme.primary,
+              ? AppColors.softGray
+              : AppColors.orangeBrand,
           foregroundColor: isDisabled 
-              ? theme.colorScheme.onSurfaceVariant 
-              : theme.colorScheme.onPrimary,
+              ? AppColors.grayMedium
+              : AppColors.white,
         );
       case AppButtonVariant.secondary:
         return OutlinedButton.styleFrom(
@@ -120,19 +120,19 @@ class AppButton extends StatelessWidget {
           ),
           side: BorderSide(
             color: isDisabled 
-                ? theme.colorScheme.outline 
-                : theme.colorScheme.primary,
+                ? AppColors.silverGrayMedium
+                : AppColors.orangeBrand,
           ),
           foregroundColor: isDisabled 
-              ? theme.colorScheme.onSurfaceVariant 
-              : theme.colorScheme.primary,
+              ? AppColors.grayMedium
+              : AppColors.orangeBrand,
         );
       case AppButtonVariant.text:
         return TextButton.styleFrom(
           padding: buttonSize.padding,
           foregroundColor: isDisabled 
-              ? theme.colorScheme.onSurfaceVariant 
-              : theme.colorScheme.primary,
+              ? AppColors.grayMedium
+              : AppColors.orangeBrand,
         );
     }
   }

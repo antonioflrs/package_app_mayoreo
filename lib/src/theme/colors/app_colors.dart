@@ -2,114 +2,67 @@ import 'package:flutter/material.dart';
 
 /// Color scheme configuration for the app_mayoreo package
 class AppColors {
-  // Private constructor to prevent instantiation
   AppColors._();
 
-  // Primary colors
-  static const Color _primaryLight = Color(0xffe1a141);
-  static const Color _primaryDark = Color(0xffffffff);
-  
-  // Secondary colors
-  static const Color _secondaryLight = Color(0xFF424242);
-  static const Color _secondaryDark = Color(0xFFBDBDBD);
-  
-  // Tertiary colors
-  static const Color _tertiaryLight = Color(0xFF2E7D32);
-  static const Color _tertiaryDark = Color(0xFF81C784);
-  
-  // Error colors
-  static const Color _errorLight = Color(0xFFD32F2F);
-  static const Color _errorDark = Color(0xFFEF5350);
-  
-  // Neutral colors
-  static const Color _neutral0 = Color(0xFFFFFFFF);
-  static const Color _neutral50 = Color(0xFFF0F0F0);
-  static const Color _neutral200 = Color(0xFFC2C2C2);
-  static const Color _neutral300 = Color(0xFFA3A3A3);
-  static const Color _neutral600 = Color(0xFF474747);
-  static const Color _neutral700 = Color(0xFF292929);
-  static const Color _neutral800 = Color(0xFF141414);
-  static const Color _neutral900 = Color(0xFF000000);
+  // Main colors
+  static const Color orangeBrand = Color(0xffe1a141);
+  static const Color ochreBrand = Color(0xffc79022);
+  static const Color oliveBrand = Color(0xff84861c);
+  static const Color lightTan = Color(0xfff1d992);
+  static const Color backCards = Color(0xfff1f0ec);
+  static const Color black = Color(0xff232323);
+  static const Color grayMedium = Color(0xffa7adba);
+  static const Color white = Color(0xffffffff);
+  static const Color softGray = Color(0xfff9f9f9);
 
-  // Surface colors
-  static const Color _surfaceLight = _neutral0;
-  static const Color _surfaceDark = _neutral900;
-  static const Color _surfaceVariantLight = _neutral50;
-  static const Color _surfaceVariantDark = _neutral800;
+  // De apoyo
+  static const Color digitalRed = Color(0xffff0000);
+  static const Color orangeRed = Color(0xffff5757);
+  static const Color fadedRed = Color(0xffd54c4c);
+  static const Color cappuccinoWhite = Color(0xffe5e6c8);
+  static const Color limeGreen = Color(0xff32cd32);
+  static const Color greenFree = Color(0xff047B5D);
+  static const Color smokeGreenMedium = Color(0xff9ba65c);
+  static const Color greenBorder = Color(0xff21CD5B);
+  static const Color truGreen = Color(0xff299617);
+  static const Color yellow = Color(0xfffada28);
+  static const Color amarilloSuscripciones = Color(0xffF3BE55);
 
-  /// Light color scheme
-  static const ColorScheme lightColorScheme = ColorScheme(
+  // Gray Scale
+  static const Color backGratis = Color(0xffddffe9);
+  static const Color mysticGray = Color(0xffdde5e8);
+  static const Color silverGrayMedium = Color(0xffd4d4d4);
+  static const Color slateCoolGray = Color(0xff708090);
+  static const Color warmGray = Color(0xff888888);
+  static const Color darkGray = Color(0xff3d3d3d);
+  static const Color pureBlack = Color(0xff000000);
+
+  /// Main color scheme for the app (single theme)
+  static ColorScheme get colorScheme => const ColorScheme(
     brightness: Brightness.light,
-    primary: _primaryLight,
-    onPrimary: _neutral0,
-    primaryContainer: Color(0xFFBBDEFB),
-    onPrimaryContainer: Color(0xFF0D47A1),
-    secondary: _secondaryLight,
-    onSecondary: _neutral0,
-    secondaryContainer: Color(0xFFE0E0E0),
-    onSecondaryContainer: Color(0xFF212121),
-    tertiary: _tertiaryLight,
-    onTertiary: _neutral0,
-    tertiaryContainer: Color(0xFFC8E6C9),
-    onTertiaryContainer: Color(0xFF1B5E20),
-    error: _errorLight,
-    onError: _neutral0,
-    errorContainer: Color(0xFFFFCDD2),
-    onErrorContainer: Color(0xFFB71C1C),
-    surface: _surfaceLight,
-    onSurface: _neutral900,
-    surfaceContainerHighest: _surfaceVariantLight,
-    onSurfaceVariant: _neutral700,
-    outline: _neutral300,
-    outlineVariant: _neutral200,
-    shadow: Color(0xFF000000),
-    scrim: Color(0xFF000000),
-    inverseSurface: _neutral900,
-    onInverseSurface: _neutral0,
-    inversePrimary: Color(0xFF90CAF9),
-    surfaceTint: _primaryLight,
+    primary: orangeBrand,
+    onPrimary: white,
+    secondary: ochreBrand,
+    onSecondary: white,
+    tertiary: oliveBrand,
+    onTertiary: white,
+    error: digitalRed,
+    onError: white,
+    surface: backCards,
+    onSurface: black,
+    surfaceContainerHighest: softGray,
+    onSurfaceVariant: grayMedium,
+    outline: silverGrayMedium,
+    outlineVariant: mysticGray,
+    shadow: pureBlack,
+    scrim: pureBlack,
+    inverseSurface: black,
+    onInverseSurface: white,
+    inversePrimary: lightTan,
+    surfaceTint: orangeBrand,
   );
 
-  /// Dark color scheme
-  static const ColorScheme darkColorScheme = ColorScheme(
-    brightness: Brightness.dark,
-    primary: _primaryDark,
-    onPrimary: _neutral900,
-    primaryContainer: Color(0xFF1976D2),
-    onPrimaryContainer: Color(0xFFE3F2FD),
-    secondary: _secondaryDark,
-    onSecondary: _neutral900,
-    secondaryContainer: Color(0xFF424242),
-    onSecondaryContainer: Color(0xFFE0E0E0),
-    tertiary: _tertiaryDark,
-    onTertiary: _neutral900,
-    tertiaryContainer: Color(0xFF2E7D32),
-    onTertiaryContainer: Color(0xFFC8E6C9),
-    error: _errorDark,
-    onError: _neutral900,
-    errorContainer: Color(0xFFD32F2F),
-    onErrorContainer: Color(0xFFFFCDD2),
-    surface: _surfaceDark,
-    onSurface: _neutral0,
-    surfaceContainerHighest: _surfaceVariantDark,
-    onSurfaceVariant: _neutral300,
-    outline: _neutral600,
-    outlineVariant: _neutral700,
-    shadow: Color(0xFF000000),
-    scrim: Color(0xFF000000),
-    inverseSurface: _neutral0,
-    onInverseSurface: _neutral900,
-    inversePrimary: Color(0xFF1976D2),
-    surfaceTint: _primaryDark,
-  );
-
-  /// Semantic colors for business logic
-  static const Color success = Color(0xFF4CAF50);
-  static const Color warning = Color(0xFFFF9800);
-  static const Color info = Color(0xFF2196F3);
-  
-  /// Brand colors (customize according to your brand)
-  static const Color brandPrimary = _primaryLight;
-  static const Color brandSecondary = Color(0xFFFF6B35);
-  static const Color brandAccent = Color(0xFF00BCD4);
-} 
+  /// Legacy getters for backward compatibility (now all return the same scheme)
+  static ColorScheme get lightColorScheme => colorScheme;
+  static ColorScheme get darkColorScheme => colorScheme;
+}
