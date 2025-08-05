@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Package App Mayoreo Demo',
+      title: 'Package App Mayoreo Demo',
       theme: FlutterPackageAppMayoreo.theme,
-      home: const MyHomePage(title: 'Flutter Package App Mayoreo Demo'),
+      home: const MyHomePage(title: 'Package App Mayoreo Demo'),
     );
   }
 }
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: AppColors.backCards,
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _buildThemeSection(),
             
             const SizedBox(height: 32),
-            _buildSectionTitle('Botones'),
+            _buildSectionTitle('Sistema de Botones'),
             _buildButtonsSection(),
             
             const SizedBox(height: 32),
@@ -76,6 +76,167 @@ class _MyHomePageState extends State<MyHomePage> {
       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
         fontWeight: FontWeight.bold,
         color: Theme.of(context).colorScheme.primary,
+      ),
+    );
+  }
+
+  Widget _buildButtonsSection() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Tipos de botones',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón primario presionado'),
+                  label: 'Primario',
+                  type: UiButtonType.primary,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón secundario presionado'),
+                  label: 'Secundario',
+                  type: UiButtonType.secondary,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón de texto presionado'),
+                  label: 'Texto',
+                  type: UiButtonType.text,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón destructivo presionado'),
+                  label: 'Eliminar',
+                  type: UiButtonType.destructive,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Botones con iconos',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                UiButton(
+                  onPressed: () => _showSnackBar('Guardar presionado'),
+                  label: 'Guardar',
+                  icon: Icons.save,
+                  type: UiButtonType.primary,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Descargar presionado'),
+                  label: 'Descargar',
+                  icon: Icons.download,
+                  iconPosition: UiButtonIconPosition.end,
+                  type: UiButtonType.secondary,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Eliminar presionado'),
+                  label: 'Eliminar',
+                  icon: Icons.delete,
+                  type: UiButtonType.destructive,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Buscar presionado'),
+                  label: 'Buscar',
+                  icon: Icons.search,
+                  type: UiButtonType.text,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Tamaños de botones',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón pequeño'),
+                  label: 'Pequeño',
+                  size: UiButtonSize.small,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón mediano'),
+                  label: 'Mediano',
+                  size: UiButtonSize.medium,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón grande'),
+                  label: 'Grande',
+                  size: UiButtonSize.large,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Estados de botones',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón con carga'),
+                  label: 'Cargando...',
+                  isLoading: true,
+                ),
+                UiButton(
+                  onPressed: null,
+                  label: 'Deshabilitado',
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Border Radius personalizado',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón cuadrado'),
+                  label: 'Cuadrado',
+                  borderRadius: 0,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón redondeado'),
+                  label: 'Redondeado',
+                  borderRadius: 12,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón muy redondeado'),
+                  label: 'Muy redondeado',
+                  borderRadius: 25,
+                ),
+                UiButton(
+                  onPressed: () => _showSnackBar('Botón circular'),
+                  label: 'Circular',
+                  borderRadius: 50,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -129,94 +290,6 @@ class _MyHomePageState extends State<MyHomePage> {
           color: color.computeLuminance() > 0.5 ? Colors.black : Colors.white,
           fontSize: 12,
           fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButtonsSection() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Variantes de botones',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón primario presionado'),
-                  variant: AppButtonVariant.primary,
-                  child: const Text('Primario'),
-                ),
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón secundario presionado'),
-                  variant: AppButtonVariant.secondary,
-                  child: const Text('Secundario'),
-                ),
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón de texto presionado'),
-                  variant: AppButtonVariant.text,
-                  child: const Text('Texto'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Tamaños de botones',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón pequeño'),
-                  size: AppButtonSize.small,
-                  child: const Text('Pequeño'),
-                ),
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón mediano'),
-                  size: AppButtonSize.medium,
-                  child: const Text('Mediano'),
-                ),
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón grande'),
-                  size: AppButtonSize.large,
-                  child: const Text('Grande'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Estados de botones',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                AppButton(
-                  onPressed: () => _showSnackBar('Botón con carga'),
-                  isLoading: true,
-                  child: const Text('Cargando...'),
-                ),
-                AppButton(
-                  onPressed: null,
-                  isDisabled: true,
-                  child: const Text('Deshabilitado'),
-                ),
-              ],
-            ),
-          ],
         ),
       ),
     );

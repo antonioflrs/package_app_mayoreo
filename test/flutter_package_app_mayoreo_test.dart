@@ -1,14 +1,14 @@
-import 'package:flutter_package_app_mayoreo/src/widgets/buttons/primary_button.dart';
+import 'package:flutter_package_app_mayoreo/src/widgets/buttons/ui_button.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  testWidgets('PrimaryButton displays correct text', (WidgetTester tester) async {
+  testWidgets('UiButton displays correct text', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: PrimaryButton(
-            text: 'Test Button',
+          body: UiButton(
+            label: 'Test Button',
             onPressed: () {},
           ),
         ),
@@ -16,5 +16,36 @@ void main() {
     );
 
     expect(find.text('Test Button'), findsOneWidget);
+  });
+
+  testWidgets('UiButton handles loading state', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: UiButton(
+            label: 'Loading Button',
+            onPressed: () {},
+            isLoading: true,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testWidgets('UiButton handles disabled state', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: UiButton(
+            label: 'Disabled Button',
+            onPressed: null,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Disabled Button'), findsOneWidget);
   });
 }
