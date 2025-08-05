@@ -1,0 +1,103 @@
+name: flutter_package_app_mayoreo
+repository: https://github.com/antonioflrs/package_app_mayoreo.git
+
+packages:
+  - .
+  - example/
+
+scripts:
+  analyze:
+    description: Analyze all packages
+    run: melos exec -- "dart analyze ."
+    packageFilters:
+      includeDependents: true
+
+  test:
+    description: Run tests for all packages
+    run: melos exec -- "flutter test"
+    packageFilters:
+      includeDependents: true
+
+  build:
+    description: Build all packages
+    run: melos exec -- "flutter build"
+    packageFilters:
+      includeDependents: true
+
+  format:
+    description: Format all Dart files
+    run: melos exec -- "dart format ."
+    packageFilters:
+      includeDependents: true
+
+  pub-get:
+    description: Get dependencies for all packages
+    run: melos exec -- "flutter pub get"
+    packageFilters:
+      includeDependents: true
+
+  clean:
+    description: Clean all packages
+    run: melos exec -- "flutter clean"
+    packageFilters:
+      includeDependents: true
+
+  example:
+    description: Run the example app
+    run: melos exec -c 1 -- "flutter run"
+    packageFilters:
+      scope:
+        - example
+
+  example:build:
+    description: Build the example app
+    run: melos exec -c 1 -- "flutter build"
+    packageFilters:
+      scope:
+        - example
+
+  example:test:
+    description: Test the example app
+    run: melos exec -c 1 -- "flutter test"
+    packageFilters:
+      scope:
+        - example
+
+  publish:
+    description: Publish the main package to pub.dev
+    run: melos exec -c 1 -- "dart pub publish"
+    packageFilters:
+      scope:
+        - flutter_package_app_mayoreo
+
+  version:
+    description: Version all packages
+    run: melos version
+    packageFilters:
+      includeDependents: true
+
+  bootstrap:
+    description: Bootstrap the workspace
+    run: melos bootstrap
+    packageFilters:
+      includeDependents: true
+
+ide:
+  intellij:
+    enabled: true
+  vscode:
+    enabled: true
+
+versioning:
+  workspaceChangelog: true
+  changelog: true
+  groups:
+    - name: "Breaking Changes"
+      matchers: ["**/*.dart"]
+      autoLabel: true
+    - name: "Features"
+      matchers: ["**/*.dart"]
+      autoLabel: true
+    - name: "Bug Fixes"
+      matchers: ["**/*.dart"]
+      autoLabel: true 

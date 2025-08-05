@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: flutter_package_app_mayoreo
+dependency_overrides:
+  flutter_package_app_mayoreo:
+    path: ..
