@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/colors/app_colors.dart';
+import '../../theme/typography/app_typography.dart';
 
 /// Estandarized button widget for the design system
 class UiButton extends StatelessWidget {
@@ -152,7 +153,7 @@ class UiButton extends StatelessWidget {
     switch (type) {
       case UiButtonType.primary:
       case UiButtonType.destructive:
-        return AppColors.white;
+        return AppColors.softGray;
       case UiButtonType.secondary:
       case UiButtonType.text:
         return AppColors.grayMedium;
@@ -160,14 +161,7 @@ class UiButton extends StatelessWidget {
   }
 
   TextStyle _getTextStyle() {
-    switch (size) {
-      case UiButtonSize.small:
-        return const TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
-      case UiButtonSize.medium:
-        return const TextStyle(fontSize: 14, fontWeight: FontWeight.w600);
-      case UiButtonSize.large:
-        return const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
-    }
+    return AppTypography.getButtonTextStyle(size);
   }
 
   double _getIconSize() {

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import '../fonts/app_fonts.dart';
 
 /// Typography configuration for the app_mayoreo package
 class AppTypography {
   // Private constructor to prevent instantiation
   AppTypography._();
 
-  static const FontWeight _fontWeightRegular = FontWeight.w400;
-  static const FontWeight _fontWeightMedium = FontWeight.w500;
+  // Font weights constants (using AppFonts for consistency)
+  static const FontWeight _fontWeightRegular = AppFonts.regular;
+  static const FontWeight _fontWeightMedium = AppFonts.medium;
+  static const FontWeight _fontWeightSemiBold = AppFonts.semiBold;
+  static const FontWeight _fontWeightBold = AppFonts.bold;
+
+  // Font family constants (using AppFonts for consistency)
+  static const String _fontFamily = AppFonts.inter;
+  static const String _fontFamilyMono = AppFonts.robotoMono;
 
   /// Main text theme
   static const TextTheme textTheme = TextTheme(
@@ -111,6 +119,28 @@ class AppTypography {
     ),
   );
 
+  /// Button text styles
+  static const TextStyle buttonTextSmall = TextStyle(
+    fontSize: 11,
+    fontWeight: _fontWeightMedium,
+    letterSpacing: 0.1,
+    height: 1.43,
+  );
+
+  static const TextStyle buttonTextMedium = TextStyle(
+    fontSize: 12,
+    fontWeight: _fontWeightSemiBold,
+    letterSpacing: 0.1,
+    height: 1.43,
+  );
+
+  static const TextStyle buttonTextLarge = TextStyle(
+    fontSize: 14,
+    fontWeight: _fontWeightSemiBold,
+    letterSpacing: 0.1,
+    height: 1.43,
+  );
+
   /// Custom text styles for specific use cases
   static const TextStyle buttonText = TextStyle(
     fontSize: 14,
@@ -133,6 +163,45 @@ class AppTypography {
     height: 1.6,
   );
 
+  /// Monospace text styles for code, numbers, etc.
+  static const TextStyle code = TextStyle(
+    fontFamily: _fontFamilyMono,
+    fontSize: 14,
+    fontWeight: _fontWeightRegular,
+    letterSpacing: 0.25,
+    height: 1.43,
+  );
+
+  static const TextStyle codeSmall = TextStyle(
+    fontFamily: _fontFamilyMono,
+    fontSize: 12,
+    fontWeight: _fontWeightRegular,
+    letterSpacing: 0.25,
+    height: 1.33,
+  );
+
+  /// Specialized text styles
+  static const TextStyle price = TextStyle(
+    fontSize: 18,
+    fontWeight: _fontWeightSemiBold,
+    letterSpacing: 0.1,
+    height: 1.33,
+  );
+
+  static const TextStyle priceLarge = TextStyle(
+    fontSize: 24,
+    fontWeight: _fontWeightBold,
+    letterSpacing: 0.1,
+    height: 1.25,
+  );
+
+  static const TextStyle badge = TextStyle(
+    fontSize: 10,
+    fontWeight: _fontWeightMedium,
+    letterSpacing: 0.5,
+    height: 1.4,
+  );
+
   /// Helper methods for common text styles
   static TextStyle? get displayLarge => textTheme.displayLarge;
   static TextStyle? get displayMedium => textTheme.displayMedium;
@@ -149,4 +218,53 @@ class AppTypography {
   static TextStyle? get bodyLarge => textTheme.bodyLarge;
   static TextStyle? get bodyMedium => textTheme.bodyMedium;
   static TextStyle? get bodySmall => textTheme.bodySmall;
+
+  /// Helper methods for button text styles
+  static TextStyle getButtonTextStyle(dynamic size) {
+    // Handle both enum values and string values for flexibility
+    if (size.toString().contains('small')) {
+      return buttonTextSmall;
+    } else if (size.toString().contains('medium')) {
+      return buttonTextMedium;
+    } else if (size.toString().contains('large')) {
+      return buttonTextLarge;
+    }
+    return buttonTextMedium; // default
+  }
+
+  /// Helper method to create custom text style with specific properties
+  static TextStyle custom({
+    double? fontSize,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+    double? height,
+    String? fontFamily,
+    Color? color,
+    TextDecoration? decoration,
+  }) {
+    return TextStyle(
+      fontSize: fontSize,
+      fontWeight: fontWeight ?? _fontWeightRegular,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontFamily: fontFamily ?? _fontFamily,
+      color: color,
+      decoration: decoration,
+    );
+  }
+
+  /// Helper method to create text style with specific weight
+  static TextStyle withWeight(TextStyle baseStyle, FontWeight weight) {
+    return baseStyle.copyWith(fontWeight: weight);
+  }
+
+  /// Helper method to create text style with specific color
+  static TextStyle withColor(TextStyle baseStyle, Color color) {
+    return baseStyle.copyWith(color: color);
+  }
+
+  /// Helper method to create text style with specific size
+  static TextStyle withSize(TextStyle baseStyle, double size) {
+    return baseStyle.copyWith(fontSize: size);
+  }
 } 
