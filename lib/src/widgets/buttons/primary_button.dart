@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/colors/app_colors.dart';
 
 /// Un botón principal con estilo predefinido para la aplicación.
 class PrimaryButton extends StatelessWidget {
@@ -20,8 +21,8 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF0052D4),
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.orangeBrand,
+        foregroundColor: AppColors.white,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
