@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../colors/app_colors.dart';
 import 'app_fonts.dart';
 
 /// Examples of how to use the Inter font family
@@ -44,7 +45,7 @@ class FontExamples {
             style: AppFonts.interStyle(
               fontSize: 20,
               fontWeight: AppFonts.semiBold,
-              color: Colors.blue,
+              color: AppColors.orangeBrand,
               letterSpacing: 0.5,
             ),
           ),
@@ -54,7 +55,7 @@ class FontExamples {
             style: AppFonts.monoStyle(
               fontSize: 16,
               fontWeight: AppFonts.medium,
-              color: Colors.green,
+              color: AppColors.greenFree,
             ),
           ),
         ],
@@ -106,7 +107,7 @@ class FontExamples {
                   style: AppFonts.interStyle(
                     fontSize: 18,
                     fontWeight: AppFonts.semiBold,
-                    color: Colors.green,
+                    color: AppColors.greenFree,
                   ),
                 ),
               ],
@@ -119,7 +120,7 @@ class FontExamples {
               style: AppFonts.monoStyle(
                 fontSize: 12,
                 fontWeight: AppFonts.regular,
-                color: Colors.grey,
+                color: AppColors.grayMedium,
               ),
             ),
           ],
@@ -155,7 +156,7 @@ class FontExamples {
             hintStyle: AppFonts.interStyle(
               fontSize: 14,
               fontWeight: AppFonts.regular,
-              color: Colors.grey,
+              color: AppColors.grayMedium,
             ),
           ),
           style: AppFonts.interStyle(
@@ -176,7 +177,7 @@ class FontExamples {
             hintStyle: AppFonts.interStyle(
               fontSize: 14,
               fontWeight: AppFonts.regular,
-              color: Colors.grey,
+              color: AppColors.grayMedium,
             ),
           ),
           style: AppFonts.interStyle(
@@ -192,7 +193,7 @@ class FontExamples {
           style: AppFonts.interStyle(
             fontSize: 16,
             fontWeight: AppFonts.semiBold,
-            color: Colors.white,
+            color: AppColors.white,
           ),
         ),
       ],

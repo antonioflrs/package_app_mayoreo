@@ -14,7 +14,7 @@ class _IconsContentState extends State<IconsContent> {
 
   @override
   Widget build(BuildContext context) {
-    final iconsByCategory = SvgIcons.getAllIconsByCategory();
+    final iconsByCategory = _getMockIconsByCategory();
     final categories = ['Todos', ...iconsByCategory.keys];
     
     final filteredIcons = _getFilteredIcons(iconsByCategory);
@@ -39,7 +39,7 @@ class _IconsContentState extends State<IconsContent> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Biblioteca de Iconos SVG',
+          'Biblioteca de Material Icons',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.onSurface,
@@ -47,7 +47,7 @@ class _IconsContentState extends State<IconsContent> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Colección organizada de iconos SVG personalizados para el sistema de diseño. Los iconos están agrupados por categorías y tipos (filled, stroke, etc.).',
+          'Colección organizada de Material Icons para el sistema de diseño. Los iconos están agrupados por categorías y funcionalidad.',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
@@ -79,7 +79,7 @@ class _IconsContentState extends State<IconsContent> {
           ),
           const SizedBox(height: 8),
           Text(
-            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\nSvgPicture.asset(SvgIcons.burgerMenu)\nSvgPicture.asset(SvgIcons.userActive)\nSvgPicture.asset(SvgIcons.logoMayoreo)',
+            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\nIcon(SvgIcons.getMaterialIcon(SvgIcons.burgerMenu))\nIcon(SvgIcons.getMaterialIcon(SvgIcons.userActive))\nIcon(Icons.widgets)',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontFamily: 'monospace',
               backgroundColor: Theme.of(context).colorScheme.surface,
@@ -235,7 +235,7 @@ class _IconsContentState extends State<IconsContent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Placeholder para el icono SVG
+              // Icono Material
               Container(
                 width: 32,
                 height: 32,
@@ -244,7 +244,7 @@ class _IconsContentState extends State<IconsContent> {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Icon(
-                  Icons.image,
+                  _getIconData(iconPath),
                   size: 20,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -268,7 +268,12 @@ class _IconsContentState extends State<IconsContent> {
   }
 
   String _getIconName(String iconPath) {
-    // Extraer el nombre del archivo del path
+    // Para Material Icons, el path ya es el nombre
+    if (iconPath.startsWith('Icons.')) {
+      return iconPath.replaceAll('Icons.', '').replaceAll('_', ' ');
+    }
+    
+    // Para rutas SVG (fallback)
     final fileName = iconPath.split('/').last;
     final nameWithoutExtension = fileName.replaceAll('.svg', '');
     
@@ -297,7 +302,8 @@ class _IconsContentState extends State<IconsContent> {
       // Filtrar por búsqueda
       final filteredIcons = icons.where((icon) {
         final iconName = _getIconName(icon).toLowerCase();
-        return iconName.contains(_searchQuery.toLowerCase());
+        return iconName.contains(_searchQuery.toLowerCase()) || 
+               icon.toLowerCase().contains(_searchQuery.toLowerCase());
       }).toList();
       
       if (filteredIcons.isNotEmpty) {
@@ -316,7 +322,7 @@ class _IconsContentState extends State<IconsContent> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Placeholder para el icono SVG
+            // Icono Material
             Container(
               width: 64,
               height: 64,
@@ -325,7 +331,7 @@ class _IconsContentState extends State<IconsContent> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                Icons.image,
+                _getIconData(iconName),
                 size: 32,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -363,5 +369,86 @@ class _IconsContentState extends State<IconsContent> {
         ],
       ),
     );
+  }
+
+  IconData _getIconData(String iconName) {
+    // Mapeo de nombres de iconos a IconData
+    final iconMap = {
+      'Icons.menu': Icons.menu,
+      'Icons.arrow_back': Icons.arrow_back,
+      'Icons.keyboard_arrow_down': Icons.keyboard_arrow_down,
+      'Icons.close': Icons.close,
+      'Icons.check': Icons.check,
+      'Icons.add': Icons.add,
+      'Icons.refresh': Icons.refresh,
+      'Icons.person': Icons.person,
+      'Icons.person_outline': Icons.person_outline,
+      'Icons.account_circle': Icons.account_circle,
+      'Icons.shopping_cart': Icons.shopping_cart,
+      'Icons.shopping_cart_outlined': Icons.shopping_cart_outlined,
+      'Icons.shopping_bag': Icons.shopping_bag,
+      'Icons.shopping_bag_outlined': Icons.shopping_bag_outlined,
+      'Icons.category': Icons.category,
+      'Icons.category_outlined': Icons.category_outlined,
+      'Icons.list': Icons.list,
+      'Icons.list_outlined': Icons.list_outlined,
+      'Icons.note_add': Icons.note_add,
+      'Icons.note_add_outlined': Icons.note_add_outlined,
+      'Icons.favorite': Icons.favorite,
+      'Icons.favorite_border': Icons.favorite_border,
+      'Icons.credit_card': Icons.credit_card,
+      'Icons.credit_card_outlined': Icons.credit_card_outlined,
+      'Icons.chat': Icons.chat,
+      'Icons.share': Icons.share,
+      'Icons.mail': Icons.mail,
+    };
+    
+    return iconMap[iconName] ?? Icons.help_outline;
+  }
+
+  Map<String, List<String>> _getMockIconsByCategory() {
+    return {
+      'Navegación': [
+        'Icons.menu',
+        'Icons.arrow_back',
+        'Icons.keyboard_arrow_down',
+        'Icons.close',
+        'Icons.check',
+        'Icons.add',
+        'Icons.refresh',
+      ],
+      'Usuario': [
+        'Icons.person',
+        'Icons.person_outline',
+        'Icons.account_circle',
+      ],
+      'Pedidos': [
+        'Icons.shopping_cart',
+        'Icons.shopping_cart_outlined',
+        'Icons.shopping_bag',
+        'Icons.shopping_bag_outlined',
+      ],
+      'Categorías': [
+        'Icons.category',
+        'Icons.category_outlined',
+        'Icons.list',
+        'Icons.list_outlined',
+        'Icons.note_add',
+        'Icons.note_add_outlined',
+      ],
+      'Favoritos': [
+        'Icons.favorite',
+        'Icons.favorite_border',
+      ],
+      'Pagos': [
+        'Icons.credit_card',
+        'Icons.credit_card_outlined',
+      ],
+      'Social': [
+        'Icons.chat',
+        'Icons.share',
+        'Icons.mail',
+      ],
+    };
   }
 } 

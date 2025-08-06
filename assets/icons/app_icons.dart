@@ -2,8 +2,6 @@
 /// 
 /// Esta clase organiza todos los iconos SVG personalizados de la aplicación
 /// agrupándolos por categorías y funcionalidad.
-import 'package:flutter/material.dart';
-
 class SvgIcons {
   SvgIcons._();
 
@@ -214,72 +212,8 @@ class SvgIcons {
   static const String whatsapp = 'assets/icons/social_media/whatsapp_logo.svg';
 
   // ============================================================================
-  // MAPEO A MATERIAL ICONS
-  // ============================================================================
-  
-  /// Mapeo de iconos SVG a Material Icons equivalentes
-  static const Map<String, IconData> _svgToMaterialIcons = {
-    burgerMenu: Icons.menu,
-    arrowLeft: Icons.arrow_back,
-    arrowDown: Icons.keyboard_arrow_down,
-    close: Icons.close,
-    check: Icons.check,
-    plus: Icons.add,
-    reset: Icons.refresh,
-    userActive: Icons.person,
-    userInactive: Icons.person_outline,
-    ordersActive: Icons.shopping_bag,
-    ordersInactive: Icons.shopping_bag_outlined,
-    cartActive: Icons.shopping_cart,
-    cartInactive: Icons.shopping_cart_outlined,
-    categoriesActive: Icons.category,
-    categoriesInactive: Icons.category_outlined,
-    listActive: Icons.list,
-    listInactive: Icons.list_outlined,
-    noteAdd: Icons.note_add,
-    favoritesActive: Icons.favorite,
-    favoritesInactive: Icons.favorite_border,
-    documentActive: Icons.description,
-    documentInactive: Icons.description_outlined,
-    cardActive: Icons.credit_card,
-    cardInactive: Icons.credit_card_outlined,
-    helpActive: Icons.help,
-    helpInactive: Icons.help_outline,
-    locationActive: Icons.location_on,
-    locationInactive: Icons.location_off,
-    mail: Icons.mail,
-    share: Icons.share,
-    delete: Icons.delete,
-    alert: Icons.warning,
-    colors: Icons.palette,
-    typography: Icons.text_fields,
-    shadows: Icons.layers,
-    spacing: Icons.space_bar,
-    breakpoints: Icons.view_week,
-    zIndex: Icons.layers_outlined,
-    bToolkit: Icons.widgets,
-  };
-
-  // ============================================================================
   // MÉTODOS DE UTILIDAD
   // ============================================================================
-  
-  /// Obtiene el Material Icon equivalente para un icono SVG
-  static IconData? getMaterialIcon(String svgPath) {
-    // Buscar por el nombre del archivo sin extensión
-    final fileName = svgPath.split('/').last.replaceAll('.svg', '');
-    
-    // Buscar coincidencias en el mapeo
-    for (final entry in _svgToMaterialIcons.entries) {
-      final svgFileName = entry.key.split('/').last.replaceAll('.svg', '');
-      if (svgFileName == fileName) {
-        return entry.value;
-      }
-    }
-    
-    // Si no se encuentra, buscar por el path completo
-    return _svgToMaterialIcons[svgPath];
-  }
   
   /// Obtiene todos los iconos organizados por categoría
   static Map<String, List<String>> getAllIconsByCategory() {
@@ -327,26 +261,5 @@ class SvgIcons {
   static List<String> getIconsByType(String type) {
     final allIcons = getAllIcons();
     return allIcons.where((icon) => icon.contains('/$type/')).toList();
-  }
-  
-  /// Obtiene todos los Material Icons equivalentes organizados por categoría
-  static Map<String, List<IconData>> getMaterialIconsByCategory() {
-    final categories = getAllIconsByCategory();
-    final materialCategories = <String, List<IconData>>{};
-    
-    for (final entry in categories.entries) {
-      final materialIcons = <IconData>[];
-      for (final svgPath in entry.value) {
-        final materialIcon = getMaterialIcon(svgPath);
-        if (materialIcon != null) {
-          materialIcons.add(materialIcon);
-        }
-      }
-      if (materialIcons.isNotEmpty) {
-        materialCategories[entry.key] = materialIcons;
-      }
-    }
-    
-    return materialCategories;
   }
 } 

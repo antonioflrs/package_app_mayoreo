@@ -89,11 +89,10 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               color: theme.colorScheme.primary,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: SvgPicture.asset(
-              SvgIcons.bToolkit,
-              width: 20,
-              height: 20,
-              colorFilter: ColorFilter.mode(theme.colorScheme.onPrimary, BlendMode.srcIn),
+            child: Icon(
+              Icons.widgets,
+              size: 20,
+              color: theme.colorScheme.onPrimary,
             ),
           ),
           const SizedBox(width: 12),
@@ -105,43 +104,33 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               ),
             ),
           ),
-          if (MediaQuery.of(context).size.width < 600)
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                Navigator.of(context).pop();
-                widget.onClose?.call();
-              },
-              tooltip: 'Cerrar menú',
-            ),
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.of(context).pop();
+              widget.onClose?.call();
+            },
+            tooltip: 'Cerrar menú',
+          ),
         ],
       ),
     );
   }
 
   Widget _buildSearchBar(ThemeData theme) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.all(16),
       child: TextField(
         controller: _searchController,
         focusNode: _searchFocusNode,
         onChanged: widget.onSearchChanged,
-        onSubmitted: (value) {
-          if (MediaQuery.of(context).size.width < 600 && value.isNotEmpty) {
-            Navigator.of(context).pop();
-          }
-        },
         decoration: InputDecoration(
           hintText: 'Buscar en ToolKit',
           hintStyle: theme.textTheme.bodyMedium?.copyWith(
             fontSize: 14,
             color: AppColors.black,
           ),
-          prefixIcon: Icon(
-            Icons.search,
-            size: 20,
-            color: AppColors.black,
-          ),
+          prefixIcon: const Icon(Icons.search, size: 20, color: AppColors.black),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -163,9 +152,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
                 ),
                 child: Text(
                   '⌘K',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    fontSize: 12,
-                  ),
+                  style: theme.textTheme.labelSmall?.copyWith(fontSize: 12),
                 ),
               ),
               const SizedBox(width: 8),
@@ -210,11 +197,10 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
       ),
       child: Row(
         children: [
-          SvgPicture.asset(
-            SvgIcons.bToolkit,
-            width: 16,
-            height: 16,
-            colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
+          Icon(
+            Icons.widgets,
+            size: 16,
+            color: theme.colorScheme.primary,
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -226,11 +212,10 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               ),
             ),
           ),
-          SvgPicture.asset(
-            SvgIcons.arrowDown,
-            width: 16,
-            height: 16,
-            colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
+          Icon(
+            Icons.keyboard_arrow_down,
+            size: 16,
+            color: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -238,12 +223,12 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
   }
 
   Widget _buildNavigationItems(ThemeData theme, List<NavigationItem> items) {
-    final designGuides = items.where((item) => item.category == NavigationCategory.designGuides).toList();
-    final uiComponents = items.where((item) => item.category == NavigationCategory.uiComponents).toList();
-
     if (items.isEmpty && widget.searchQuery.isNotEmpty) {
       return _buildEmptySearch(theme);
     }
+
+    final designGuides = items.where((item) => item.category == NavigationCategory.designGuides).toList();
+    final uiComponents = items.where((item) => item.category == NavigationCategory.uiComponents).toList();
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -312,13 +297,11 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
     return Container(
       margin: const EdgeInsets.only(bottom: 4),
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.white,
         child: InkWell(
           onTap: () {
             widget.onItemSelected(item);
-            if (MediaQuery.of(context).size.width < 600) {
-              Navigator.of(context).pop();
-            }
+            Navigator.of(context).pop();
           },
           borderRadius: BorderRadius.circular(8),
           child: Container(
@@ -326,7 +309,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
             decoration: BoxDecoration(
               color: isSelected 
                   ? theme.colorScheme.primaryContainer
-                  : Colors.transparent,
+                  : AppColors.white,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

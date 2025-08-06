@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../widgets/sidebar_navigation.dart';
 import '../widgets/component_viewer.dart';
+import '../widgets/app_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 
@@ -19,7 +21,6 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
   @override
   void initState() {
     super.initState();
-    // Seleccionar el primer elemento por defecto
     _selectedItem = DesignSystemData.designGuides.first;
   }
 
@@ -27,31 +28,14 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text(
-          _selectedItem?.title ?? 'B Life Flutter Toolkit',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        elevation: 0,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            },
-            tooltip: 'Abrir menú',
-          ),
-        ),
+      appBar: AppBarWidget(
+        title: _selectedItem?.title ?? 'B Life Flutter Toolkit',
+        onMenuPressed: () => _scaffoldKey.currentState?.openDrawer(),
+        onSearchPressed: () => _showGlobalSearch(context),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              _showGlobalSearch(context);
-            },
-            tooltip: 'Búsqueda global',
+            icon: const Icon(Icons.more_vert, color: AppColors.grayMedium),
+            onPressed: () => _showMenu(context),
           ),
         ],
       ),
@@ -66,15 +50,13 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
         onItemSelected: (item) {
           setState(() {
             _selectedItem = item;
-            _searchQuery = ''; // Limpiar búsqueda al seleccionar
+            _searchQuery = '';
           });
-          // Cerrar el drawer después de seleccionar un item
           Navigator.of(context).pop();
         },
         onClose: () {
-          // Callback adicional para manejo de cierre
           setState(() {
-            _searchQuery = ''; // Limpiar búsqueda al cerrar
+            _searchQuery = '';
           });
         },
       ),
@@ -124,6 +106,80 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
             child: const Text('Buscar'),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showMenu(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildMenuItem(
+                context,
+                'Documentación',
+                Icons.description,
+                () {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Documentación próximamente'),
+                      duration: Duration(seconds: 1),
+                      backgroundColor: AppColors.black,
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 8),
+              _buildMenuItem(
+                context,
+                'Novedades',
+                Icons.newspaper,
+                () {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Novedades próximamente'),
+                      duration: Duration(seconds: 1),
+                      backgroundColor: AppColors.black,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMenuItem(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: [
+            Icon(icon, size: 24, color: AppColors.grayMedium),
+            const SizedBox(width: 12),
+                          Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

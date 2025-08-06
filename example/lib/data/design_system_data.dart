@@ -10,39 +10,43 @@ import '../widgets/component_content/radii_content.dart';
 import '../widgets/component_content/breakpoints_content.dart';
 import '../widgets/component_content/z_index_content.dart';
 import '../widgets/component_content/icons_content.dart';
-import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+import '../widgets/component_content/accordion_content.dart';
+import '../widgets/component_content/alert_content.dart';
+import '../widgets/component_content/avatar_content.dart';
+import '../widgets/component_content/badge_content.dart';
+import '../widgets/component_content/breadcrumbs_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'colors',
       title: 'Paleta de colores',
       description: 'Colores del sistema de diseño',
-      svgIcon: 'lib/src/icons/stroke/colors.svg',
+      icon: Icons.palette,
       category: NavigationCategory.designGuides,
       content: ColorsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'typography',
       title: 'Tipografía',
       description: 'Sistema de tipografía con Inter',
-      svgIcon: 'lib/src/icons/stroke/tipography.svg',
+      icon: Icons.text_fields,
       category: NavigationCategory.designGuides,
       content: TypographyContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'shadows',
       title: 'Sombras',
       description: 'Sistema de sombras y elevación',
-      svgIcon: 'lib/src/icons/stroke/shadow.svg',
+      icon: Icons.layers,
       category: NavigationCategory.designGuides,
       content: ShadowsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'spacing',
       title: 'Espaciado',
       description: 'Sistema de espaciado y márgenes',
-      svgIcon: 'lib/src/icons/stroke/espaciados.svg',
+      icon: Icons.space_bar,
       category: NavigationCategory.designGuides,
       content: SpacingContent(),
     ),
@@ -54,118 +58,123 @@ class DesignSystemData {
       category: NavigationCategory.designGuides,
       content: RadiiContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'breakpoints',
       title: 'Breakpoints',
       description: 'Puntos de quiebre responsivos',
-      svgIcon: 'lib/src/icons/stroke/breakpoints.svg',
+      icon: Icons.view_week,
       category: NavigationCategory.designGuides,
       content: BreakpointsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'z-index',
       title: 'Z Index',
       description: 'Sistema de capas y profundidad',
-      svgIcon: 'lib/src/icons/stroke/z index.svg',
+      icon: Icons.layers_outlined,
       category: NavigationCategory.designGuides,
       content: ZIndexContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'icons',
       title: 'Iconos',
       description: 'Biblioteca de iconos del sistema',
-      svgIcon: SvgIcons.colors,
+      icon: Icons.style,
       category: NavigationCategory.designGuides,
       content: IconsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'user-profile',
       title: 'Perfil de Usuario',
       description: 'Gestión de perfil de usuario',
-      svgIcon: SvgIcons.userActive,
+      icon: Icons.person_outline,
       category: NavigationCategory.designGuides,
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'orders',
       title: 'Pedidos',
       description: 'Gestión de pedidos',
-      svgIcon: SvgIcons.ordersActive,
+      icon: Icons.shopping_cart,
       category: NavigationCategory.designGuides,
     ),
   ];
 
   static const List<NavigationItem> uiComponents = [
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'buttons',
       title: 'Botones',
       description: 'Sistema de botones interactivos',
-      svgIcon: 'lib/src/icons/stroke/check.svg',
+      icon: Icons.touch_app,
       category: NavigationCategory.uiComponents,
       content: ButtonsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'text-fields',
       title: 'Campos de texto',
       description: 'Campos de entrada de texto',
-      svgIcon: 'lib/src/icons/stroke/plus_icon.svg',
+      icon: Icons.input,
       category: NavigationCategory.uiComponents,
       content: TextFieldsContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'accordion',
       title: 'Acordeón',
       description: 'Componente de acordeón colapsable',
-      svgIcon: 'lib/src/icons/stroke/arrow_down.svg',
+      icon: Icons.expand_more,
       category: NavigationCategory.uiComponents,
+      content: AccordionContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'action-bar',
       title: 'Action bar',
       description: 'Barra de acciones',
-      svgIcon: SvgIcons.burgerMenu,
+      icon: Icons.more_vert,
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'alert',
       title: 'Alert',
       description: 'Alertas y notificaciones',
-      svgIcon: 'lib/src/icons/stroke/alert_icon.svg',
+      icon: Icons.warning,
       category: NavigationCategory.uiComponents,
+      content: AlertContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'autocomplete',
       title: 'Autocomplete search',
       description: 'Búsqueda con autocompletado',
-      svgIcon: 'lib/src/icons/stroke/icon.svg',
+      icon: Icons.search,
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'avatar',
       title: 'Avatar',
       description: 'Avatares de usuario',
-      svgIcon: 'lib/src/icons/filled/user_activo.svg',
+      icon: Icons.person,
       category: NavigationCategory.uiComponents,
+      content: AvatarContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'badge',
       title: 'Badge',
       description: 'Badges y etiquetas',
-      svgIcon: 'lib/src/icons/stroke/close.svg',
+      icon: Icons.label,
       category: NavigationCategory.uiComponents,
+      content: BadgeContent(),
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'bulk-actions',
       title: 'Bulk actions',
       description: 'Acciones en lote',
-      svgIcon: 'lib/src/icons/stroke/delete.svg',
+      icon: Icons.delete_sweep,
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem.svg(
+    NavigationItem.material(
       id: 'breadcrumbs',
       title: 'Breadcrumbs',
       description: 'Navegación de migas de pan',
-      svgIcon: 'lib/src/icons/stroke/arrow_left.svg',
+      icon: Icons.navigation,
       category: NavigationCategory.uiComponents,
+      content: BreadcrumbsContent(),
     ),
   ];
 
