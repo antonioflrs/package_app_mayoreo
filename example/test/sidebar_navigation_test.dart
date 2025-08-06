@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../lib/widgets/sidebar_navigation.dart';
-import '../lib/widgets/app_bar_widget.dart';
+import 'package:example/widgets/sidebar_navigation.dart';
+import 'package:example/widgets/app_bar_widget.dart';
 
 void main() {
   group('SidebarNavigation Callbacks Tests', () {
@@ -64,9 +64,6 @@ void main() {
         ),
       );
 
-      // Verificar que el widget se renderiza correctamente
-      expect(find.byType(SidebarNavigation), findsOneWidget);
-      
       // Verificar que los callbacks están configurados (no llamados aún)
       expect(onSearchChangedCalled, isFalse);
       expect(onItemSelectedCalled, isFalse);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class IconsContent extends StatefulWidget {
   const IconsContent({super.key});

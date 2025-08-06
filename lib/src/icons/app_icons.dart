@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+
 /// Biblioteca principal de iconos SVG de la aplicación
 /// 
 /// Esta clase organiza todos los iconos SVG personalizados de la aplicación
 /// agrupándolos por categorías y funcionalidad.
-import 'package:flutter/material.dart';
-
 class SvgIcons {
   SvgIcons._();
 
