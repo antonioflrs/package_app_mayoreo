@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../models/navigation_item.dart';
 import '../data/design_system_data.dart';
@@ -354,11 +353,11 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
           color: iconColor,
         );
       case IconType.svg:
-        return SvgPicture.asset(
-          item.svgIcon!,
-          width: 18,
-          height: 18,
-          colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+        // Fallback to a default icon for SVG types
+        return Icon(
+          Icons.help_outline,
+          size: 18,
+          color: iconColor,
         );
     }
   }

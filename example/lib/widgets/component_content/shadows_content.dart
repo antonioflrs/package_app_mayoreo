@@ -67,13 +67,13 @@ class ShadowsContent extends StatelessWidget {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Sintaxis\nBoxShadow(\n  color: Colors.black.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
+          '// Sintaxis\nBoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
           isMobile,
         ),
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    boxShadow: [\n      BoxShadow(\n        color: Colors.black.withValues(alpha: 0.1),\n        blurRadius: 4,\n        offset: Offset(0, 2),\n      ),\n    ],\n  ),\n  child: Text(\'Mi elemento\'),\n)',
+          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    boxShadow: [\n      BoxShadow(\n        color: AppColors.pureBlack.withValues(alpha: 0.1),\n        blurRadius: 4,\n        offset: Offset(0, 2),\n      ),\n    ],\n  ),\n  child: Text(\'Mi elemento\'),\n)',
           isMobile,
         ),
       ],

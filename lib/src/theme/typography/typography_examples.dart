@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../colors/app_colors.dart';
 import 'app_typography.dart';
 
 /// Examples of how to use the typography system
@@ -76,7 +77,7 @@ class TypographyExamples {
             style: AppTypography.custom(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: AppColors.orangeBrand,
             ),
           ),
           const SizedBox(height: 8),
@@ -84,7 +85,7 @@ class TypographyExamples {
             'Modified Body Style',
             style: AppTypography.withColor(
               AppTypography.bodyLarge!,
-              Colors.green,
+              AppColors.greenFree,
             ),
           ),
           const SizedBox(height: 8),
@@ -125,7 +126,7 @@ class TypographyExamples {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: Colors.orange,
+                color: AppColors.orangeBrand,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text('NEW', style: AppTypography.badge),
@@ -155,7 +156,7 @@ class TypographyExamples {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: AppColors.digitalRed,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text('NEW', style: AppTypography.badge),
