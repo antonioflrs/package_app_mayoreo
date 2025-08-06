@@ -72,7 +72,7 @@ class RadiiContent extends StatelessWidget {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    borderRadius: BorderRadius.circular(12),\n    color: Colors.blue,\n  ),\n  child: Text(\'Mi contenedor\'),\n)',
+          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    borderRadius: BorderRadius.circular(12),\n    color: AppColors.orangeBrand,\n  ),\n  child: Text(\'Mi contenedor\'),\n)',
           isMobile,
         ),
       ],

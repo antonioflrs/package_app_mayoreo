@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../models/navigation_item.dart';
 import '../data/design_system_data.dart';
 
@@ -250,7 +251,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
     return Container(
       margin: const EdgeInsets.only(bottom: 4),
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.white,
         child: InkWell(
           onTap: () => widget.onItemSelected(item),
           borderRadius: BorderRadius.circular(8),
@@ -259,7 +260,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
             decoration: BoxDecoration(
               color: isSelected 
                   ? theme.colorScheme.primaryContainer
-                  : Colors.transparent,
+                  : AppColors.white,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

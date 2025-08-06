@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import 'package:flutter/services.dart';
 
 class ShadowsContent extends StatelessWidget {
@@ -66,13 +67,13 @@ class ShadowsContent extends StatelessWidget {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Sintaxis\nBoxShadow(\n  color: Colors.black.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
+          '// Sintaxis\nBoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
           isMobile,
         ),
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    boxShadow: [\n      BoxShadow(\n        color: Colors.black.withValues(alpha: 0.1),\n        blurRadius: 4,\n        offset: Offset(0, 2),\n      ),\n    ],\n  ),\n  child: Text(\'Mi elemento\'),\n)',
+          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    boxShadow: [\n      BoxShadow(\n        color: AppColors.pureBlack.withValues(alpha: 0.1),\n        blurRadius: 4,\n        offset: Offset(0, 2),\n      ),\n    ],\n  ),\n  child: Text(\'Mi elemento\'),\n)',
           isMobile,
         ),
       ],
@@ -94,7 +95,7 @@ class ShadowsContent extends StatelessWidget {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Usar valores de sombra\nBoxShadow(\n  color: Colors.black.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
+          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Usar valores de sombra\nBoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
           isMobile,
         ),
       ],
@@ -186,7 +187,7 @@ class ShadowsContent extends StatelessWidget {
         'valor': '0 1px 2px 0',
         'descripcion': 'Sombra pequeña para elementos sutiles',
         'shadow': BoxShadow(
-          color: Colors.black.withValues(alpha: 0.05),
+          color: AppColors.pureBlack.withValues(alpha: 0.05),
           blurRadius: 2,
           offset: const Offset(0, 1),
         ),
@@ -196,7 +197,7 @@ class ShadowsContent extends StatelessWidget {
         'valor': '0 4px 6px -1px',
         'descripcion': 'Sombra mediana para tarjetas y contenedores',
         'shadow': BoxShadow(
-          color: Colors.black.withValues(alpha: 0.1),
+          color: AppColors.pureBlack.withValues(alpha: 0.1),
           blurRadius: 6,
           offset: const Offset(0, 4),
         ),
@@ -206,7 +207,7 @@ class ShadowsContent extends StatelessWidget {
         'valor': '0 10px 15px -3px',
         'descripcion': 'Sombra grande para elementos elevados',
         'shadow': BoxShadow(
-          color: Colors.black.withValues(alpha: 0.1),
+          color: AppColors.pureBlack.withValues(alpha: 0.1),
           blurRadius: 15,
           offset: const Offset(0, 10),
         ),
@@ -216,7 +217,7 @@ class ShadowsContent extends StatelessWidget {
         'valor': '0 20px 25px -5px',
         'descripcion': 'Sombra extra grande para modales y overlays',
         'shadow': BoxShadow(
-          color: Colors.black.withValues(alpha: 0.1),
+          color: AppColors.pureBlack.withValues(alpha: 0.1),
           blurRadius: 25,
           offset: const Offset(0, 20),
         ),
@@ -226,7 +227,7 @@ class ShadowsContent extends StatelessWidget {
         'valor': '0 25px 50px -12px',
         'descripcion': 'Sombra máxima para elementos de máxima elevación',
         'shadow': BoxShadow(
-          color: Colors.black.withValues(alpha: 0.25),
+          color: AppColors.pureBlack.withValues(alpha: 0.25),
           blurRadius: 50,
           offset: const Offset(0, 25),
         ),
