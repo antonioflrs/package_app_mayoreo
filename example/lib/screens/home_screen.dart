@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+import '../widgets/search_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 import '../widgets/mobile_card.dart';
 import '../widgets/app_bar_widget.dart';
+import '../widgets/icon_test_widget.dart';
 import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
 
@@ -64,13 +66,11 @@ class HomeScreen extends StatelessWidget {
       showMenuButton: false,
       actions: [
         IconButton(
-          icon: const Icon(Icons.search, color: AppColors.black),
+          icon: const Icon(Icons.bug_report, color: AppColors.black),
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Búsqueda próximamente'),
-                duration: Duration(seconds: 1),
-                backgroundColor: AppColors.black,
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const IconTestWidget(),
               ),
             );
           },
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildHeroSection(BuildContext context) {
     return Container(
-      height: 120,
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -96,20 +96,33 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      child: Center(
-        child: Container(
-          width: double.infinity,
-          height: 80,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: AppColors.white.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColors.grayMedium.withValues(alpha: 0.1),
-              width: 1,
+      child: Column(
+        children: [
+          // Título del hero
+          Text(
+            'Sistema de Diseño Flutter',
+            style: AppTypography.headlineSmall!.copyWith(
+              color: AppColors.black,
+              fontWeight: FontWeight.w600,
             ),
+            textAlign: TextAlign.center,
           ),
-        ),
+          const SizedBox(height: 8),
+          Text(
+            'Componentes y herramientas para desarrollo',
+            style: AppTypography.bodyLarge!.copyWith(
+              color: AppColors.black,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+          // Buscador
+          SearchBarWidget(
+            onChanged: (value) {
+              // Implementar lógica de búsqueda aquí
+            },
+          ),
+        ],
       ),
     );
   }
@@ -330,6 +343,10 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+
+
+
 }
 
 class _TechTag extends StatelessWidget {

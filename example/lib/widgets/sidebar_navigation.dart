@@ -158,19 +158,19 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
             ],
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
               color: theme.colorScheme.outline.withValues(alpha: 0.3),
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
               color: theme.colorScheme.outline.withValues(alpha: 0.3),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
               color: theme.colorScheme.primary,
               width: 2,
