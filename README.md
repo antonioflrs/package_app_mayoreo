@@ -53,31 +53,31 @@ class MyApp extends StatelessWidget {
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 // Botón primario
-AppButton(
+UiButton(
   onPressed: () => print('Botón presionado'),
-  child: Text('Botón Primario'),
-  variant: AppButtonVariant.primary,
-  size: AppButtonSize.medium,
+  label: 'Botón Primario',
+  type: UiButtonType.primary,
+  size: UiButtonSize.medium,
 )
 
 // Botón secundario
-AppButton(
+UiButton(
   onPressed: () => print('Botón secundario'),
-  child: Text('Botón Secundario'),
-  variant: AppButtonVariant.secondary,
+  label: 'Botón Secundario',
+  type: UiButtonType.secondary,
 )
 
 // Botón de texto
-AppButton(
+UiButton(
   onPressed: () => print('Botón de texto'),
-  child: Text('Botón de Texto'),
-  variant: AppButtonVariant.text,
+  label: 'Botón de Texto',
+  type: UiButtonType.text,
 )
 
 // Botón con estado de carga
-AppButton(
+UiButton(
   onPressed: () => print('Botón con carga'),
-  child: Text('Cargando...'),
+  label: 'Cargando...',
   isLoading: true,
 )
 ```
@@ -174,14 +174,14 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                 ),
                 SizedBox(height: 24),
-                AppButton(
+                UiButton(
                   onPressed: () {
                     _authBloc.add(LoginRequested(
                       email: _emailController.text,
                       password: _passwordController.text,
                     ));
                   },
-                  child: Text('Iniciar Sesión'),
+                  label: 'Iniciar Sesión',
                 ),
               ],
             ),
@@ -217,7 +217,7 @@ lib/
     │       └── app_icons.dart
     ├── widgets/                        # Componentes de UI
     │   ├── buttons/
-    │   │   └── app_button.dart
+    │   │   └── ui_button.dart
     │   └── inputs/
     │       └── app_text_field.dart
     └── blocs/                          # Arquitectura BLoC
