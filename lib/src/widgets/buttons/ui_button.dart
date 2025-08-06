@@ -48,7 +48,7 @@ class UiButton extends StatelessWidget {
             ),
             backgroundColor: isDisabled 
                 ? AppColors.softGray
-                : AppColors.orangeBrand,
+                : AppColors.mysticGray,
             foregroundColor: isDisabled 
                 ? AppColors.grayMedium
                 : AppColors.white,

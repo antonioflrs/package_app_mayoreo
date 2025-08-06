@@ -9,42 +9,44 @@ import '../widgets/component_content/spacing_content.dart';
 import '../widgets/component_content/radii_content.dart';
 import '../widgets/component_content/breakpoints_content.dart';
 import '../widgets/component_content/z_index_content.dart';
+import '../widgets/component_content/icons_content.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
-    NavigationItem(
+    NavigationItem.svg(
       id: 'colors',
       title: 'Paleta de colores',
       description: 'Colores del sistema de diseño',
-      icon: Icons.palette,
+      svgIcon: 'lib/src/icons/stroke/colors.svg',
       category: NavigationCategory.designGuides,
       content: ColorsContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'typography',
       title: 'Tipografía',
       description: 'Sistema de tipografía con Inter',
-      icon: Icons.text_fields,
+      svgIcon: 'lib/src/icons/stroke/tipography.svg',
       category: NavigationCategory.designGuides,
       content: TypographyContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'shadows',
       title: 'Sombras',
       description: 'Sistema de sombras y elevación',
-      icon: Icons.visibility,
+      svgIcon: 'lib/src/icons/stroke/shadow.svg',
       category: NavigationCategory.designGuides,
       content: ShadowsContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'spacing',
       title: 'Espaciado',
       description: 'Sistema de espaciado y márgenes',
-      icon: Icons.space_bar,
+      svgIcon: 'lib/src/icons/stroke/espaciados.svg',
       category: NavigationCategory.designGuides,
       content: SpacingContent(),
     ),
-    NavigationItem(
+    NavigationItem.material(
       id: 'radii',
       title: 'Radios',
       description: 'Sistema de bordes redondeados',
@@ -52,95 +54,117 @@ class DesignSystemData {
       category: NavigationCategory.designGuides,
       content: RadiiContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'breakpoints',
       title: 'Breakpoints',
       description: 'Puntos de quiebre responsivos',
-      icon: Icons.view_week,
+      svgIcon: 'lib/src/icons/stroke/breakpoints.svg',
       category: NavigationCategory.designGuides,
       content: BreakpointsContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'z-index',
       title: 'Z Index',
       description: 'Sistema de capas y profundidad',
-      icon: Icons.layers,
+      svgIcon: 'lib/src/icons/stroke/z index.svg',
       category: NavigationCategory.designGuides,
       content: ZIndexContent(),
+    ),
+    NavigationItem.svg(
+      id: 'icons',
+      title: 'Iconos',
+      description: 'Biblioteca de iconos del sistema',
+      svgIcon: SvgIcons.colors,
+      category: NavigationCategory.designGuides,
+      content: IconsContent(),
+    ),
+    NavigationItem.svg(
+      id: 'user-profile',
+      title: 'Perfil de Usuario',
+      description: 'Gestión de perfil de usuario',
+      svgIcon: SvgIcons.userActive,
+      category: NavigationCategory.designGuides,
+    ),
+    NavigationItem.svg(
+      id: 'orders',
+      title: 'Pedidos',
+      description: 'Gestión de pedidos',
+      svgIcon: SvgIcons.ordersActive,
+      category: NavigationCategory.designGuides,
     ),
   ];
 
   static const List<NavigationItem> uiComponents = [
-    NavigationItem(
+    NavigationItem.svg(
       id: 'buttons',
       title: 'Botones',
       description: 'Sistema de botones interactivos',
-      icon: Icons.smart_button,
+      svgIcon: 'lib/src/icons/stroke/check.svg',
       category: NavigationCategory.uiComponents,
       content: ButtonsContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'text-fields',
       title: 'Campos de texto',
       description: 'Campos de entrada de texto',
-      icon: Icons.input,
+      svgIcon: 'lib/src/icons/stroke/plus_icon.svg',
       category: NavigationCategory.uiComponents,
       content: TextFieldsContent(),
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'accordion',
       title: 'Acordeón',
       description: 'Componente de acordeón colapsable',
-      icon: Icons.expand_more,
+      svgIcon: 'lib/src/icons/stroke/arrow_down.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'action-bar',
       title: 'Action bar',
       description: 'Barra de acciones',
-      icon: Icons.menu,
+      svgIcon: SvgIcons.burgerMenu,
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'alert',
       title: 'Alert',
       description: 'Alertas y notificaciones',
-      icon: Icons.warning,
+      svgIcon: 'lib/src/icons/stroke/alert_icon.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'autocomplete',
       title: 'Autocomplete search',
       description: 'Búsqueda con autocompletado',
-      icon: Icons.search,
+      svgIcon: 'lib/src/icons/stroke/icon.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'avatar',
       title: 'Avatar',
       description: 'Avatares de usuario',
-      icon: Icons.person,
+      svgIcon: 'lib/src/icons/filled/user_activo.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'badge',
       title: 'Badge',
       description: 'Badges y etiquetas',
-      icon: Icons.label,
+      svgIcon: 'lib/src/icons/stroke/close.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'bulk-actions',
       title: 'Bulk actions',
       description: 'Acciones en lote',
-      icon: Icons.select_all,
+      svgIcon: 'lib/src/icons/stroke/delete.svg',
       category: NavigationCategory.uiComponents,
     ),
-    NavigationItem(
+    NavigationItem.svg(
       id: 'breadcrumbs',
       title: 'Breadcrumbs',
       description: 'Navegación de migas de pan',
-      icon: Icons.navigation,
+      svgIcon: 'lib/src/icons/stroke/arrow_left.svg',
       category: NavigationCategory.uiComponents,
     ),
   ];

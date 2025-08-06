@@ -7,6 +7,9 @@ import 'src/theme/icons/app_icons.dart';
 // Theme exports
 export 'src/theme/theme.dart';
 
+// Icons exports
+export 'src/icons/icons.dart';
+
 // Widget exports
 export 'src/widgets/widgets.dart';
 

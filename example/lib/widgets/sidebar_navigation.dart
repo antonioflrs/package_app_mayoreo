@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../models/navigation_item.dart';
 import '../data/design_system_data.dart';
 
@@ -7,6 +9,7 @@ class SidebarNavigation extends StatefulWidget {
   final String searchQuery;
   final Function(String) onSearchChanged;
   final Function(NavigationItem) onItemSelected;
+  final VoidCallback? onClose;
 
   const SidebarNavigation({
     super.key,
@@ -14,6 +17,7 @@ class SidebarNavigation extends StatefulWidget {
     required this.searchQuery,
     required this.onSearchChanged,
     required this.onItemSelected,
+    this.onClose,
   });
 
   @override
@@ -51,18 +55,12 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
     final filteredItems = DesignSystemData.searchItems(widget.searchQuery);
     
     return Drawer(
+      width: MediaQuery.of(context).size.width * 0.85,
       child: Column(
         children: [
-          // Header
           _buildHeader(theme),
-          
-          // Search Bar
           _buildSearchBar(theme),
-          
-          // Version Selector
           _buildVersionSelector(theme),
-          
-          // Navigation Items
           Expanded(
             child: _buildNavigationItems(theme, filteredItems),
           ),
@@ -84,7 +82,6 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
       ),
       child: Row(
         children: [
-          // Logo
           Container(
             width: 32,
             height: 32,
@@ -92,15 +89,14 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               color: theme.colorScheme.primary,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              Icons.construction,
-              color: theme.colorScheme.onPrimary,
-              size: 20,
+            child: SvgPicture.asset(
+              SvgIcons.bToolkit,
+              width: 20,
+              height: 20,
+              colorFilter: ColorFilter.mode(theme.colorScheme.onPrimary, BlendMode.srcIn),
             ),
           ),
           const SizedBox(width: 12),
-          
-          // Title
           Expanded(
             child: Text(
               'App Mayoreo Toolkit',
@@ -109,6 +105,15 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               ),
             ),
           ),
+          if (MediaQuery.of(context).size.width < 600)
+            IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Navigator.of(context).pop();
+                widget.onClose?.call();
+              },
+              tooltip: 'Cerrar menú',
+            ),
         ],
       ),
     );
@@ -121,22 +126,45 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
         controller: _searchController,
         focusNode: _searchFocusNode,
         onChanged: widget.onSearchChanged,
+        onSubmitted: (value) {
+          if (MediaQuery.of(context).size.width < 600 && value.isNotEmpty) {
+            Navigator.of(context).pop();
+          }
+        },
         decoration: InputDecoration(
-          hintText: 'Buscar',
-          prefixIcon: const Icon(Icons.search, size: 20),
+          hintText: 'Buscar en ToolKit',
+          hintStyle: theme.textTheme.bodyMedium?.copyWith(
+            fontSize: 14,
+            color: AppColors.black,
+          ),
+          prefixIcon: Icon(
+            Icons.search,
+            size: 20,
+            color: AppColors.black,
+          ),
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (_searchController.text.isNotEmpty)
+                IconButton(
+                  icon: const Icon(Icons.clear, size: 18),
+                  onPressed: () {
+                    _searchController.clear();
+                    widget.onSearchChanged('');
+                    _searchFocusNode.requestFocus();
+                  },
+                  tooltip: 'Limpiar búsqueda',
+                ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(4),
+                  color: AppColors.backCards,
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   '⌘K',
                   style: theme.textTheme.labelSmall?.copyWith(
-                    fontSize: 10,
+                    fontSize: 12,
                   ),
                 ),
               ),
@@ -163,7 +191,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
             ),
           ),
           filled: true,
-          fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+          fillColor: AppColors.backCards,
         ),
       ),
     );
@@ -182,10 +210,11 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.construction,
-            size: 16,
-            color: theme.colorScheme.primary,
+          SvgPicture.asset(
+            SvgIcons.bToolkit,
+            width: 16,
+            height: 16,
+            colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -197,10 +226,11 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
               ),
             ),
           ),
-          Icon(
-            Icons.keyboard_arrow_down,
-            size: 16,
-            color: theme.colorScheme.primary,
+          SvgPicture.asset(
+            SvgIcons.arrowDown,
+            width: 16,
+            height: 16,
+            colorFilter: ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
           ),
         ],
       ),
@@ -211,6 +241,10 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
     final designGuides = items.where((item) => item.category == NavigationCategory.designGuides).toList();
     final uiComponents = items.where((item) => item.category == NavigationCategory.uiComponents).toList();
 
+    if (items.isEmpty && widget.searchQuery.isNotEmpty) {
+      return _buildEmptySearch(theme);
+    }
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -220,13 +254,41 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
           ...designGuides.map((item) => _buildNavigationItem(theme, item)),
           const SizedBox(height: 24),
         ],
-        
         if (uiComponents.isNotEmpty) ...[
           _buildCategoryHeader(theme, 'UI'),
           const SizedBox(height: 8),
           ...uiComponents.map((item) => _buildNavigationItem(theme, item)),
         ],
       ],
+    );
+  }
+
+  Widget _buildEmptySearch(ThemeData theme) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.search_off,
+            size: 64,
+            color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'No se encontraron resultados',
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Intenta con otros términos de búsqueda',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -252,7 +314,12 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => widget.onItemSelected(item),
+          onTap: () {
+            widget.onItemSelected(item);
+            if (MediaQuery.of(context).size.width < 600) {
+              Navigator.of(context).pop();
+            }
+          },
           borderRadius: BorderRadius.circular(8),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -264,13 +331,7 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
             ),
             child: Row(
               children: [
-                Icon(
-                  item.icon,
-                  size: 18,
-                  color: isSelected 
-                      ? theme.colorScheme.primary
-                      : theme.colorScheme.onSurfaceVariant,
-                ),
+                _buildIcon(theme, item, isSelected),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -283,11 +344,39 @@ class _SidebarNavigationState extends State<SidebarNavigation> {
                     ),
                   ),
                 ),
+                if (isSelected)
+                  Icon(
+                    Icons.check,
+                    size: 16,
+                    color: theme.colorScheme.primary,
+                  ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildIcon(ThemeData theme, NavigationItem item, bool isSelected) {
+    final iconColor = isSelected 
+        ? theme.colorScheme.primary
+        : theme.colorScheme.onSurfaceVariant;
+
+    switch (item.iconType) {
+      case IconType.material:
+        return Icon(
+          item.icon,
+          size: 18,
+          color: iconColor,
+        );
+      case IconType.svg:
+        return SvgPicture.asset(
+          item.svgIcon!,
+          width: 18,
+          height: 18,
+          colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+        );
+    }
   }
 } 

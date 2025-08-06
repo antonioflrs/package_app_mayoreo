@@ -14,6 +14,7 @@ class DesignSystemScreen extends StatefulWidget {
 class _DesignSystemScreenState extends State<DesignSystemScreen> {
   NavigationItem? _selectedItem;
   String _searchQuery = '';
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -25,9 +26,10 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
-          _selectedItem?.title ?? 'App Mayoreo Toolkit',
+          _selectedItem?.title ?? 'B Life Flutter Toolkit',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w600,
           ),
@@ -38,8 +40,9 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {
-              Scaffold.of(context).openDrawer();
+              _scaffoldKey.currentState?.openDrawer();
             },
+            tooltip: 'Abrir menú',
           ),
         ),
         actions: [
@@ -48,6 +51,7 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
             onPressed: () {
               _showGlobalSearch(context);
             },
+            tooltip: 'Búsqueda global',
           ),
         ],
       ),
@@ -62,9 +66,16 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
         onItemSelected: (item) {
           setState(() {
             _selectedItem = item;
+            _searchQuery = ''; // Limpiar búsqueda al seleccionar
           });
           // Cerrar el drawer después de seleccionar un item
           Navigator.of(context).pop();
+        },
+        onClose: () {
+          // Callback adicional para manejo de cierre
+          setState(() {
+            _searchQuery = ''; // Limpiar búsqueda al cerrar
+          });
         },
       ),
       body: _selectedItem != null
@@ -91,6 +102,12 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
               _searchQuery = query;
             });
           },
+          onSubmitted: (query) {
+            Navigator.of(context).pop();
+            if (query.isNotEmpty) {
+              _scaffoldKey.currentState?.openDrawer();
+            }
+          },
         ),
         actions: [
           TextButton(
@@ -100,7 +117,9 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              // El drawer se abrirá automáticamente si hay resultados
+              if (_searchQuery.isNotEmpty) {
+                _scaffoldKey.currentState?.openDrawer();
+              }
             },
             child: const Text('Buscar'),
           ),
