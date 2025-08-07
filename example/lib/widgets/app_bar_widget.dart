@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -49,13 +50,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             color: AppColors.black,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Center(
-            child: Text(
-              'B',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/icons/blife/b_toolkit.svg',
+              width: 60,
+              height: 24,
+              colorFilter: const ColorFilter.mode(
+                AppColors.black,
+                BlendMode.srcIn,
               ),
             ),
           ),

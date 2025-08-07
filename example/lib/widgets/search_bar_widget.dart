@@ -141,7 +141,7 @@ class SearchBarWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: SvgPicture.asset(
-        'assets/icons/stroke/search_icon.svg',
+        'packages/flutter_package_app_mayoreo/assets/icons/stroke/search_icon.svg',
         width: 20,
         height: 20,
         colorFilter: ColorFilter.mode(

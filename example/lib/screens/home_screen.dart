@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/search_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 import '../widgets/mobile_card.dart';
-import '../widgets/app_bar_widget.dart';
-import '../widgets/icon_test_widget.dart';
 import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
 
@@ -61,25 +60,53 @@ class HomeScreen extends StatelessWidget {
   }
 
   PreferredSizeWidget _buildMobileAppBar(BuildContext context) {
-    return AppBarWidget(
-      title: 'BlifeUI',
-      showMenuButton: false,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.bug_report, color: AppColors.black),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const IconTestWidget(),
+    return AppBar(
+      backgroundColor: AppColors.softGray,
+      elevation: 0,
+      title: Row(
+        children: [
+          // Logo Btoolkit+
+          Row(
+            children: [
+              SvgPicture.asset(
+                'packages/flutter_package_app_mayoreo/assets/icons/blife/b_toolkit.svg',
+                width: 93,
+                height: 24,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.black,
+                  BlendMode.srcIn,
+                ),
+                placeholderBuilder: (BuildContext context) => Container(
+                  width: 93,
+                  height: 24,
+                  color: Colors.red,
+                  child: const Center(
+                    child: Text(
+                      'SVG Error',
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                  ),
+                ),
               ),
-            );
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.more_vert, color: AppColors.black),
-          onPressed: () => _showMenu(context),
-        ),
-      ],
+              const SizedBox(width: 4),
+              const Text(
+                'toolkit+',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          // Three dots menu
+          IconButton(
+            icon: const Icon(Icons.more_vert, color: AppColors.black),
+            onPressed: () => _showMenu(context),
+          ),
+        ],
+      ),
     );
   }
 
