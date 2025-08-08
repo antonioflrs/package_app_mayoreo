@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../widgets/app_bar_widget.dart';
 
 // Clase para mapear iconos directamente a PackageIcons
 class PackageIconMapper {

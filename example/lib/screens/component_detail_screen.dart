@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/navigation_item.dart';
-import '../widgets/app_bar_widget.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class ComponentDetailScreen extends StatelessWidget {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../models/search_result.dart';
 
 class SearchResultsWidget extends StatelessWidget {
   final List<SearchResult> results;

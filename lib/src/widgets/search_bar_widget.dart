@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../models/search_result.dart';
-import '../services/search_service.dart';
-import 'search_results_widget.dart';
 
 class SearchBarWidget extends StatefulWidget {
   final String hintText;

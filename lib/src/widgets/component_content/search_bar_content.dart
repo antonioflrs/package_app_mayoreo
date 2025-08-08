@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../../widgets/search_bar_widget.dart';
 
 class SearchBarContent extends StatefulWidget {
   const SearchBarContent({super.key});

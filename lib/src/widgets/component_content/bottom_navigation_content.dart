@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../../widgets/mobile_navigation.dart';
 
 class BottomNavigationContent extends StatefulWidget {
   const BottomNavigationContent({super.key});

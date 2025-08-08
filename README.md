@@ -1,514 +1,336 @@
-# flutter_package_app_mayoreo
+# Flutter Package App Mayoreo
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.8.1+-blue.svg)](https://flutter.dev/)
-[![Version](https://img.shields.io/badge/version-0.0.1-orange.svg)](https://pub.dev/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-
-Un paquete de Flutter que proporciona un sistema de diseño completo para aplicaciones móviles, incluyendo componentes UI reutilizables, iconos personalizados, paleta de colores y tipografía consistente.
-
-## 🎯 Características
-
-- ✅ **Componentes UI predefinidos** (botones, campos de texto)
-- ✅ **Biblioteca de iconos SVG** personalizados
-- ✅ **Sistema de colores consistente**
-- ✅ **Tipografía optimizada**
-- ✅ **Tema Material 3 integrado**
-- ✅ **Fácil de usar y personalizar**
-- ✅ **BLoCs para gestión de estado**
+Un package de Flutter que proporciona componentes de UI, iconos y temas para aplicaciones de mayoreo.
 
 ## 📦 Instalación
 
-### 1. Agregar Dependencia
+### Paso 1: Agregar la dependencia
 
-Agrega la dependencia a tu archivo `pubspec.yaml`:
+En tu `pubspec.yaml`, agrega la dependencia:
 
 ```yaml
 dependencies:
-  flutter_package_app_mayoreo: ^0.0.1
+  flutter:
+    sdk: flutter
+  flutter_package_app_mayoreo:
+    path: ../flutter_package_app_mayoreo  # Para desarrollo local
+    # O usar la versión publicada cuando esté disponible
+    # version: ^0.0.1
 ```
 
-### 2. Instalar Dependencias
+### Paso 2: Instalar dependencias
 
 ```bash
 flutter pub get
 ```
 
-### 3. Importar el Paquete
+### Paso 3: Configurar assets (opcional)
 
-```dart
-import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+Si necesitas acceder directamente a los assets del package, agrégalos a tu `pubspec.yaml`:
+
+```yaml
+flutter:
+  assets:
+    - packages/flutter_package_app_mayoreo/assets/icons/blife/
+    - packages/flutter_package_app_mayoreo/assets/icons/filled/
+    - packages/flutter_package_app_mayoreo/assets/icons/stroke/
+    - packages/flutter_package_app_mayoreo/assets/icons/social/
+    - packages/flutter_package_app_mayoreo/assets/icons/custom/
+    - packages/flutter_package_app_mayoreo/assets/icons/others/
+    - packages/flutter_package_app_mayoreo/assets/fonts/
 ```
 
-## ⚙️ Configuración Inicial
+## 🎨 Configuración del Tema
 
-### Configuración Básica (Recomendada)
+### Paso 4: Aplicar el tema en tu app
 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mi Aplicación',
-      theme: FlutterPackageAppMayoreo.theme, // Tema completo preconfigurado
-      home: MyHomePage(),
+      title: 'Mi App Mayoreo',
+      theme: FlutterPackageAppMayoreo.theme, // Aplica el tema del package
+      home: const MyHomePage(),
     );
   }
 }
 ```
 
-## 🧩 Componentes Disponibles
+## 🚀 Uso de Componentes
 
-### UiButton
-
-Botón estandarizado con diferentes tipos y tamaños.
+### Ejemplo 1: Bottom Navigation Bar
 
 ```dart
-// Botón primario básico
-UiButton(
-  onPressed: () {
-    print('Botón presionado');
-  },
-  label: 'Mi Botón',
-  type: UiButtonType.primary,
-)
+import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
-// Botón secundario con icono
-UiButton(
-  onPressed: () {},
-  label: 'Guardar',
-  type: UiButtonType.secondary,
-  icon: Icons.save,
-  iconPosition: UiButtonIconPosition.start,
-)
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-// Botón con estado de carga
-UiButton(
-  onPressed: () {},
-  label: 'Procesando...',
-  isLoading: true,
-  type: UiButtonType.primary,
-)
-```
-
-**Tipos disponibles:**
-- `UiButtonType.primary` - Botón principal (naranja)
-- `UiButtonType.secondary` - Botón secundario (contorno)
-- `UiButtonType.text` - Botón de texto
-- `UiButtonType.destructive` - Botón destructivo (rojo)
-
-**Tamaños disponibles:**
-- `UiButtonSize.small` - 32px de altura
-- `UiButtonSize.medium` - 40px de altura (por defecto)
-- `UiButtonSize.large` - 48px de altura
-
-### AppTextField
-
-Campo de texto personalizado con estados y validación.
-
-```dart
-// Campo de texto básico
-AppTextField(
-  labelText: 'Email',
-  hintText: 'ejemplo@correo.com',
-  prefixIcon: Icon(Icons.email),
-)
-
-// Campo de contraseña
-AppTextField(
-  labelText: 'Contraseña',
-  hintText: 'Ingresa tu contraseña',
-  obscureText: true,
-  prefixIcon: Icon(Icons.lock),
-)
-
-// Campo con validación
-AppTextField(
-  labelText: 'Teléfono',
-  hintText: '+52 123 456 7890',
-  keyboardType: TextInputType.phone,
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'El teléfono es requerido';
-    }
-    return null;
-  },
-)
-```
-
-## 🎨 Sistema de Colores
-
-### Colores Principales
-
-```dart
-// Colores de marca
-AppColors.orangeBrand    // #e1a141 - Naranja principal
-AppColors.ochreBrand     // #c79022 - Ocre
-AppColors.oliveBrand     // #84861c - Oliva
-
-// Colores de fondo
-AppColors.backCards      // #f1f0ec - Fondo de tarjetas
-AppColors.softGray       // #f9f9f9 - Gris suave
-AppColors.mysticGray     // #dde5e8 - Gris místico
-
-// Colores de texto
-AppColors.black          // #232323 - Negro
-AppColors.white          // #ffffff - Blanco
-AppColors.darkGray       // #3d3d3d - Gris oscuro
-AppColors.grayMedium     // #a7adba - Gris medio
-```
-
-### Uso de Colores
-
-```dart
-Container(
-  color: AppColors.backCards,
-  child: Text(
-    'Mi texto',
-    style: TextStyle(
-      color: AppColors.orangeBrand,
-    ),
-  ),
-)
-```
-
-## 📝 Tipografía
-
-### Estilos Disponibles
-
-```dart
-// Encabezados
-AppTypography.headlineLarge
-AppTypography.headlineMedium
-AppTypography.headlineSmall
-
-// Cuerpo de texto
-AppTypography.bodyLarge
-AppTypography.bodyMedium
-AppTypography.bodySmall
-
-// Etiquetas
-AppTypography.labelLarge
-AppTypography.labelMedium
-AppTypography.labelSmall
-```
-
-### Uso de Tipografía
-
-```dart
-Text(
-  'Título Principal',
-  style: AppTypography.headlineLarge,
-)
-
-Text(
-  'Texto del cuerpo',
-  style: AppTypography.bodyMedium,
-)
-```
-
-## 🎯 Iconos
-
-### Iconos de Material Design
-
-```dart
-// Iconos de navegación
-Icon(Icons.menu)
-Icon(Icons.arrow_back)
-Icon(Icons.keyboard_arrow_down)
-
-// Iconos de usuario
-Icon(Icons.person)
-Icon(Icons.account_circle)
-
-// Iconos de pedidos
-Icon(Icons.shopping_cart)
-Icon(Icons.shopping_bag)
-
-// Iconos de categorías
-Icon(Icons.category)
-Icon(Icons.list)
-```
-
-### Uso de Iconos
-
-```dart
-Icon(
-  Icons.menu,
-  size: 24,
-  color: AppColors.orangeBrand,
-)
-```
-
-## 🔧 BLoCs
-
-### BaseBloc
-
-BLoC base para gestión de estado.
-
-```dart
-class MyBloc extends BaseBloc {
-  // Tu lógica de negocio aquí
-}
-```
-
-### AuthBloc
-
-BLoC para gestión de autenticación.
-
-```dart
-class AuthBloc extends AuthBloc {
-  // Lógica de autenticación
-}
-```
-
-## 💡 Ejemplos Prácticos
-
-### Formulario de Login
-
-```dart
-class LoginForm extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          AppTextField(
-            controller: _emailController,
-            labelText: 'Email',
-            hintText: 'ejemplo@correo.com',
-            prefixIcon: Icon(Icons.email),
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'El email es requerido';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: 16),
-          AppTextField(
-            controller: _passwordController,
-            labelText: 'Contraseña',
-            hintText: 'Ingresa tu contraseña',
-            obscureText: true,
-            prefixIcon: Icon(Icons.lock),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'La contraseña es requerida';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: 24),
-          UiButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                // Procesar login
-                print('Email: ${_emailController.text}');
-                print('Password: ${_passwordController.text}');
-              }
-            },
-            label: 'Iniciar Sesión',
-            type: UiButtonType.primary,
-            width: double.infinity,
-          ),
-        ],
+    return Scaffold(
+      body: _buildBody(),
+      bottomNavigationBar: MobileNavigation(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildBody() {
+    switch (_currentIndex) {
+      case 0:
+        return const Center(child: Text('Página de Inicio'));
+      case 1:
+        return const Center(child: Text('Página de Categorías'));
+      case 2:
+        return const Center(child: Text('Página del Carrito'));
+      default:
+        return const Center(child: Text('Página de Inicio'));
+    }
+  }
+}
+```
+
+### Ejemplo 2: Uso del icono B Toolkit Copia
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+
+class IconExample extends StatelessWidget {
+  const IconExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ejemplo de Iconos'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Usando SafeSvgIcon
+            SafeSvgIcon(
+              iconPath: PackageIcons.bToolkitCopia,
+              height: 64.0,
+              width: 64.0,
+            ),
+            const SizedBox(height: 20),
+            const Text('B Toolkit Copia Icon'),
+            
+            const SizedBox(height: 40),
+            
+            // Usando PackageIcon (nueva API)
+            PackageIcon(
+              iconPath: PackageIcons.bToolkitCopia,
+              size: 48.0,
+              color: AppColors.orangeBrand,
+            ),
+            const SizedBox(height: 20),
+            const Text('B Toolkit Copia con color personalizado'),
+          ],
+        ),
       ),
     );
   }
 }
 ```
 
-## ✅ Mejores Prácticas
-
-### 1. Uso Consistente de Colores
+### Ejemplo 3: Sidebar Navigation
 
 ```dart
-// ✅ Correcto
-Container(
-  color: AppColors.backCards,
-  child: Text(
-    'Texto',
-    style: TextStyle(color: AppColors.orangeBrand),
-  ),
-)
+import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
-// ❌ Incorrecto
-Container(
-  color: Color(0xfff1f0ec),
-  child: Text(
-    'Texto',
-    style: TextStyle(color: Color(0xffe1a141)),
-  ),
-)
+class SidebarExample extends StatefulWidget {
+  const SidebarExample({super.key});
+
+  @override
+  State<SidebarExample> createState() => _SidebarExampleState();
+}
+
+class _SidebarExampleState extends State<SidebarExample> {
+  String _searchQuery = '';
+  NavigationItem? _selectedItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ejemplo de Sidebar'),
+      ),
+      drawer: SidebarNavigation(
+        selectedItem: _selectedItem,
+        searchQuery: _searchQuery,
+        onSearchChanged: (query) {
+          setState(() {
+            _searchQuery = query;
+          });
+        },
+        onItemSelected: (item) {
+          setState(() {
+            _selectedItem = item;
+          });
+          Navigator.pop(context); // Cerrar drawer
+        },
+      ),
+      body: Center(
+        child: Text(
+          _selectedItem != null 
+            ? 'Seleccionado: ${_selectedItem!.title}'
+            : 'Selecciona un elemento del sidebar',
+        ),
+      ),
+    );
+  }
+}
 ```
 
-### 2. Uso de Tipografía del Sistema
+### Ejemplo 4: Botones del Package
 
 ```dart
-// ✅ Correcto
-Text(
-  'Título',
-  style: AppTypography.headlineMedium,
-)
+import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
-// ❌ Incorrecto
-Text(
-  'Título',
-  style: TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w500,
-  ),
-)
+class ButtonExample extends StatelessWidget {
+  const ButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ejemplo de Botones'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            UiButton(
+              label: 'Botón Primario',
+              onPressed: () {
+                print('Botón presionado');
+              },
+            ),
+            const SizedBox(height: 16),
+            UiButton(
+              label: 'Botón con Loading',
+              onPressed: () async {
+                // Simular operación asíncrona
+                await Future.delayed(const Duration(seconds: 2));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 ```
 
-### 3. Validación de Formularios
+## 🎯 Componentes Disponibles
 
-```dart
-// ✅ Correcto
-AppTextField(
-  labelText: 'Email',
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'El campo es requerido';
-    }
-    return null;
-  },
-)
-```
+### Widgets de Navegación
+- `MobileNavigation` - Bottom navigation bar personalizado
+- `SidebarNavigation` - Navegación lateral con búsqueda
+- `AppBarWidget` - App bar personalizado
+- `SearchBarWidget` - Barra de búsqueda con resultados
+- `SearchResultsWidget` - Widget para mostrar resultados de búsqueda
+- `MobileCard` - Tarjeta móvil personalizada
 
-## 🔧 Solución de Problemas
+### Widgets Básicos
+- `UiButton` - Botón personalizado con estados de loading
+- `AppTextField` - Campo de texto personalizado
+- `SafeSvgIcon` - Icono SVG seguro con manejo de errores
+- `PackageIcon` - Nueva API para iconos del package
 
-### Error: "flutter_package_app_mayoreo not found"
+### Componentes de Contenido
+- `BottomNavigationContent` - Contenido de ejemplo para bottom navigation
+- `ButtonsContent` - Contenido de ejemplo para botones
+- `ColorsContent` - Contenido de ejemplo para colores
+- `IconsContent` - Contenido de ejemplo para iconos
+- `TypographyContent` - Contenido de ejemplo para tipografía
+- Y muchos más componentes de ejemplo...
 
-**Solución:**
-1. Verifica que la dependencia esté en `pubspec.yaml`
-2. Ejecuta `flutter pub get`
-3. Reinicia tu IDE
+### Temas
+- `FlutterPackageAppMayoreo.theme` - Tema principal
+- `FlutterPackageAppMayoreo.colorScheme` - Esquema de colores
+- `FlutterPackageAppMayoreo.textTheme` - Tema de texto
+- `FlutterPackageAppMayoreo.iconTheme` - Tema de iconos
 
-### Error: "The method 'copyWith' was called on null"
+### Modelos y Servicios
+- `NavigationItem` - Modelo para elementos de navegación
+- `SearchResult` - Modelo para resultados de búsqueda
+- `SearchService` - Servicio de búsqueda
+- `DesignSystemData` - Datos del sistema de diseño
 
-**Solución:**
-```dart
-// ✅ Correcto
-Text(
-  'Texto',
-  style: AppTypography.bodyMedium?.copyWith(
-    color: AppColors.orangeBrand,
-  ) ?? TextStyle(
-    color: AppColors.orangeBrand,
-  ),
-)
-```
+### Iconos Disponibles
+- **BLife Icons**: `bToolkitCopia`, `blifeLogoActivo`, `blifeLogoInactivo`
+- **Filled Icons**: `userActivo`, `cartActivo`, `categoriesActivo`, etc.
+- **Stroke Icons**: `userInactivo`, `cartInactivo`, `categoriesInactive`, etc.
+- **Social Icons**: `whatsappLogo`
+- **Custom Icons**: `promotions`, `iconFlutter`
 
-## 📚 Documentación
+## 🔧 Actualización del Package
 
-- [Tutorial Completo](TUTORIAL.md) - Guía detallada de instalación y uso
-- [Verificación del Package](PACKAGE_VERIFICATION.md) - Lista completa de componentes y verificación
-- [Ejemplos de Código](example/) - Proyecto de ejemplo con implementaciones
+### Para el equipo de desarrollo:
 
-## 🧪 Testing
+1. **Hacer cambios en el package**:
+   ```bash
+   cd flutter_package_app_mayoreo
+   # Realizar cambios en el código
+   ```
 
-Para probar que el package funciona correctamente:
+2. **Actualizar la versión** en `pubspec.yaml`:
+   ```yaml
+   version: 0.0.3  # Incrementar versión
+   ```
 
-```bash
-# Analizar el código
-flutter analyze
+3. **Publicar cambios** (si es un package privado):
+   ```bash
+   flutter pub publish
+   ```
 
-# Ejecutar tests
-flutter test
+4. **En el proyecto que usa el package**:
+   ```bash
+   flutter pub upgrade flutter_package_app_mayoreo
+   ```
 
-# Verificar dependencias
-flutter pub get
-```
+## 📝 Notas Importantes
 
-## 📦 Estructura del Package
+- Todos los iconos deben usar `SafeSvgIcon` o `PackageIcon` para consistencia
+- Los assets están organizados por categorías en el package
+- El tema incluye la fuente Inter con diferentes pesos
+- Los colores están definidos en `AppColors` para consistencia
 
-```
-lib/
-├── flutter_package_app_mayoreo.dart    # Archivo principal
-└── src/
-    ├── widgets/                        # Componentes UI
-    │   ├── buttons/
-    │   │   └── ui_button.dart
-    │   ├── inputs/
-    │   │   └── app_text_field.dart
-    │   ├── custom_svg_icon.dart
-    │   └── widgets.dart
-    ├── theme/                          # Sistema de diseño
-    │   ├── colors/
-    │   │   └── app_colors.dart
-    │   ├── typography/
-    │   │   └── app_typography.dart
-    │   ├── icons/
-    │   │   └── app_icons.dart
-    │   ├── app_theme.dart
-    │   └── theme.dart
-    ├── icons/                          # Iconos SVG
-    │   └── icons.dart
-    └── blocs/                          # Gestión de estado
-        ├── base/
-        │   └── base_bloc.dart
-        ├── auth/
-        │   └── auth_bloc.dart
-        └── blocs.dart
+## 🐛 Solución de Problemas
 
-assets/
-├── fonts/                              # Fuentes personalizadas
-│   ├── Inter-Light.ttf
-│   ├── Inter-Regular.ttf
-│   ├── Inter-Medium.ttf
-│   ├── Inter-SemiBold.ttf
-│   └── Inter-Bold.ttf
-└── icons/                              # Iconos SVG
-    ├── blife/
-    ├── filled/
-    ├── stroke/
-    ├── simbolicos/
-    ├── social_media/
-    ├── status_pedidos/
-    └── pagos/
-```
+Si los iconos no se muestran:
+1. Verifica que `flutter_svg` esté en las dependencias
+2. Asegúrate de que los assets estén correctamente referenciados
+3. Usa `SafeSvgIcon` para mejor manejo de errores
 
-## 🤝 Contribución
-
-Para contribuir al proyecto:
-
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
-## 📞 Soporte
-
-Para reportar problemas o solicitar nuevas características:
-
-1. Revisar la documentación en [TUTORIAL.md](TUTORIAL.md)
-2. Verificar el documento de [verificación](PACKAGE_VERIFICATION.md)
-3. Contactar al equipo de desarrollo
-
----
-
-**Desarrollado con ❤️ para la comunidad Flutter**
+Para más ejemplos, revisa la carpeta `example/` del package.

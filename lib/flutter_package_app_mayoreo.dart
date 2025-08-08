@@ -22,6 +22,15 @@ export 'src/blocs/blocs.dart';
 // Assets exports
 export 'src/assets/assets.dart';
 
+// Model exports
+export 'src/models/models.dart';
+
+// Data exports
+export 'src/data/data.dart';
+
+// Service exports
+export 'src/services/services.dart';
+
 /// Main class for the flutter_package_app_mayoreo package
 class FlutterPackageAppMayoreo {
   // Private constructor to prevent instantiation

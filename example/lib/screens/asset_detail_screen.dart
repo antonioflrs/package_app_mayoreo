@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../models/search_result.dart';
 
 class AssetDetailScreen extends StatelessWidget {
   final SearchResult asset;

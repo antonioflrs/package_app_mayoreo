@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/navigation_item.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class ComponentViewer extends StatelessWidget {
   final NavigationItem item;

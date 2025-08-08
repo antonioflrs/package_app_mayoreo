@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../widgets/app_bar_widget.dart';
-import '../data/design_system_data.dart';
-import '../models/navigation_item.dart';
 import 'component_detail_screen.dart';
 
 class ComponentsSummaryScreen extends StatefulWidget {

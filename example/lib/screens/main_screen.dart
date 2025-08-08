@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import 'home_screen.dart';
 import 'components_summary_screen.dart';
 import 'icons_screen.dart';
 import 'documentation_screen.dart';
-import '../widgets/mobile_navigation.dart';
 
 
 class MainScreen extends StatefulWidget {

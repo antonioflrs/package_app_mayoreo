@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/search_result.dart';
 import '../models/navigation_item.dart';
 import '../data/design_system_data.dart';
-import '../screens/asset_detail_screen.dart';
 
 class SearchService {
   static List<SearchResult> search(String query, BuildContext context) {
@@ -156,76 +155,76 @@ class SearchService {
   }
 
   static void _navigateToItem(NavigationItem item, BuildContext context) {
-    // Crear un SearchResult para mostrar en la pantalla de detalles
-    final searchResult = SearchResult.fromNavigationItem(
-      item,
-      () {}, // Callback vacío ya que la navegación se maneja aquí
-    );
+    // TODO: Implementar navegación específica del proyecto
+    // final searchResult = SearchResult.fromNavigationItem(
+    //   item,
+    //   () {}, // Callback vacío ya que la navegación se maneja aquí
+    // );
     
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AssetDetailScreen(asset: searchResult),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => AssetDetailScreen(asset: searchResult),
+    //   ),
+    // );
   }
 
   static void _navigateToColors(BuildContext context) {
-    // Crear un SearchResult para tokens de color
-    final searchResult = SearchResult(
-      id: 'colors_section',
-      title: 'Tokens de Color',
-      description: 'Paleta de colores del sistema de diseño',
-      type: SearchResultType.color,
-      icon: Icons.palette,
-      onTap: () {},
-      category: 'Tokens',
-      subcategory: 'Colores',
-    );
+    // TODO: Implementar navegación específica del proyecto
+    // final searchResult = SearchResult(
+    //   id: 'colors_section',
+    //   title: 'Tokens de Color',
+    //   description: 'Paleta de colores del sistema de diseño',
+    //   type: SearchResultType.color,
+    //   icon: Icons.palette,
+    //   onTap: () {},
+    //   category: 'Tokens',
+    //   subcategory: 'Colores',
+    // );
     
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AssetDetailScreen(asset: searchResult),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => AssetDetailScreen(asset: searchResult),
+    //   ),
+    // );
   }
 
   static void _navigateToTypography(BuildContext context) {
-    // Crear un SearchResult para tokens de tipografía
-    final searchResult = SearchResult(
-      id: 'typography_section',
-      title: 'Tokens de Tipografía',
-      description: 'Sistema de tipografía del diseño',
-      type: SearchResultType.typography,
-      icon: Icons.text_fields,
-      onTap: () {},
-      category: 'Tokens',
-      subcategory: 'Tipografía',
-    );
+    // TODO: Implementar navegación específica del proyecto
+    // final searchResult = SearchResult(
+    //   id: 'typography_section',
+    //   title: 'Tokens de Tipografía',
+    //   description: 'Sistema de tipografía del diseño',
+    //   type: SearchResultType.typography,
+    //   icon: Icons.text_fields,
+    //   onTap: () {},
+    //   category: 'Tokens',
+    //   subcategory: 'Tipografía',
+    // );
     
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AssetDetailScreen(asset: searchResult),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => AssetDetailScreen(asset: searchResult),
+    //   ),
+    // );
   }
 
   static void _navigateToIcons(BuildContext context) {
-    // Crear un SearchResult para iconos
-    final searchResult = SearchResult(
-      id: 'icons_section',
-      title: 'Iconos del Package',
-      description: 'Biblioteca de iconos SVG del sistema',
-      type: SearchResultType.icon,
-      icon: Icons.style,
-      onTap: () {},
-      category: 'Tokens',
-      subcategory: 'Iconos',
-    );
+    // TODO: Implementar navegación específica del proyecto
+    // final searchResult = SearchResult(
+    //   id: 'icons_section',
+    //   title: 'Iconos del Package',
+    //   description: 'Biblioteca de iconos SVG del sistema',
+    //   type: SearchResultType.icon,
+    //   icon: Icons.style,
+    //   onTap: () {},
+    //   category: 'Tokens',
+    //   subcategory: 'Iconos',
+    // );
     
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AssetDetailScreen(asset: searchResult),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => AssetDetailScreen(asset: searchResult),
+    //   ),
+    // );
   }
 }

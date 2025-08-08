@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../widgets/search_bar_widget.dart';
-import '../data/design_system_data.dart';
-import '../models/navigation_item.dart';
-import '../widgets/mobile_card.dart';
 import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
 import 'icon_test_screen.dart';
