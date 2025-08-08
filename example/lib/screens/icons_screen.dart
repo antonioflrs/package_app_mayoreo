@@ -212,7 +212,6 @@ class _IconsScreenState extends State<IconsScreen> {
   }
 
   Widget _buildLegend() {
-    final packageIconCount = _getPackageIconCount();
     final totalIconCount = _getTotalIconCount();
     
     return Container(
@@ -264,11 +263,6 @@ class _IconsScreenState extends State<IconsScreen> {
         ],
       ),
     );
-  }
-
-  int _getPackageIconCount() {
-    final allIcons = _getAvailableIcons();
-    return allIcons.where((icon) => PackageIconMapper.hasPackageIcon(icon.name)).length;
   }
 
   int _getTotalIconCount() {

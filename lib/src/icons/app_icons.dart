@@ -16,6 +16,9 @@ class SvgIcons {
   
   /// Icono de colores (BLife)
   static const String colors = 'assets/icons/blife/colors.svg';
+  
+  /// Icono de Flutter
+  static const String iconFlutter = 'assets/icons/others/icon_flutter.svg';
 
   // ============================================================================
   // MAPEO A MATERIAL ICONS
@@ -25,6 +28,7 @@ class SvgIcons {
   static const Map<String, IconData> _svgToMaterialIcons = {
     bToolkitCopia: Icons.widgets,
     colors: Icons.palette,
+    iconFlutter: Icons.flutter_dash,
   };
 
   // ============================================================================
@@ -51,8 +55,9 @@ class SvgIcons {
   /// Obtiene todos los iconos organizados por categoría
   static Map<String, List<String>> getAllIconsByCategory() {
     return {
-      'Iconos Restantes': [bToolkitCopia, colors],
+      'Iconos Restantes': [bToolkitCopia, colors, iconFlutter],
       'BLife Icons': [colors],
+      'Otros': [iconFlutter],
     };
   }
   

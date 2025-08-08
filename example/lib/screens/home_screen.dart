@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               PackageIcon(
                 iconPath: PackageIcons.bToolkitCopia,
-                size: 24,
+                size: 32,
                 color: AppColors.black,
               ),
               const SizedBox(width: 4),
@@ -110,9 +110,9 @@ class HomeScreen extends StatelessWidget {
         children: [
           _TechTag(
             text: 'Creado para Flutter',
-           iconPath: PackageIcons.iconFlutter,
+            iconPath: PackageIcons.iconFlutter,
             textColor: AppColors.black,
-            iconColor: null,
+            iconColor: null, // null means original color
           ),
           SizedBox(height: 8),
         ],
@@ -138,10 +138,10 @@ class HomeScreen extends StatelessWidget {
         // Título del hero
         Text(
           'Sistema de diseño\npara Flutter',
-          style: AppTypography.headlineSmall!.copyWith(
+                      style: AppTypography.headlineSmall!.copyWith(
             color: AppColors.black,
             fontWeight: FontWeight.w700,
-              fontSize: 32,
+            fontSize: 32,
             height: 1.2,
           ),
           textAlign: TextAlign.center,

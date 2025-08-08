@@ -77,7 +77,6 @@ class _SearchBarContentState extends State<SearchBarContent> {
         controller: _searchController,
         onChanged: (query) {
           // Handle search query
-          print('Searching for: $query');
         },
       ),
       codeExample: codeExample,
@@ -100,7 +99,6 @@ class _SearchBarContentState extends State<SearchBarContent> {
       child: SearchBarWidget(
         hintText: 'Buscar productos, categorías...',
         onChanged: (query) {
-          print('Searching with custom hint: $query');
         },
       ),
       codeExample: codeExample,
@@ -153,7 +151,6 @@ class _SearchBarContentState extends State<SearchBarContent> {
         hintText: 'Buscar con márgenes...',
         margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         onChanged: (query) {
-          print('Searching with custom margin: $query');
         },
       ),
       codeExample: codeExample,
