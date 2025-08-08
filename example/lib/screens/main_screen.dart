@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
         },
       ),
       const ComponentsSummaryScreen(),
-      const IconsScreen(), // Restaurado el IconsScreen
+      const IconsScreen(),
       const DocumentationScreen(),
     ];
 

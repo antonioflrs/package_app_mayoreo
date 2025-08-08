@@ -69,6 +69,7 @@ flutter:
     - ../assets/icons/stroke/
     - ../assets/icons/social/
     - ../assets/icons/custom/
+    - ../assets/icons/others/
     - ../assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see

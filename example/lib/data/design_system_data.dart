@@ -15,6 +15,8 @@ import '../widgets/component_content/alert_content.dart';
 import '../widgets/component_content/avatar_content.dart';
 import '../widgets/component_content/badge_content.dart';
 import '../widgets/component_content/breadcrumbs_content.dart';
+import '../widgets/component_content/search_bar_content.dart';
+import '../widgets/component_content/bottom_navigation_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -175,6 +177,22 @@ class DesignSystemData {
       icon: Icons.navigation,
       category: NavigationCategory.uiComponents,
       content: BreadcrumbsContent(),
+    ),
+    NavigationItem.material(
+      id: 'search-bar',
+      title: 'Barra de Búsqueda',
+      description: 'Widget de búsqueda con autocompletado',
+      icon: Icons.search,
+      category: NavigationCategory.uiComponents,
+      content: SearchBarContent(),
+    ),
+    NavigationItem.material(
+      id: 'bottom-navigation',
+      title: 'Bottom Navigation',
+      description: 'Barra de navegación inferior personalizada',
+      icon: Icons.navigation,
+      category: NavigationCategory.uiComponents,
+      content: BottomNavigationContent(),
     ),
   ];
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
-class MobileNavigation extends StatelessWidget {
+class MobileNavigation extends StatefulWidget {
   final int currentIndex;
   final Function(int) onTap;
 
@@ -12,42 +12,120 @@ class MobileNavigation extends StatelessWidget {
   });
 
   @override
+  MobileNavigationState createState() => MobileNavigationState();
+}
+
+class MobileNavigationState extends State<MobileNavigation> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    widget.onTap(index);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.currentIndex;
+  }
+
+  @override
+  void didUpdateWidget(MobileNavigation oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.currentIndex != widget.currentIndex) {
+      setState(() {
+        _selectedIndex = widget.currentIndex;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onTap,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: AppColors.white,
-      selectedItemColor: AppColors.black,
-      unselectedItemColor: AppColors.grayMedium,
-      selectedLabelStyle: const TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
+    return Container(
+      // Envuelve el ClipRRect en un Container
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          // Mueve el borderRadius a la BoxDecoration
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1), // Color de la sombra
+            spreadRadius: 0, // Cuánto se extiende la sombra
+            blurRadius: 5, // Cuánto se difumina la sombra
+            offset: const Offset(
+              0,
+              -1,
+            ), // Posición de la sombra (negativo para arriba)
+          ),
+        ],
       ),
-      unselectedLabelStyle: const TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
+      child: ClipRRect(
+        // Mantén el ClipRRect para el recorte visual si lo necesitas
+        borderRadius: BorderRadius.only(
+          // Mueve el borderRadius a la BoxDecoration para la sombra
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: AppColors.white,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: SafeSvgIcon(
+                iconPath: PackageIcons.blifeLogoInactivo,
+                height: 24.0,
+              ),
+              activeIcon: SafeSvgIcon(
+                iconPath: PackageIcons.blifeLogoActivo,
+                height: 24.0,
+              ),
+              label: 'Inicio',
+            ),
+            BottomNavigationBarItem(
+              icon: SafeSvgIcon(
+                iconPath: PackageIcons.categoriesInactive,
+                height: 24.0,
+              ),
+              activeIcon: SafeSvgIcon(
+                iconPath: PackageIcons.categoriesActivo,
+                height: 24.0,
+              ),
+              label: 'Componentes',
+            ),
+            BottomNavigationBarItem(
+              icon: SafeSvgIcon(
+                iconPath: PackageIcons.documentInactive,
+                height: 24.0,
+              ),
+              activeIcon: SafeSvgIcon(
+                iconPath: PackageIcons.documentActive,
+                height: 24.0,
+              ),
+              label: 'Iconos',
+            ),
+            BottomNavigationBarItem(
+              icon: SafeSvgIcon(
+                iconPath: PackageIcons.helpInactive,
+                height: 24.0,
+              ),
+              activeIcon: SafeSvgIcon(
+                iconPath: PackageIcons.helpActive,
+                height: 24.0,
+              ),
+              label: 'Docs',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: AppColors.orangeBrand,
+          unselectedItemColor: AppColors.black,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          iconSize: 24.0,
+        ),
       ),
-      elevation: 8,
-      enableFeedback: true,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Inicio',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.widgets),
-          label: 'Componentes',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.style),
-          label: 'Iconos',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.description),
-          label: 'Docs',
-        ),
-      ],
     );
   }
 } 

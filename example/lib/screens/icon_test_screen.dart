@@ -68,9 +68,18 @@ class _IconTestScreenState extends State<IconTestScreen> {
         backgroundColor: AppColors.orangeBrand,
         foregroundColor: AppColors.white,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0x00FFFFFF), Color(0xFFFFFFFF)],
+            stops: [0.15, 0.65],
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Título principal
@@ -131,6 +140,7 @@ class _IconTestScreenState extends State<IconTestScreen> {
             // Información de debug
             _buildDebugInfo(),
           ],
+        ),
         ),
       ),
     );

@@ -72,6 +72,9 @@ class PackageIcons {
   
   /// Custom Icons
   static const String promotions = '$_packagePath/custom/promotions.svg';
+  
+  /// Flutter Icon (for technology tags)
+  static const String iconFlutter = '$_packagePath/others/icon_flutter.svg';
 
   /// Get all available icons
   static const List<String> allIcons = [
@@ -125,6 +128,7 @@ class PackageIcons {
     alertIcon,
     whatsappLogo,
     promotions,
+    iconFlutter,
   ];
 
   /// Check if an icon exists
@@ -244,6 +248,8 @@ class PackageIcons {
       // Custom Icons
       case promotions:
         return 'Promotions';
+      case iconFlutter:
+        return 'Flutter Icon';
       
       default:
         return 'Unknown Icon';

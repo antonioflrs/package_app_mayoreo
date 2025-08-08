@@ -1,145 +1,202 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+import '../models/search_result.dart';
+import '../services/search_service.dart';
+import 'search_results_widget.dart';
 
-class SearchBarWidget extends StatelessWidget {
-  // Funcionalidad básica
+class SearchBarWidget extends StatefulWidget {
   final String hintText;
   final Function(String)? onChanged;
   final TextEditingController? controller;
   final bool enabled;
-  
-  // Diseño básico
-  final double? width;
-  final double height;
-  final double cornerRadius;
   final EdgeInsetsGeometry? margin;
-  
-  // Colores básicos
-  final Color? backgroundColor;
-  final Color? borderColor;
-  final Color? textColor;
-  final Color? hintColor;
-  final Color? iconColor;
-  
-  // Icono
   final String? iconPath;
-  final Widget? customIcon;
-  final bool showIcon;
 
   const SearchBarWidget({
     super.key,
-    this.hintText = 'Buscar en componentes',
+    this.hintText = 'Buscar en B Life®️ Mayoreo',
     this.onChanged,
     this.controller,
     this.enabled = true,
-    this.width,
-    this.height = 48,
-    this.cornerRadius = 24,
     this.margin,
-    this.backgroundColor,
-    this.borderColor,
-    this.textColor,
-    this.hintColor,
-    this.iconColor,
     this.iconPath,
-    this.customIcon,
-    this.showIcon = true,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Valores por defecto
-    final bgColor = backgroundColor ?? AppColors.backCards;
-    final borderColor = this.borderColor ?? AppColors.silverGrayMedium;
-    final textColor = this.textColor ?? AppColors.black;
-    final hintColor = this.hintColor ?? AppColors.darkGray;
-    final iconColor = this.iconColor ?? AppColors.grayMedium;
-    final margin = this.margin ?? const EdgeInsets.symmetric(horizontal: 16);
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
 
-    return Container(
-      width: width,
-      height: height,
-      margin: margin,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(cornerRadius),
-        border: Border.all(
-          color: borderColor,
-          width: 1,
-        ),
-      ),
-      child: TextField(
-        controller: controller,
-        enabled: enabled,
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: hintColor,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  late TextEditingController _controller;
+  List<SearchResult> _searchResults = [];
+  bool _showResults = false;
+  Timer? _debounceTimer;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController();
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    if (!_focusNode.hasFocus) {
+      setState(() {
+        _showResults = false;
+      });
+    }
+  }
+
+  void _onSearchChanged(String query) {
+    widget.onChanged?.call(query);
+    
+    // Cancelar el timer anterior
+    _debounceTimer?.cancel();
+    
+    // Crear un nuevo timer para debouncing
+    _debounceTimer = Timer(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        final results = SearchService.search(query, context);
+        setState(() {
+          _searchResults = results;
+          _showResults = query.isNotEmpty && results.isNotEmpty;
+        });
+      }
+    });
+  }
+
+  void _clearSearch() {
+    _controller.clear();
+    setState(() {
+      _searchResults = [];
+      _showResults = false;
+    });
+    widget.onChanged?.call('');
+  }
+
+  void _closeResults() {
+    setState(() {
+      _showResults = false;
+    });
+    _focusNode.unfocus();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Barra de búsqueda
+        Padding(
+          padding: widget.margin ?? const EdgeInsets.symmetric(horizontal: 15.0),
+          child: TextField(
+            controller: _controller,
+            focusNode: _focusNode,
+            enabled: widget.enabled,
+            onChanged: _onSearchChanged,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              hintStyle: const TextStyle(
+                color: AppColors.darkGray,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w400,
+              ),
+              filled: true,
+              fillColor: AppColors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: const BorderSide(
+                  color: AppColors.silverGrayMedium,
+                  width: 0.5,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: const BorderSide(
+                  color: AppColors.silverGrayMedium,
+                  width: 0.5,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: const BorderSide(
+                  color: AppColors.orangeBrand,
+                  width: 1.0,
+                ),
+              ),
+              suffixIcon: _controller.text.isNotEmpty 
+                  ? IconButton(
+                      onPressed: _clearSearch,
+                      icon: const Icon(
+                        Icons.close,
+                        size: 18.0,
+                        color: AppColors.darkGray,
+                      ),
+                      padding: const EdgeInsets.all(5.0),
+                      constraints: const BoxConstraints(
+                        minWidth: 24.0,
+                        minHeight: 24.0,
+                      ),
+                    )
+                  : _buildSearchIcon(),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 10.0,
+              ),
+            ),
+            textAlignVertical: TextAlignVertical.center,
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: AppColors.black,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-          border: InputBorder.none,
-          suffixIcon: _buildIcon(iconColor),
-          contentPadding: const EdgeInsets.only(
-            left: 16,
-            right: 8,
-            top: 12,
-            bottom: 12,
+        ),
+        
+        // Resultados de búsqueda
+        if (_showResults)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SearchResultsWidget(
+              results: _searchResults,
+              onClose: _closeResults,
+            ),
           ),
-        ),
-        style: TextStyle(
-          color: textColor,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
+      ],
     );
   }
 
-  Widget? _buildIcon(Color iconColor) {
-    if (!showIcon) return null;
-    
-    if (customIcon != null) {
+  Widget _buildSearchIcon() {
+    if (widget.iconPath != null) {
       return Padding(
-        padding: const EdgeInsets.all(12),
-        child: customIcon,
-      );
-    }
-
-    if (iconPath != null) {
-      return Padding(
-        padding: const EdgeInsets.all(12),
-        child: Builder(
-          builder: (context) => FutureBuilder<String>(
-            future: DefaultAssetBundle.of(context).loadString(iconPath!),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SafeSvgIcon(
-                  iconPath: iconPath!,
-                  width: 20,
-                  height: 20,
-                  color: iconColor,
-                );
-              } else {
-                return _buildDefaultSearchIcon(iconColor);
-              }
-            },
-          ),
+        padding: const EdgeInsets.all(5.0),
+        child: SafeSvgIcon(
+          iconPath: widget.iconPath!,
+          width: 20,
+          height: 20,
+          color: AppColors.grayMedium,
         ),
       );
     }
 
-    return _buildDefaultSearchIcon(iconColor);
-  }
-
-  Widget _buildDefaultSearchIcon(Color iconColor) {
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(5.0),
       child: Icon(
         Icons.search,
         size: 20,
-        color: iconColor,
+        color: AppColors.grayMedium,
       ),
     );
   }

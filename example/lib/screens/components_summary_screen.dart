@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../widgets/app_bar_widget.dart';
+import '../widgets/search_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 import 'component_detail_screen.dart';
@@ -32,15 +33,22 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
       appBar: AppBarWidget(
         title: 'Componentes',
         showMenuButton: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: AppColors.black),
-            onPressed: () => _showSearchDialog(context),
-          ),
-        ],
       ),
       body: Column(
         children: [
+          // Search Bar at the top
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SearchBarWidget(
+              hintText: 'Buscar componentes...',
+              controller: _searchController,
+              onChanged: (query) {
+                setState(() {
+                  _searchQuery = query;
+                });
+              },
+            ),
+          ),
           _buildHeader(),
           _buildCategoryFilter(),
           Expanded(
@@ -457,65 +465,5 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
     }
     
     return allComponents;
-  }
-
-  void _showSearchDialog(BuildContext context) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: AppColors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          title: const Text(
-            'Buscar Componentes',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: AppColors.black,
-            ),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: _searchController,
-                decoration: const InputDecoration(
-                  hintText: 'Buscar por nombre o descripción...',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(),
-                ),
-                onSubmitted: (value) {
-                  setState(() {
-                    _searchQuery = value;
-                  });
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _searchQuery = _searchController.text;
-                });
-                Navigator.of(context).pop();
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.orangeBrand,
-                foregroundColor: AppColors.white,
-              ),
-              child: const Text('Buscar'),
-            ),
-          ],
-        );
-      },
-    );
   }
 } 

@@ -20,68 +20,72 @@ class FontAssets {
 class IconAssets {
   IconAssets._();
 
+  // Base path for package assets
+  static const String _packagePath = 'packages/flutter_package_app_mayoreo/assets/icons';
+
   /// Available Icons (Verified working)
   
   // BLife Icons
-  static const String bToolkitCopia = 'assets/icons/blife/b_toolkit_copia.svg';
-  static const String colors = 'assets/icons/blife/colors.svg';
-  static const String blifeLogoActivo = 'assets/icons/blife/logo_activo.svg';
-  static const String blifeLogoInactivo = 'assets/icons/blife/logo_inactivo.svg';
+  static const String bToolkitCopia = '$_packagePath/blife/b_toolkit_copia.svg';
+  static const String colors = '$_packagePath/blife/colors.svg';
+  static const String blifeLogoActivo = '$_packagePath/blife/logo_activo.svg';
+  static const String blifeLogoInactivo = '$_packagePath/blife/logo_inactivo.svg';
   
   // Filled Icons
-  static const String user = 'assets/icons/filled/user.svg';
-  static const String userActivo = 'assets/icons/filled/user_activo.svg';
-  static const String ubicationActive = 'assets/icons/filled/ubication_active.svg';
-  static const String ubicationInactive = 'assets/icons/filled/ubication_inactive.svg';
-  static const String pedidosActive = 'assets/icons/filled/pedidos_active.svg';
-  static const String pedidosInactive = 'assets/icons/filled/pedidos_inactive.svg';
-  static const String ordersActivo = 'assets/icons/filled/orders_activo.svg';
-  static const String mailIcon = 'assets/icons/filled/mail_icon.svg';
-  static const String listActive = 'assets/icons/filled/list_active.svg';
-  static const String listInactive = 'assets/icons/filled/list_inactive.svg';
-  static const String helpActive = 'assets/icons/filled/help_active.svg';
-  static const String helpInactive = 'assets/icons/filled/help_inactive.svg';
-  static const String favoritesActivo = 'assets/icons/filled/favorites_activo.svg';
-  static const String favActive = 'assets/icons/filled/fav_active.svg';
-  static const String favInactive = 'assets/icons/filled/fav_inactive.svg';
-  static const String documentActive = 'assets/icons/filled/document_active.svg';
-  static const String documentInactive = 'assets/icons/filled/document_inactive.svg';
-  static const String categoriesActivo = 'assets/icons/filled/categories_activo.svg';
-  static const String cartActivo = 'assets/icons/filled/cart_activo.svg';
-  static const String cardActive = 'assets/icons/filled/card_active.svg';
-  static const String cardInactive = 'assets/icons/filled/card_inactive.svg';
-  static const String appleLogo = 'assets/icons/filled/apple_logo.svg';
+  static const String user = '$_packagePath/filled/user.svg';
+  static const String userActivo = '$_packagePath/filled/user_activo.svg';
+  static const String ubicationActive = '$_packagePath/filled/ubication_active.svg';
+  static const String ubicationInactive = '$_packagePath/filled/ubication_inactive.svg';
+  static const String pedidosActive = '$_packagePath/filled/pedidos_active.svg';
+  static const String pedidosInactive = '$_packagePath/filled/pedidos_inactive.svg';
+  static const String ordersActivo = '$_packagePath/filled/orders_activo.svg';
+  static const String mailIcon = '$_packagePath/filled/mail_icon.svg';
+  static const String listActive = '$_packagePath/filled/list_active.svg';
+  static const String listInactive = '$_packagePath/filled/list_inactive.svg';
+  static const String helpActive = '$_packagePath/filled/help_active.svg';
+  static const String helpInactive = '$_packagePath/filled/help_inactive.svg';
+  static const String favoritesActivo = '$_packagePath/filled/favorites_activo.svg';
+  static const String favActive = '$_packagePath/filled/fav_active.svg';
+  static const String favInactive = '$_packagePath/filled/fav_inactive.svg';
+  static const String documentActive = '$_packagePath/filled/document_active.svg';
+  static const String documentInactive = '$_packagePath/filled/document_inactive.svg';
+  static const String categoriesActivo = '$_packagePath/filled/categories_activo.svg';
+  static const String cartActivo = '$_packagePath/filled/cart_activo.svg';
+  static const String cardActive = '$_packagePath/filled/card_active.svg';
+  static const String cardInactive = '$_packagePath/filled/card_inactive.svg';
+  static const String appleLogo = '$_packagePath/filled/apple_logo.svg';
   
   // Stroke Icons
-  static const String zIndex = 'assets/icons/stroke/z_index.svg';
-  static const String userInactivo = 'assets/icons/stroke/user_inactivo.svg';
-  static const String tipography = 'assets/icons/stroke/tipography.svg';
-  static const String shareIcon = 'assets/icons/stroke/share_icon.svg';
-  static const String shadow = 'assets/icons/stroke/shadow.svg';
-  static const String rest = 'assets/icons/stroke/rest.svg';
-  static const String plusIcon = 'assets/icons/stroke/plus_icon.svg';
-  static const String ordesInactivo = 'assets/icons/stroke/ordes_inactivo.svg';
-  static const String icon = 'assets/icons/stroke/icon.svg';
-  static const String hugeiconsNoteAdd = 'assets/icons/stroke/hugeicons_note-add.svg';
-  static const String favoritesInactivo = 'assets/icons/stroke/favorites_inactivo.svg';
-  static const String espaciados = 'assets/icons/stroke/espaciados.svg';
-  static const String delete = 'assets/icons/stroke/delete.svg';
-  static const String strokeColors = 'assets/icons/stroke/colors.svg';
-  static const String close = 'assets/icons/stroke/close.svg';
-  static const String check = 'assets/icons/stroke/check.svg';
-  static const String categoriesInactive = 'assets/icons/stroke/categories_inactive.svg';
-  static const String cartInactivo = 'assets/icons/stroke/cart_inactivo.svg';
-  static const String burguerIcon = 'assets/icons/stroke/burguer_icon.svg';
-  static const String breakpoints = 'assets/icons/stroke/breakpoints.svg';
-  static const String arrowLeft = 'assets/icons/stroke/arrow_left.svg';
-  static const String arrowDown = 'assets/icons/stroke/arrow_down.svg';
-  static const String alertIcon = 'assets/icons/stroke/alert_icon.svg';
+  static const String zIndex = '$_packagePath/stroke/z_index.svg';
+  static const String userInactivo = '$_packagePath/stroke/user_inactivo.svg';
+  static const String tipography = '$_packagePath/stroke/tipography.svg';
+  static const String shareIcon = '$_packagePath/stroke/share_icon.svg';
+  static const String shadow = '$_packagePath/stroke/shadow.svg';
+  static const String rest = '$_packagePath/stroke/rest.svg';
+  static const String plusIcon = '$_packagePath/stroke/plus_icon.svg';
+  static const String ordesInactivo = '$_packagePath/stroke/ordes_inactivo.svg';
+  static const String icon = '$_packagePath/stroke/icon.svg';
+  static const String hugeiconsNoteAdd = '$_packagePath/stroke/hugeicons_note-add.svg';
+  static const String favoritesInactivo = '$_packagePath/stroke/favorites_inactivo.svg';
+  static const String espaciados = '$_packagePath/stroke/espaciados.svg';
+  static const String delete = '$_packagePath/stroke/delete.svg';
+  static const String strokeColors = '$_packagePath/stroke/colors.svg';
+  static const String close = '$_packagePath/stroke/close.svg';
+  static const String check = '$_packagePath/stroke/check.svg';
+  static const String categoriesInactive = '$_packagePath/stroke/categories_inactive.svg';
+  static const String cartInactivo = '$_packagePath/stroke/cart_inactivo.svg';
+  static const String burguerIcon = '$_packagePath/stroke/burguer_icon.svg';
+  static const String breakpoints = '$_packagePath/stroke/breakpoints.svg';
+  static const String arrowLeft = '$_packagePath/stroke/arrow_left.svg';
+  static const String arrowDown = '$_packagePath/stroke/arrow_down.svg';
+  static const String alertIcon = '$_packagePath/stroke/alert_icon.svg';
   
   // Social Icons
-  static const String whatsappLogo = 'assets/icons/social/whatsapp_logo.svg';
+  static const String whatsappLogo = '$_packagePath/social/whatsapp_logo.svg';
   
   // Custom Icons
-  static const String promotions = 'assets/icons/custom/promotions.svg';
+  static const String promotions = '$_packagePath/custom/promotions.svg';
+  static const String iconFlutter = '$_packagePath/others/icon_flutter.svg';
 }
 
 /// Asset categories for easy access - Cleaned version
@@ -150,6 +154,7 @@ class AssetCategories {
     
     // Custom Icons
     IconAssets.promotions,
+    IconAssets.iconFlutter,
   ];
 
   /// Icons by category
@@ -214,6 +219,7 @@ class AssetCategories {
     ],
     'Custom Icons': [
       IconAssets.promotions,
+      IconAssets.iconFlutter,
     ],
   };
 

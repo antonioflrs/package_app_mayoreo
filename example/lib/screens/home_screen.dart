@@ -8,53 +8,63 @@ import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
 import 'icon_test_screen.dart';
 
-
 class HomeScreen extends StatelessWidget {
   final Function(int)? onNavigationRequested;
-  
-  const HomeScreen({
-    super.key,
-    this.onNavigationRequested,
-  });
+
+  const HomeScreen({super.key, this.onNavigationRequested});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.softGray,
-      appBar: _buildMobileAppBar(context),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0x00FFFFFF), Color(0xFFFFFFFF)],
+            stops: [0.15, 0.65],
+          ),
+        ),
         child: Column(
           children: [
-            // Hero Section
-            _buildHeroSection(context),
-            
-            // Technology Tags
-            _buildTechnologyTags(context),
-            
-            // Main Content
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  // Main Heading
-                  _buildMainHeading(context),
-                  
-                  // Subtitle
-                  _buildSubtitle(context),
-                  
-                  // Call to Action Button
-                  _buildCallToActionButton(context),
-                  
-                  // Icon Test Button
-                  _buildIconTestButton(context),
-                  
-                  const SizedBox(height: 48),
-                  
-                  // Component Cards
-                  _buildComponentCards(context),
-                  
-                  const SizedBox(height: 48),
-                ],
+            _buildMobileAppBar(context),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Search Bar
+                    _buildSearchBar(context),
+
+                    // Technology Tags
+                    _buildTechnologyTags(context),
+
+                    // Main Content
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          // Hero Content
+                          _buildHeroContent(context),
+
+                          const SizedBox(height: 48),
+
+                          // Call to Action Button
+                          _buildCallToActionButton(context),
+
+                          // Icon Test Button
+                          _buildIconTestButton(context),
+
+                          const SizedBox(height: 48),
+
+                          // Component Cards
+                          _buildComponentCards(context),
+
+                          const SizedBox(height: 48),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -65,7 +75,7 @@ class HomeScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildMobileAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.softGray,
+      backgroundColor: AppColors.backCards,
       elevation: 0,
       title: Row(
         children: [
@@ -80,14 +90,6 @@ class HomeScreen extends StatelessWidget {
                 color: AppColors.black,
               ),
               const SizedBox(width: 4),
-              const Text(
-                'toolkit+',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black,
-                ),
-              ),
             ],
           ),
           const Spacer(),
@@ -101,89 +103,64 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.softGray,
-            AppColors.white,
-          ],
-        ),
-      ),
-      child: Column(
-        children: [
-          // Título del hero
-          Text(
-            'Sistema de Diseño Flutter',
-            style: AppTypography.headlineSmall!.copyWith(
-              color: AppColors.black,
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Componentes y herramientas para desarrollo',
-            style: AppTypography.bodyLarge!.copyWith(
-              color: AppColors.black,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 32),
-          // Buscador
-          SearchBarWidget(
-            onChanged: (value) {
-              // Implementar lógica de búsqueda aquí
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildTechnologyTags(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 6, bottom: 30),
       child: Column(
         children: [
-          _TechTag(text: 'Creado para Flutter', icon: Icons.flutter_dash),
+          _TechTag(
+            text: 'Creado para Flutter',
+           iconPath: PackageIcons.iconFlutter,
+            textColor: AppColors.black,
+            iconColor: null,
+          ),
           SizedBox(height: 8),
         ],
       ),
     );
   }
 
-  Widget _buildMainHeading(BuildContext context) {
-    return const Text(
-      'Menos código repetido, más velocidad en tu desarrollo',
-      style: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: AppColors.black,
-        height: 1.2,
+  Widget _buildSearchBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 10),
+      child: SearchBarWidget(
+        hintText: 'Buscar componentes, tokens, iconos...',
+        onChanged: (value) {
+          // La búsqueda se maneja internamente en el widget
+        },
       ),
-      textAlign: TextAlign.center,
     );
   }
 
-  Widget _buildSubtitle(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: Text(
-        'Componentes listos para ayudarte a desarrollar más rápido, sin esfuerzo y sin código repetido.',
-        style: TextStyle(
-          fontSize: 16,
-          color: AppColors.darkGray,
-          height: 1.5,
+  Widget _buildHeroContent(BuildContext context) {
+    return Column(
+      children: [
+        // Título del hero
+        Text(
+          'Sistema de diseño\npara Flutter',
+          style: AppTypography.headlineSmall!.copyWith(
+            color: AppColors.black,
+            fontWeight: FontWeight.w700,
+              fontSize: 32,
+            height: 1.2,
+          ),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,
-      ),
+        const SizedBox(height: 16),
+        Text(
+          'La librería de componentes para unificar\nel diseño de tus apps.',
+          style: AppTypography.bodyLarge!.copyWith(
+            color: AppColors.warmGray,
+            fontSize: 14,
+          ),
+          textAlign: TextAlign.center,
+        ),
+          const SizedBox(height: 30),
+        ],
     );
   }
+
+ 
 
   Widget _buildCallToActionButton(BuildContext context) {
     return SizedBox(
@@ -191,18 +168,13 @@ class HomeScreen extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const DesignSystemScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const DesignSystemScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.black,
           foregroundColor: AppColors.white,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -210,10 +182,7 @@ class HomeScreen extends StatelessWidget {
         ),
         child: const Text(
           'Explorar componentes',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -226,18 +195,13 @@ class HomeScreen extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const IconTestScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const IconTestScreen()),
           );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.orangeBrand,
           foregroundColor: AppColors.white,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -246,10 +210,7 @@ class HomeScreen extends StatelessWidget {
         icon: const Icon(Icons.image, size: 20),
         label: const Text(
           'Probar Iconos SVG',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -265,9 +226,9 @@ class HomeScreen extends StatelessWidget {
         _buildSectionTitle('Guías de Diseño', Icons.palette),
         const SizedBox(height: 16),
         _buildCardsColumn(designGuides, context),
-        
+
         const SizedBox(height: 32),
-        
+
         // UI Components Section
         _buildSectionTitle('Componentes UI', Icons.widgets),
         const SizedBox(height: 16),
@@ -280,20 +241,16 @@ class HomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          icon,
-          color: AppColors.grayMedium,
-          size: 20,
-        ),
+        Icon(icon, color: AppColors.grayMedium, size: 20),
         const SizedBox(width: 8),
-                  Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: AppColors.black,
           ),
+        ),
       ],
     );
   }
@@ -332,42 +289,26 @@ class HomeScreen extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildMenuItem(
-                context,
-                'Docs',
-                Icons.description,
-                () {
-                  Navigator.of(context).pop();
-                  onNavigationRequested?.call(3);
-                },
-              ),
+              _buildMenuItem(context, 'Docs', Icons.description, () {
+                Navigator.of(context).pop();
+                onNavigationRequested?.call(3);
+              }),
               const SizedBox(height: 8),
-              _buildMenuItem(
-                context,
-                'Novedades',
-                Icons.newspaper,
-                () {
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Novedades próximamente'),
-                      duration: Duration(seconds: 1),
-                      backgroundColor: AppColors.black,
-                    ),
-                  );
-                },
-              ),
+              _buildMenuItem(context, 'Novedades', Icons.newspaper, () {
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Novedades próximamente'),
+                    duration: Duration(seconds: 1),
+                    backgroundColor: AppColors.black,
+                  ),
+                );
+              }),
               const SizedBox(height: 8),
-              _buildMenuItem(
-                context,
-                'Iconos',
-                Icons.style,
-                () {
-                  Navigator.of(context).pop();
-                  onNavigationRequested?.call(2);
-                },
-              ),
-
+              _buildMenuItem(context, 'Iconos', Icons.style, () {
+                Navigator.of(context).pop();
+                onNavigationRequested?.call(2);
+              }),
             ],
           ),
         );
@@ -375,7 +316,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+  Widget _buildMenuItem(
+    BuildContext context,
+    String title,
+    IconData icon,
+    VoidCallback onTap,
+  ) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
@@ -385,32 +331,32 @@ class HomeScreen extends StatelessWidget {
           children: [
             Icon(icon, size: 24, color: AppColors.grayMedium),
             const SizedBox(width: 12),
-                          Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.black,
-                ),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black,
               ),
+            ),
           ],
         ),
       ),
     );
   }
-
-
-
-
 }
 
 class _TechTag extends StatelessWidget {
   final String text;
-  final IconData icon;
+  final String? iconPath;
+  final Color? textColor;
+  final Color? iconColor;
 
   const _TechTag({
     required this.text,
-    required this.icon,
+    this.iconPath,
+    this.textColor,
+    this.iconColor,
   });
 
   @override
@@ -418,32 +364,33 @@ class _TechTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-                    color: AppColors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-                      color: AppColors.grayMedium.withValues(alpha: 0.2),
+          color: AppColors.grayMedium.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 16,
-            color: AppColors.grayMedium,
-          ),
-          const SizedBox(width: 6),
-                      Text(
-              text,
-              style: const TextStyle(
-                fontSize: 12,
-                color: AppColors.grayMedium,
-                fontWeight: FontWeight.w500,
-              ),
+          if (iconPath != null)
+            PackageIcon(
+              iconPath: iconPath!,
+              size: 16,
+              color: iconColor,
             ),
+          const SizedBox(width: 6),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 12,
+              color: textColor ?? AppColors.grayMedium,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
     );
   }
-} 
+}
