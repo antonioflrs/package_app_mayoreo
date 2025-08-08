@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class PackageIcons {
   PackageIcons._();
 
-  // Base path for package assets - using the optimized test structure
-  static const String _packagePath = 'packages/flutter_package_app_mayoreo/assets/icons';
+  // Base path for package assets - using correct package paths
+  static const String _packagePath = 'assets/icons';
 
   /// B Toolkit Copia icon
   static const String bToolkitCopia = '$_packagePath/blife/b_toolkit_copia.svg';
