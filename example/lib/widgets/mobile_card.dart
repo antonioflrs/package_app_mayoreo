@@ -4,7 +4,8 @@ import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 class MobileCard extends StatelessWidget {
   final String title;
   final String description;
-  final IconData icon;
+  final String? packageIconPath;
+  final IconData? icon;
   final VoidCallback? onTap;
   final Color? backgroundColor;
   final Color? iconColor;
@@ -13,7 +14,8 @@ class MobileCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.icon,
+    this.packageIconPath,
+    this.icon,
     this.onTap,
     this.backgroundColor,
     this.iconColor,
@@ -27,6 +29,7 @@ class MobileCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
+      color: AppColors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -34,20 +37,18 @@ class MobileCard extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Row(
             children: [
-              // Icon Container
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: backgroundColor ?? AppColors.softGray,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  icon,
-                  color: iconColor ?? AppColors.grayMedium,
-                  size: 28,
-                ),
-              ),
+              // Icon without background
+              packageIconPath != null
+                  ? PackageIcon(
+                      iconPath: packageIconPath!,
+                      size: 28,
+                      color: iconColor ?? AppColors.grayMedium,
+                    )
+                  : Icon(
+                      icon ?? Icons.widgets,
+                      color: iconColor ?? AppColors.grayMedium,
+                      size: 28,
+                    ),
               
               const SizedBox(width: 16),
               

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../widgets/app_bar_widget.dart';
-import '../widgets/search_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 import 'component_detail_screen.dart';
@@ -36,19 +35,6 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
       ),
       body: Column(
         children: [
-          // Search Bar at the top
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SearchBarWidget(
-              hintText: 'Buscar componentes...',
-              controller: _searchController,
-              onChanged: (query) {
-                setState(() {
-                  _searchQuery = query;
-                });
-              },
-            ),
-          ),
           _buildHeader(),
           _buildCategoryFilter(),
           Expanded(

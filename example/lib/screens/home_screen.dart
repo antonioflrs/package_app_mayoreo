@@ -32,6 +32,12 @@ class HomeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    // Hero Content
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 60.0, bottom: 20.0),
+                      child: _buildHeroContent(context),
+                    ),
+
                     // Search Bar
                     _buildSearchBar(context),
 
@@ -43,16 +49,8 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          // Hero Content
-                          _buildHeroContent(context),
-
-                          const SizedBox(height: 48),
-
-                          // Call to Action Button
-                          _buildCallToActionButton(context),
-
-                          // Icon Test Button
-                          _buildIconTestButton(context),
+                          // Call to Action Buttons
+                          _buildActionButtons(context),
 
                           const SizedBox(height: 48),
 
@@ -105,7 +103,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildTechnologyTags(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 10, bottom: 30),
+      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 10, bottom: 40),
       child: Column(
         children: [
           _TechTag(
@@ -122,7 +120,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 60, bottom: 0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 0),
       child: SearchBarWidget(
         hintText: 'Buscar componentes, tokens, iconos...',
         onChanged: (value) {
@@ -155,65 +153,106 @@ class HomeScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 0),
         ],
     );
   }
 
  
 
-  Widget _buildCallToActionButton(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const DesignSystemScreen()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.black,
-          foregroundColor: AppColors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+  Widget _buildActionButtons(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const DesignSystemScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.black,
+              foregroundColor: AppColors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+            ),
+            child: const Text(
+              'Explorar componentes',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ),
           ),
-          elevation: 0,
         ),
-        child: const Text(
-          'Explorar componentes',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        const SizedBox(width: 12),
+        Expanded(
+          child: ElevatedButton.icon(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const IconTestScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.orangeBrand,
+              foregroundColor: AppColors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 0,
+            ),
+            icon: const Icon(Icons.image, size: 18),
+            label: const Text(
+              'Probar Iconos',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
-  Widget _buildIconTestButton(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 12),
-      child: ElevatedButton.icon(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const IconTestScreen()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.orangeBrand,
-          foregroundColor: AppColors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: 0,
-        ),
-        icon: const Icon(Icons.image, size: 20),
-        label: const Text(
-          'Probar Iconos SVG',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
+  String? _getPackageIconForItem(NavigationItem item) {
+    // Mapeo de componentes a iconos del package
+    switch (item.title.toLowerCase()) {
+      case 'colores':
+        return PackageIcons.colors;
+      case 'tipografía':
+        return PackageIcons.tipography;
+      case 'espaciados':
+        return PackageIcons.espaciados;
+      case 'sombras':
+        return PackageIcons.shadow;
+      case 'radios':
+        return PackageIcons.rest;
+      case 'breakpoints':
+        return PackageIcons.breakpoints;
+      case 'z-index':
+        return PackageIcons.zIndex;
+      case 'botones':
+        return PackageIcons.plusIcon;
+      case 'campos de texto':
+        return PackageIcons.hugeiconsNoteAdd;
+      case 'barras de navegación':
+        return PackageIcons.burguerIcon;
+      case 'tarjetas':
+        return PackageIcons.cardActive;
+      case 'badges':
+        return PackageIcons.check;
+      case 'alertas':
+        return PackageIcons.alertIcon;
+      case 'acordeones':
+        return PackageIcons.arrowDown;
+      case 'breadcrumbs':
+        return PackageIcons.arrowLeft;
+      case 'barras de búsqueda':
+        return PackageIcons.shareIcon;
+      case 'avatares':
+        return PackageIcons.userActivo;
+      default:
+        return null;
+    }
   }
 
   Widget _buildComponentCards(BuildContext context) {
@@ -263,6 +302,7 @@ class HomeScreen extends StatelessWidget {
           child: MobileCard(
             title: item.title,
             description: item.description,
+            packageIconPath: _getPackageIconForItem(item),
             icon: item.icon ?? Icons.widgets,
             onTap: () {
               Navigator.of(context).push(

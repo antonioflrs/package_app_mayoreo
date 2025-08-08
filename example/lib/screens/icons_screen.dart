@@ -84,7 +84,7 @@ class IconsScreen extends StatefulWidget {
 }
 
 class _IconsScreenState extends State<IconsScreen> {
-  String _searchQuery = '';
+  final String _searchQuery = '';
   String _selectedCategory = 'Todos';
 
   final List<IconCategory> _categories = [
@@ -105,7 +105,6 @@ class _IconsScreenState extends State<IconsScreen> {
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
           _buildCategoryFilter(),
           _buildLegend(),
           _buildIconStats(),
@@ -117,53 +116,7 @@ class _IconsScreenState extends State<IconsScreen> {
     );
   }
 
-  Widget _buildSearchBar() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: TextField(
-        onChanged: (value) {
-          setState(() {
-            _searchQuery = value;
-          });
-        },
-        decoration: InputDecoration(
-          hintText: 'Buscar iconos SVG...',
-          prefixIcon: const Icon(Icons.search),
-          suffixIcon: _searchQuery.isNotEmpty
-              ? IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    setState(() {
-                      _searchQuery = '';
-                    });
-                  },
-                )
-              : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              color: AppColors.orangeBrand,
-              width: 2,
-            ),
-          ),
-          filled: true,
-          fillColor: AppColors.backCards,
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildCategoryFilter() {
     return Container(
