@@ -1,7 +1,7 @@
 name: flutter_package_app_mayoreo
 description: "A new Flutter package project."
 version: 0.0.2
-homepage:
+homepage: https://github.com/your-username/flutter_package_app_mayoreo
 
 environment:
   sdk: ^3.8.1
