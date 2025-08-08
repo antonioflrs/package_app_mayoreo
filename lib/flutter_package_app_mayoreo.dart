@@ -8,10 +8,13 @@ import 'src/theme/icons/app_icons.dart';
 export 'src/theme/theme.dart';
 
 // Icons exports
-export 'src/icons/icons.dart';
+// export 'src/icons/icons.dart'; // Removed - no icons.dart file exists
 
 // Widget exports
 export 'src/widgets/widgets.dart';
+
+// Icon exports
+export 'src/widgets/custom_svg_icon.dart';
 
 // BLoC exports
 export 'src/blocs/blocs.dart';

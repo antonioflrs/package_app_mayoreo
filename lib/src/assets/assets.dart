@@ -16,218 +16,242 @@ class FontAssets {
   static const String interFamily = 'Inter';
 }
 
-/// Icon assets organized by category
+/// Icon assets organized by category - Cleaned version
 class IconAssets {
   IconAssets._();
 
-  /// BLife brand icons
-  static const String blifeToolkit = 'assets/icons/blife/b_toolkit.svg';
+  /// Available Icons (Verified working)
+  
+  // BLife Icons
+  static const String bToolkitCopia = 'assets/icons/blife/b_toolkit_copia.svg';
+  static const String colors = 'assets/icons/blife/colors.svg';
   static const String blifeLogoActivo = 'assets/icons/blife/logo_activo.svg';
   static const String blifeLogoInactivo = 'assets/icons/blife/logo_inactivo.svg';
-  static const String blifeLogoMayoreo = 'assets/icons/blife/logo_mayoreo.svg';
-
-  /// Filled icons
-  static const String filledAppleLogo = 'assets/icons/filled/apple_logo.svg';
-  static const String filledCardActive = 'assets/icons/filled/card_active.svg';
-  static const String filledCardInactive = 'assets/icons/filled/card_inactive.svg';
-  static const String filledCartActivo = 'assets/icons/filled/cart_activo.svg';
-  static const String filledCategoriesActivo = 'assets/icons/filled/categories_activo.svg';
-  static const String filledDocumentActive = 'assets/icons/filled/document_active.svg';
-  static const String filledDocumentInactive = 'assets/icons/filled/document_inactive.svg';
-  static const String filledFavActive = 'assets/icons/filled/fav_active.svg';
-  static const String filledFavInactive = 'assets/icons/filled/fav_inactive.svg';
-  static const String filledFavoritesActivo = 'assets/icons/filled/favorites_activo.svg';
-  static const String filledHelpActive = 'assets/icons/filled/help_active.svg';
-  static const String filledHelpInactive = 'assets/icons/filled/help_inactive.svg';
-  static const String filledListActive = 'assets/icons/filled/list_active.svg';
-  static const String filledListInactive = 'assets/icons/filled/list_inactive.svg';
-  static const String filledMailIcon = 'assets/icons/filled/mail_icon.svg';
-  static const String filledNoteAddList = 'assets/icons/filled/note_add_list.svg';
-  static const String filledOrdersActivo = 'assets/icons/filled/orders_activo.svg';
-  static const String filledPedidosActive = 'assets/icons/filled/pedidos_active.svg';
-  static const String filledPedidosInactive = 'assets/icons/filled/pedidos_inactive.svg';
-  static const String filledUbicationActive = 'assets/icons/filled/ubication_active.svg';
-  static const String filledUbicationInactive = 'assets/icons/filled/ubication_inactive.svg';
-  static const String filledUserActivo = 'assets/icons/filled/user_activo.svg';
-
-  /// Stroke icons
-  static const String strokeAlertIcon = 'assets/icons/stroke/alert_icon.svg';
-  static const String strokeArrowDown = 'assets/icons/stroke/arrow_down.svg';
-  static const String strokeArrowLeft = 'assets/icons/stroke/arrow_left.svg';
-  static const String strokeBreakpoints = 'assets/icons/stroke/breakpoints.svg';
-  static const String strokeBurguerIcon = 'assets/icons/stroke/burguer_icon.svg';
-  static const String strokeCartInactivo = 'assets/icons/stroke/cart_inactivo.svg';
-  static const String strokeCategoriesInactive = 'assets/icons/stroke/categories_inactive.svg';
-  static const String strokeCheck = 'assets/icons/stroke/check.svg';
-  static const String strokeClose = 'assets/icons/stroke/close.svg';
+  
+  // Filled Icons
+  static const String user = 'assets/icons/filled/user.svg';
+  static const String userActivo = 'assets/icons/filled/user_activo.svg';
+  static const String ubicationActive = 'assets/icons/filled/ubication_active.svg';
+  static const String ubicationInactive = 'assets/icons/filled/ubication_inactive.svg';
+  static const String pedidosActive = 'assets/icons/filled/pedidos_active.svg';
+  static const String pedidosInactive = 'assets/icons/filled/pedidos_inactive.svg';
+  static const String ordersActivo = 'assets/icons/filled/orders_activo.svg';
+  static const String mailIcon = 'assets/icons/filled/mail_icon.svg';
+  static const String listActive = 'assets/icons/filled/list_active.svg';
+  static const String listInactive = 'assets/icons/filled/list_inactive.svg';
+  static const String helpActive = 'assets/icons/filled/help_active.svg';
+  static const String helpInactive = 'assets/icons/filled/help_inactive.svg';
+  static const String favoritesActivo = 'assets/icons/filled/favorites_activo.svg';
+  static const String favActive = 'assets/icons/filled/fav_active.svg';
+  static const String favInactive = 'assets/icons/filled/fav_inactive.svg';
+  static const String documentActive = 'assets/icons/filled/document_active.svg';
+  static const String documentInactive = 'assets/icons/filled/document_inactive.svg';
+  static const String categoriesActivo = 'assets/icons/filled/categories_activo.svg';
+  static const String cartActivo = 'assets/icons/filled/cart_activo.svg';
+  static const String cardActive = 'assets/icons/filled/card_active.svg';
+  static const String cardInactive = 'assets/icons/filled/card_inactive.svg';
+  static const String appleLogo = 'assets/icons/filled/apple_logo.svg';
+  
+  // Stroke Icons
+  static const String zIndex = 'assets/icons/stroke/z_index.svg';
+  static const String userInactivo = 'assets/icons/stroke/user_inactivo.svg';
+  static const String tipography = 'assets/icons/stroke/tipography.svg';
+  static const String shareIcon = 'assets/icons/stroke/share_icon.svg';
+  static const String shadow = 'assets/icons/stroke/shadow.svg';
+  static const String rest = 'assets/icons/stroke/rest.svg';
+  static const String plusIcon = 'assets/icons/stroke/plus_icon.svg';
+  static const String ordesInactivo = 'assets/icons/stroke/ordes_inactivo.svg';
+  static const String icon = 'assets/icons/stroke/icon.svg';
+  static const String hugeiconsNoteAdd = 'assets/icons/stroke/hugeicons_note-add.svg';
+  static const String favoritesInactivo = 'assets/icons/stroke/favorites_inactivo.svg';
+  static const String espaciados = 'assets/icons/stroke/espaciados.svg';
+  static const String delete = 'assets/icons/stroke/delete.svg';
   static const String strokeColors = 'assets/icons/stroke/colors.svg';
-  static const String strokeDelete = 'assets/icons/stroke/delete.svg';
-  static const String strokeEspaciados = 'assets/icons/stroke/espaciados.svg';
-  static const String strokeFavoritesInactivo = 'assets/icons/stroke/favorites_inactivo.svg';
-  static const String strokeHugeiconsNoteAdd = 'assets/icons/stroke/hugeicons_note-add.svg';
-  static const String strokeIcon = 'assets/icons/stroke/icon.svg';
-  static const String strokeOrdesInactivo = 'assets/icons/stroke/ordes_inactivo.svg';
-  static const String strokePlusIcon = 'assets/icons/stroke/plus_icon.svg';
-  static const String strokeRest = 'assets/icons/stroke/rest.svg';
-  static const String strokeSearchIcon = 'assets/icons/stroke/search_icon.svg';
-  static const String strokeShadow = 'assets/icons/stroke/shadow.svg';
-  static const String strokeShareIcon = 'assets/icons/stroke/share_icon.svg';
-  static const String strokeTipography = 'assets/icons/stroke/tipography.svg';
-  static const String strokeUserInactivo = 'assets/icons/stroke/user_inactivo.svg';
-  static const String strokeZIndex = 'assets/icons/stroke/z_index.svg';
-
-  /// Symbolic icons
-  static const String simbolicosPromotions = 'assets/icons/simbolicos/promotions.svg';
-
-  /// Social media icons
-  static const String socialMediaWhatsappLogo = 'assets/icons/social_media/whatsapp_logo.svg';
-
-  /// Payment icons (from pagos directory)
-  // Add specific payment icons as needed
-  static const String pagosDirectory = 'assets/icons/pagos/';
-
-  /// Order status icons (from status_pedidos directory)
-  // Add specific order status icons as needed
-  static const String statusPedidosDirectory = 'assets/icons/status_pedidos/';
+  static const String close = 'assets/icons/stroke/close.svg';
+  static const String check = 'assets/icons/stroke/check.svg';
+  static const String categoriesInactive = 'assets/icons/stroke/categories_inactive.svg';
+  static const String cartInactivo = 'assets/icons/stroke/cart_inactivo.svg';
+  static const String burguerIcon = 'assets/icons/stroke/burguer_icon.svg';
+  static const String breakpoints = 'assets/icons/stroke/breakpoints.svg';
+  static const String arrowLeft = 'assets/icons/stroke/arrow_left.svg';
+  static const String arrowDown = 'assets/icons/stroke/arrow_down.svg';
+  static const String alertIcon = 'assets/icons/stroke/alert_icon.svg';
+  
+  // Social Icons
+  static const String whatsappLogo = 'assets/icons/social/whatsapp_logo.svg';
+  
+  // Custom Icons
+  static const String promotions = 'assets/icons/custom/promotions.svg';
 }
 
-/// Asset categories for easy access
+/// Asset categories for easy access - Cleaned version
 class AssetCategories {
   AssetCategories._();
 
+  /// All available icons
+  static const List<String> allIcons = [
+    // BLife Icons
+    IconAssets.bToolkitCopia,
+    IconAssets.colors,
+    IconAssets.blifeLogoActivo,
+    IconAssets.blifeLogoInactivo,
+    
+    // Filled Icons
+    IconAssets.user,
+    IconAssets.userActivo,
+    IconAssets.ubicationActive,
+    IconAssets.ubicationInactive,
+    IconAssets.pedidosActive,
+    IconAssets.pedidosInactive,
+    IconAssets.ordersActivo,
+    IconAssets.mailIcon,
+    IconAssets.listActive,
+    IconAssets.listInactive,
+    IconAssets.helpActive,
+    IconAssets.helpInactive,
+    IconAssets.favoritesActivo,
+    IconAssets.favActive,
+    IconAssets.favInactive,
+    IconAssets.documentActive,
+    IconAssets.documentInactive,
+    IconAssets.categoriesActivo,
+    IconAssets.cartActivo,
+    IconAssets.cardActive,
+    IconAssets.cardInactive,
+    IconAssets.appleLogo,
+    
+    // Stroke Icons
+    IconAssets.zIndex,
+    IconAssets.userInactivo,
+    IconAssets.tipography,
+    IconAssets.shareIcon,
+    IconAssets.shadow,
+    IconAssets.rest,
+    IconAssets.plusIcon,
+    IconAssets.ordesInactivo,
+    IconAssets.icon,
+    IconAssets.hugeiconsNoteAdd,
+    IconAssets.favoritesInactivo,
+    IconAssets.espaciados,
+    IconAssets.delete,
+    IconAssets.strokeColors,
+    IconAssets.close,
+    IconAssets.check,
+    IconAssets.categoriesInactive,
+    IconAssets.cartInactivo,
+    IconAssets.burguerIcon,
+    IconAssets.breakpoints,
+    IconAssets.arrowLeft,
+    IconAssets.arrowDown,
+    IconAssets.alertIcon,
+    
+    // Social Icons
+    IconAssets.whatsappLogo,
+    
+    // Custom Icons
+    IconAssets.promotions,
+  ];
+
+  /// Icons by category
+  static const Map<String, List<String>> iconsByCategory = {
+    'BLife Icons': [
+      IconAssets.bToolkitCopia,
+      IconAssets.colors,
+      IconAssets.blifeLogoActivo,
+      IconAssets.blifeLogoInactivo,
+    ],
+    'Filled Icons': [
+      IconAssets.user,
+      IconAssets.userActivo,
+      IconAssets.ubicationActive,
+      IconAssets.ubicationInactive,
+      IconAssets.pedidosActive,
+      IconAssets.pedidosInactive,
+      IconAssets.ordersActivo,
+      IconAssets.mailIcon,
+      IconAssets.listActive,
+      IconAssets.listInactive,
+      IconAssets.helpActive,
+      IconAssets.helpInactive,
+      IconAssets.favoritesActivo,
+      IconAssets.favActive,
+      IconAssets.favInactive,
+      IconAssets.documentActive,
+      IconAssets.documentInactive,
+      IconAssets.categoriesActivo,
+      IconAssets.cartActivo,
+      IconAssets.cardActive,
+      IconAssets.cardInactive,
+      IconAssets.appleLogo,
+    ],
+    'Stroke Icons': [
+      IconAssets.zIndex,
+      IconAssets.userInactivo,
+      IconAssets.tipography,
+      IconAssets.shareIcon,
+      IconAssets.shadow,
+      IconAssets.rest,
+      IconAssets.plusIcon,
+      IconAssets.ordesInactivo,
+      IconAssets.icon,
+      IconAssets.hugeiconsNoteAdd,
+      IconAssets.favoritesInactivo,
+      IconAssets.espaciados,
+      IconAssets.delete,
+      IconAssets.strokeColors,
+      IconAssets.close,
+      IconAssets.check,
+      IconAssets.categoriesInactive,
+      IconAssets.cartInactivo,
+      IconAssets.burguerIcon,
+      IconAssets.breakpoints,
+      IconAssets.arrowLeft,
+      IconAssets.arrowDown,
+      IconAssets.alertIcon,
+    ],
+    'Social Icons': [
+      IconAssets.whatsappLogo,
+    ],
+    'Custom Icons': [
+      IconAssets.promotions,
+    ],
+  };
+
   /// All font assets
-  static const List<String> fonts = [
+  static const List<String> allFonts = [
     FontAssets.interLight,
     FontAssets.interRegular,
     FontAssets.interMedium,
     FontAssets.interSemiBold,
     FontAssets.interBold,
   ];
-
-  /// All BLife brand icons
-  static const List<String> blifeIcons = [
-    IconAssets.blifeToolkit,
-    IconAssets.blifeLogoActivo,
-    IconAssets.blifeLogoInactivo,
-    IconAssets.blifeLogoMayoreo,
-  ];
-
-  /// All filled icons
-  static const List<String> filledIcons = [
-    IconAssets.filledAppleLogo,
-    IconAssets.filledCardActive,
-    IconAssets.filledCardInactive,
-    IconAssets.filledCartActivo,
-    IconAssets.filledCategoriesActivo,
-    IconAssets.filledDocumentActive,
-    IconAssets.filledDocumentInactive,
-    IconAssets.filledFavActive,
-    IconAssets.filledFavInactive,
-    IconAssets.filledFavoritesActivo,
-    IconAssets.filledHelpActive,
-    IconAssets.filledHelpInactive,
-    IconAssets.filledListActive,
-    IconAssets.filledListInactive,
-    IconAssets.filledMailIcon,
-    IconAssets.filledNoteAddList,
-    IconAssets.filledOrdersActivo,
-    IconAssets.filledPedidosActive,
-    IconAssets.filledPedidosInactive,
-    IconAssets.filledUbicationActive,
-    IconAssets.filledUbicationInactive,
-    IconAssets.filledUserActivo,
-  ];
-
-  /// All stroke icons
-  static const List<String> strokeIcons = [
-    IconAssets.strokeAlertIcon,
-    IconAssets.strokeArrowDown,
-    IconAssets.strokeArrowLeft,
-    IconAssets.strokeBreakpoints,
-    IconAssets.strokeBurguerIcon,
-    IconAssets.strokeCartInactivo,
-    IconAssets.strokeCategoriesInactive,
-    IconAssets.strokeCheck,
-    IconAssets.strokeClose,
-    IconAssets.strokeColors,
-    IconAssets.strokeDelete,
-    IconAssets.strokeEspaciados,
-    IconAssets.strokeFavoritesInactivo,
-    IconAssets.strokeHugeiconsNoteAdd,
-    IconAssets.strokeIcon,
-    IconAssets.strokeOrdesInactivo,
-    IconAssets.strokePlusIcon,
-    IconAssets.strokeRest,
-    IconAssets.strokeSearchIcon,
-    IconAssets.strokeShadow,
-    IconAssets.strokeShareIcon,
-    IconAssets.strokeTipography,
-    IconAssets.strokeUserInactivo,
-    IconAssets.strokeZIndex,
-  ];
-
-  /// All symbolic icons
-  static const List<String> symbolicIcons = [
-    IconAssets.simbolicosPromotions,
-  ];
-
-  /// All social media icons
-  static const List<String> socialMediaIcons = [
-    IconAssets.socialMediaWhatsappLogo,
-  ];
-
-  /// All icon assets combined
-  static const List<String> allIcons = [
-    ...blifeIcons,
-    ...filledIcons,
-    ...strokeIcons,
-    ...symbolicIcons,
-    ...socialMediaIcons,
-  ];
-
-  /// All assets combined
-  static const List<String> allAssets = [
-    ...fonts,
-    ...allIcons,
-  ];
 }
 
-/// Utility class for asset operations
+/// Asset utilities
 class AssetUtils {
   AssetUtils._();
 
-  /// Check if an asset exists (for runtime validation)
+  /// Get all available assets
+  static List<String> getAllAssets() {
+    return [
+      ...AssetCategories.allIcons,
+      ...AssetCategories.allFonts,
+    ];
+  }
+
+  /// Check if an asset exists (basic validation)
   static bool isValidAsset(String assetPath) {
-    return AssetCategories.allAssets.contains(assetPath);
+    return AssetCategories.allIcons.contains(assetPath) ||
+           AssetCategories.allFonts.contains(assetPath);
   }
 
-  /// Get all assets by category
-  static List<String> getAssetsByCategory(String category) {
-    switch (category.toLowerCase()) {
-      case 'fonts':
-        return AssetCategories.fonts;
-      case 'blife':
-        return AssetCategories.blifeIcons;
-      case 'filled':
-        return AssetCategories.filledIcons;
-      case 'stroke':
-        return AssetCategories.strokeIcons;
-      case 'symbolic':
-        return AssetCategories.symbolicIcons;
-      case 'social':
-        return AssetCategories.socialMediaIcons;
-      case 'all':
-        return AssetCategories.allAssets;
-      default:
-        return [];
+  /// Get asset category
+  static String? getAssetCategory(String assetPath) {
+    for (final entry in AssetCategories.iconsByCategory.entries) {
+      if (entry.value.contains(assetPath)) {
+        return entry.key;
+      }
     }
+    return null;
   }
-
-  /// Get asset count by category
-  static int getAssetCount(String category) {
-    return getAssetsByCategory(category).length;
-  }
-
-  /// Get total asset count
-  static int get totalAssetCount => AssetCategories.allAssets.length;
 }

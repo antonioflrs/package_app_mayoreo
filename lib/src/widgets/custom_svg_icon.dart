@@ -1,53 +1,320 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// Widget personalizado para renderizar iconos SVG propios
-class CustomSvgIcon extends StatelessWidget {
-  final String iconPath;
-  final double? width;
-  final double? height;
-  final Color? color;
-  final BoxFit fit;
-  final bool allowDrawingOutsideViewBox;
+/// Material Design-style icon system for the package
+/// This emulates how Material Design handles icons with a robust, predictable API
+class PackageIcons {
+  PackageIcons._();
 
-  const CustomSvgIcon({
+  // Base path for package assets - using the optimized test structure
+  static const String _packagePath = 'packages/flutter_package_app_mayoreo/assets/icons';
+
+  /// B Toolkit Copia icon
+  static const String bToolkitCopia = '$_packagePath/blife/b_toolkit_copia.svg';
+  
+  /// Colors icon (BLife)
+  static const String colors = '$_packagePath/blife/colors.svg';
+  
+  /// BLife Logos
+  static const String blifeLogoActivo = '$_packagePath/blife/logo_activo.svg';
+  static const String blifeLogoInactivo = '$_packagePath/blife/logo_inactivo.svg';
+  
+  /// Filled Icons
+  static const String userActivo = '$_packagePath/filled/user_activo.svg';
+  static const String ubicationActive = '$_packagePath/filled/ubication_active.svg';
+  static const String ubicationInactive = '$_packagePath/filled/ubication_inactive.svg';
+  static const String pedidosActive = '$_packagePath/filled/pedidos_active.svg';
+  static const String pedidosInactive = '$_packagePath/filled/pedidos_inactive.svg';
+  static const String ordersActivo = '$_packagePath/filled/orders_activo.svg';
+  static const String mailIcon = '$_packagePath/filled/mail_icon.svg';
+  static const String listActive = '$_packagePath/filled/list_active.svg';
+  static const String listInactive = '$_packagePath/filled/list_inactive.svg';
+  static const String helpActive = '$_packagePath/filled/help_active.svg';
+  static const String helpInactive = '$_packagePath/filled/help_inactive.svg';
+  static const String favoritesActivo = '$_packagePath/filled/favorites_activo.svg';
+  static const String favActive = '$_packagePath/filled/fav_active.svg';
+  static const String favInactive = '$_packagePath/filled/fav_inactive.svg';
+  static const String documentActive = '$_packagePath/filled/document_active.svg';
+  static const String documentInactive = '$_packagePath/filled/document_inactive.svg';
+  static const String categoriesActivo = '$_packagePath/filled/categories_activo.svg';
+  static const String cartActivo = '$_packagePath/filled/cart_activo.svg';
+  static const String cardActive = '$_packagePath/filled/card_active.svg';
+  static const String cardInactive = '$_packagePath/filled/card_inactive.svg';
+  static const String appleLogo = '$_packagePath/filled/apple_logo.svg';
+  
+  /// Stroke Icons
+  static const String zIndex = '$_packagePath/stroke/z_index.svg';
+  static const String userInactivo = '$_packagePath/stroke/user_inactivo.svg';
+  static const String tipography = '$_packagePath/stroke/tipography.svg';
+  static const String shareIcon = '$_packagePath/stroke/share_icon.svg';
+  static const String shadow = '$_packagePath/stroke/shadow.svg';
+  static const String rest = '$_packagePath/stroke/rest.svg';
+  static const String plusIcon = '$_packagePath/stroke/plus_icon.svg';
+  static const String ordesInactivo = '$_packagePath/stroke/ordes_inactivo.svg';
+  static const String icon = '$_packagePath/stroke/icon.svg';
+  static const String hugeiconsNoteAdd = '$_packagePath/stroke/hugeicons_note-add.svg';
+  static const String favoritesInactivo = '$_packagePath/stroke/favorites_inactivo.svg';
+  static const String espaciados = '$_packagePath/stroke/espaciados.svg';
+  static const String delete = '$_packagePath/stroke/delete.svg';
+  static const String strokeColors = '$_packagePath/stroke/colors.svg';
+  static const String close = '$_packagePath/stroke/close.svg';
+  static const String check = '$_packagePath/stroke/check.svg';
+  static const String categoriesInactive = '$_packagePath/stroke/categories_inactive.svg';
+  static const String cartInactivo = '$_packagePath/stroke/cart_inactivo.svg';
+  static const String burguerIcon = '$_packagePath/stroke/burguer_icon.svg';
+  static const String breakpoints = '$_packagePath/stroke/breakpoints.svg';
+  static const String arrowLeft = '$_packagePath/stroke/arrow_left.svg';
+  static const String arrowDown = '$_packagePath/stroke/arrow_down.svg';
+  static const String alertIcon = '$_packagePath/stroke/alert_icon.svg';
+  
+  /// Social Icons
+  static const String whatsappLogo = '$_packagePath/social/whatsapp_logo.svg';
+  
+  /// Custom Icons
+  static const String promotions = '$_packagePath/custom/promotions.svg';
+
+  /// Get all available icons
+  static const List<String> allIcons = [
+    bToolkitCopia,
+    colors,
+    blifeLogoActivo,
+    blifeLogoInactivo,
+    userActivo,
+    ubicationActive,
+    ubicationInactive,
+    pedidosActive,
+    pedidosInactive,
+    ordersActivo,
+    mailIcon,
+    listActive,
+    listInactive,
+    helpActive,
+    helpInactive,
+    favoritesActivo,
+    favActive,
+    favInactive,
+    documentActive,
+    documentInactive,
+    categoriesActivo,
+    cartActivo,
+    cardActive,
+    cardInactive,
+    appleLogo,
+    zIndex,
+    userInactivo,
+    tipography,
+    shareIcon,
+    shadow,
+    rest,
+    plusIcon,
+    ordesInactivo,
+    icon,
+    hugeiconsNoteAdd,
+    favoritesInactivo,
+    espaciados,
+    delete,
+    strokeColors,
+    close,
+    check,
+    categoriesInactive,
+    cartInactivo,
+    burguerIcon,
+    breakpoints,
+    arrowLeft,
+    arrowDown,
+    alertIcon,
+    whatsappLogo,
+    promotions,
+  ];
+
+  /// Check if an icon exists
+  static bool hasIcon(String iconPath) {
+    return allIcons.contains(iconPath);
+  }
+
+  /// Get icon name from path
+  static String getIconName(String iconPath) {
+    switch (iconPath) {
+      // BLife Icons
+      case bToolkitCopia:
+        return 'B Toolkit Copia';
+      case colors:
+        return 'BLife Colors';
+      case blifeLogoActivo:
+        return 'BLife Logo Activo';
+      case blifeLogoInactivo:
+        return 'BLife Logo Inactivo';
+      
+      // Filled Icons
+      case userActivo:
+        return 'User Activo';
+      case ubicationActive:
+        return 'Ubication Active';
+      case ubicationInactive:
+        return 'Ubication Inactive';
+      case pedidosActive:
+        return 'Pedidos Active';
+      case pedidosInactive:
+        return 'Pedidos Inactive';
+      case ordersActivo:
+        return 'Orders Activo';
+      case mailIcon:
+        return 'Mail Icon';
+      case listActive:
+        return 'List Active';
+      case listInactive:
+        return 'List Inactive';
+      case helpActive:
+        return 'Help Active';
+      case helpInactive:
+        return 'Help Inactive';
+      case favoritesActivo:
+        return 'Favorites Activo';
+      case favActive:
+        return 'Fav Active';
+      case favInactive:
+        return 'Fav Inactive';
+      case documentActive:
+        return 'Document Active';
+      case documentInactive:
+        return 'Document Inactive';
+      case categoriesActivo:
+        return 'Categories Activo';
+      case cartActivo:
+        return 'Cart Activo';
+      case cardActive:
+        return 'Card Active';
+      case cardInactive:
+        return 'Card Inactive';
+      case appleLogo:
+        return 'Apple Logo';
+      
+      // Stroke Icons
+      case zIndex:
+        return 'Z Index';
+      case userInactivo:
+        return 'User Inactivo';
+      case tipography:
+        return 'Typography';
+      case shareIcon:
+        return 'Share Icon';
+      case shadow:
+        return 'Shadow';
+      case rest:
+        return 'Rest';
+      case plusIcon:
+        return 'Plus Icon';
+      case ordesInactivo:
+        return 'Orders Inactivo';
+      case icon:
+        return 'Icon';
+      case hugeiconsNoteAdd:
+        return 'Note Add';
+      case favoritesInactivo:
+        return 'Favorites Inactivo';
+      case espaciados:
+        return 'Espaciados';
+      case delete:
+        return 'Delete';
+      case strokeColors:
+        return 'Stroke Colors';
+      case close:
+        return 'Close';
+      case check:
+        return 'Check';
+      case categoriesInactive:
+        return 'Categories Inactive';
+      case cartInactivo:
+        return 'Cart Inactivo';
+      case burguerIcon:
+        return 'Burger Icon';
+      case breakpoints:
+        return 'Breakpoints';
+      case arrowLeft:
+        return 'Arrow Left';
+      case arrowDown:
+        return 'Arrow Down';
+      case alertIcon:
+        return 'Alert Icon';
+      
+      // Social Icons
+      case whatsappLogo:
+        return 'WhatsApp Logo';
+      
+      // Custom Icons
+      case promotions:
+        return 'Promotions';
+      
+      default:
+        return 'Unknown Icon';
+    }
+  }
+}
+
+/// Material Design-style icon widget
+/// Similar to Icon widget but for SVG assets from the package
+class PackageIcon extends StatelessWidget {
+  final String iconPath;
+  final double? size;
+  final Color? color;
+  final Widget? fallback;
+
+  const PackageIcon({
     super.key,
     required this.iconPath,
-    this.width,
-    this.height,
+    this.size,
     this.color,
-    this.fit = BoxFit.contain,
-    this.allowDrawingOutsideViewBox = false,
+    this.fallback,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Validate that the icon exists
+    if (!PackageIcons.hasIcon(iconPath)) {
+      debugPrint('PackageIcon: Icon not found: $iconPath');
+      return fallback ?? _buildErrorIcon(context);
+    }
+
     return SvgPicture.asset(
       iconPath,
-      width: width,
-      height: height,
+      width: size,
+      height: size,
       colorFilter: color != null 
           ? ColorFilter.mode(color!, BlendMode.srcIn)
           : null,
-      fit: fit,
-      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
-      placeholderBuilder: (context) => SizedBox(
-        width: width,
-        height: height,
-        child: Center(
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              color ?? Theme.of(context).primaryColor,
-            ),
+      placeholderBuilder: (context) => _buildPlaceholder(context),
+      errorBuilder: (context, error, stackTrace) {
+        debugPrint('PackageIcon: Error loading $iconPath: $error');
+        return fallback ?? _buildErrorIcon(context);
+      },
+    );
+  }
+
+  Widget _buildPlaceholder(BuildContext context) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            color ?? Theme.of(context).primaryColor,
           ),
         ),
       ),
     );
   }
+
+  Widget _buildErrorIcon(BuildContext context) {
+    return Icon(
+      Icons.error_outline,
+      size: size,
+      color: color ?? Colors.red,
+    );
+  }
 }
 
-/// Widget para renderizar iconos SVG con manejo de errores
+/// Safe SVG Icon with error handling (legacy support)
 class SafeSvgIcon extends StatelessWidget {
   final String iconPath;
   final double? width;
@@ -68,153 +335,109 @@ class SafeSvgIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: DefaultAssetBundle.of(context).loadString(iconPath),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return SvgPicture.string(
-            snapshot.data!,
-            width: width,
-            height: height,
-            colorFilter: color != null 
-                ? ColorFilter.mode(color!, BlendMode.srcIn)
-                : null,
-            fit: fit,
-          );
-        } else if (snapshot.hasError) {
-          return fallback ?? 
-              Icon(
-                Icons.error_outline,
-                size: width ?? height ?? 24,
-                color: color ?? Colors.red,
-              );
-        } else {
-          return SizedBox(
-            width: width,
-            height: height,
-            child: Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  color ?? Theme.of(context).primaryColor,
-                ),
+    try {
+      return SvgPicture.asset(
+        iconPath,
+        width: width,
+        height: height,
+        colorFilter: color != null 
+            ? ColorFilter.mode(color!, BlendMode.srcIn)
+            : null,
+        fit: fit,
+        placeholderBuilder: (context) => SizedBox(
+          width: width,
+          height: height,
+          child: Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                color ?? Theme.of(context).primaryColor,
               ),
             ),
+          ),
+        ),
+        errorBuilder: (context, error, stackTrace) {
+          debugPrint('SVG Error loading $iconPath: $error');
+          return fallback ?? 
+              SizedBox(
+                width: width,
+                height: height,
+                child: Icon(
+                  Icons.error_outline,
+                  size: (width ?? height ?? 24) * 0.6,
+                  color: color ?? Colors.red,
+                ),
+              );
+        },
+      );
+    } catch (e) {
+      debugPrint('SVG Exception loading $iconPath: $e');
+      return fallback ?? 
+          SizedBox(
+            width: width,
+            height: height,
+            child: Icon(
+              Icons.error_outline,
+              size: (width ?? height ?? 24) * 0.6,
+              color: color ?? Colors.red,
+            ),
           );
-        }
-      },
-    );
+    }
   }
 }
 
-/// Clase helper para acceder a iconos SVG organizados por categorías
-class SvgIconHelper {
+/// Centralized Icon Registry - Simplified with only remaining icons
+class SvgIconRegistry {
+  // Base path for all icons - Using the optimized test structure
   static const String _basePath = 'assets/icons';
   
-  // Iconos de navegación
-  static const String burgerMenu = '$_basePath/stroke/burguer_icon.svg';
-  static const String arrowLeft = '$_basePath/stroke/arrow_left.svg';
-  static const String arrowDown = '$_basePath/stroke/arrow_down.svg';
-  static const String close = '$_basePath/stroke/close.svg';
-  static const String check = '$_basePath/stroke/check.svg';
-  static const String plus = '$_basePath/stroke/plus_icon.svg';
-  static const String reset = '$_basePath/stroke/rest.svg';
-  static const String search = '$_basePath/stroke/search_icon.svg';
+  // Remaining Icons
+  static const String bToolkitCopia = '$_basePath/b_toolkit_copia.svg';
+  static const String colors = '$_basePath/colors.svg';
   
-  // Iconos de usuario
-  static const String userActive = '$_basePath/filled/user_activo.svg';
-  static const String userInactive = '$_basePath/stroke/user_inactivo.svg';
-  
-  // Iconos de pedidos y carrito
-  static const String ordersActive = '$_basePath/filled/pedidos_active.svg';
-  static const String ordersInactive = '$_basePath/filled/pedidos_inactive.svg';
-  static const String cartActive = '$_basePath/filled/cart_activo.svg';
-  static const String cartInactive = '$_basePath/stroke/cart_inactivo.svg';
-  
-  // Iconos de categorías
-  static const String categoriesActive = '$_basePath/filled/categories_activo.svg';
-  static const String categoriesInactive = '$_basePath/stroke/categories_inactive.svg';
-  
-  // Iconos de favoritos
-  static const String favoritesActive = '$_basePath/filled/favorites_activo.svg';
-  static const String favoritesInactive = '$_basePath/stroke/favorites_inactivo.svg';
-  static const String favActive = '$_basePath/filled/fav_active.svg';
-  static const String favInactive = '$_basePath/filled/fav_inactive.svg';
-  
-  // Iconos de documentos
-  static const String documentActive = '$_basePath/filled/document_active.svg';
-  static const String documentInactive = '$_basePath/filled/document_inactive.svg';
-  
-  // Iconos de tarjetas
-  static const String cardActive = '$_basePath/filled/card_active.svg';
-  static const String cardInactive = '$_basePath/filled/card_inactive.svg';
-  
-  // Iconos de ayuda
-  static const String helpActive = '$_basePath/filled/help_active.svg';
-  static const String helpInactive = '$_basePath/filled/help_inactive.svg';
-  
-  // Iconos de ubicación
-  static const String locationActive = '$_basePath/filled/ubication_active.svg';
-  static const String locationInactive = '$_basePath/filled/ubication_inactive.svg';
-  
-  // Iconos de comunicación
-  static const String mail = '$_basePath/filled/mail_icon.svg';
-  static const String share = '$_basePath/stroke/share_icon.svg';
-  
-  // Iconos de acciones
-  static const String delete = '$_basePath/stroke/delete.svg';
-  static const String alert = '$_basePath/stroke/alert_icon.svg';
-  
-  // Iconos de sistema de diseño
-  static const String colors = '$_basePath/stroke/colors.svg';
-  static const String typography = '$_basePath/stroke/tipography.svg';
-  static const String shadows = '$_basePath/stroke/shadow.svg';
-  static const String spacing = '$_basePath/stroke/espaciados.svg';
-  static const String breakpoints = '$_basePath/stroke/breakpoints.svg';
-  static const String zIndex = '$_basePath/stroke/z_index.svg';
-  
-  // Iconos de marca
-  static const String bToolkit = '$_basePath/blife/b_toolkit.svg';
-  static const String logoActive = '$_basePath/blife/logo_activo.svg';
-  static const String logoInactive = '$_basePath/blife/logo_inactivo.svg';
-  static const String appleLogo = '$_basePath/filled/apple_logo.svg';
-  
-  // Iconos de redes sociales
-  static const String whatsapp = '$_basePath/social_media/whatsapp_logo.svg';
-  
-  /// Obtiene todos los iconos organizados por categoría
-  static Map<String, List<String>> getAllIconsByCategory() {
+  /// Get all icons organized by category - Simplified version
+  static Map<String, List<SvgIconData>> getAllIconsByCategory() {
     return {
-      'Navegación': [burgerMenu, arrowLeft, arrowDown, close, check, plus, reset, search],
-      'Usuario': [userActive, userInactive],
-      'Pedidos y Carrito': [ordersActive, ordersInactive, cartActive, cartInactive],
-      'Categorías': [categoriesActive, categoriesInactive],
-      'Favoritos': [favoritesActive, favoritesInactive, favActive, favInactive],
-      'Documentos': [documentActive, documentInactive],
-      'Tarjetas': [cardActive, cardInactive],
-      'Ayuda': [helpActive, helpInactive],
-      'Ubicación': [locationActive, locationInactive],
-      'Comunicación': [mail, share],
-      'Acciones': [delete, alert],
-      'Sistema de Diseño': [colors, typography, shadows, spacing, breakpoints, zIndex],
-      'Marca': [bToolkit, logoActive, logoInactive, appleLogo],
-      'Redes Sociales': [whatsapp],
+      'Remaining Icons': [
+        SvgIconData('B Toolkit Copia', bToolkitCopia),
+        SvgIconData('Colors', colors),
+      ],
     };
   }
   
-  /// Obtiene todos los iconos en una lista plana
-  static List<String> getAllIcons() {
+  /// Get all icons in a flat list
+  static List<SvgIconData> getAllIcons() {
     return getAllIconsByCategory().values.expand((icons) => icons).toList();
   }
   
-  /// Busca iconos por nombre
-  static List<String> searchIcons(String query) {
+  /// Search icons by name
+  static List<SvgIconData> searchIcons(String query) {
     if (query.isEmpty) return getAllIcons();
     
     final lowercaseQuery = query.toLowerCase();
     return getAllIcons().where((icon) {
-      final fileName = icon.split('/').last.toLowerCase();
-      return fileName.contains(lowercaseQuery);
+      return icon.name.toLowerCase().contains(lowercaseQuery) ||
+             icon.path.toLowerCase().contains(lowercaseQuery);
     }).toList();
   }
+}
+
+/// Icon data class
+class SvgIconData {
+  final String name;
+  final String path;
+  
+  const SvgIconData(this.name, this.path);
+  
+  @override
+  String toString() => 'SvgIconData(name: $name, path: $path)';
+  
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is SvgIconData && other.path == path;
+  }
+  
+  @override
+  int get hashCode => path.hashCode;
 } 

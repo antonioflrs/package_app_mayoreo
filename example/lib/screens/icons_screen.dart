@@ -2,6 +2,80 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import '../widgets/app_bar_widget.dart';
 
+// Clase para mapear iconos directamente a PackageIcons
+class PackageIconMapper {
+  static String? getPackageIconPath(String iconName) {
+    // Mapeo directo de nombres de iconos a PackageIcons
+    final Map<String, String> iconMapping = {
+      // BLife Icons
+      'bToolkitCopia': PackageIcons.bToolkitCopia,
+      'colors': PackageIcons.colors,
+      'blifeLogoActivo': PackageIcons.blifeLogoActivo,
+      'blifeLogoInactivo': PackageIcons.blifeLogoInactivo,
+      
+      // Filled Icons
+      'userActivo': PackageIcons.userActivo,
+      'ubicationActive': PackageIcons.ubicationActive,
+      'ubicationInactive': PackageIcons.ubicationInactive,
+      'pedidosActive': PackageIcons.pedidosActive,
+      'pedidosInactive': PackageIcons.pedidosInactive,
+      'ordersActivo': PackageIcons.ordersActivo,
+      'mailIcon': PackageIcons.mailIcon,
+      'listActive': PackageIcons.listActive,
+      'listInactive': PackageIcons.listInactive,
+      'helpActive': PackageIcons.helpActive,
+      'helpInactive': PackageIcons.helpInactive,
+      'favoritesActivo': PackageIcons.favoritesActivo,
+      'favActive': PackageIcons.favActive,
+      'favInactive': PackageIcons.favInactive,
+      'documentActive': PackageIcons.documentActive,
+      'documentInactive': PackageIcons.documentInactive,
+      'categoriesActivo': PackageIcons.categoriesActivo,
+      'cartActivo': PackageIcons.cartActivo,
+      'cardActive': PackageIcons.cardActive,
+      'cardInactive': PackageIcons.cardInactive,
+      'appleLogo': PackageIcons.appleLogo,
+      
+      // Stroke Icons
+      'zIndex': PackageIcons.zIndex,
+      'userInactivo': PackageIcons.userInactivo,
+      'tipography': PackageIcons.tipography,
+      'shareIcon': PackageIcons.shareIcon,
+      'shadow': PackageIcons.shadow,
+      'rest': PackageIcons.rest,
+      'plusIcon': PackageIcons.plusIcon,
+      'ordesInactivo': PackageIcons.ordesInactivo,
+      'icon': PackageIcons.icon,
+      'hugeiconsNoteAdd': PackageIcons.hugeiconsNoteAdd,
+      'favoritesInactivo': PackageIcons.favoritesInactivo,
+      'espaciados': PackageIcons.espaciados,
+      'delete': PackageIcons.delete,
+      'strokeColors': PackageIcons.strokeColors,
+      'close': PackageIcons.close,
+      'check': PackageIcons.check,
+      'categoriesInactive': PackageIcons.categoriesInactive,
+      'cartInactivo': PackageIcons.cartInactivo,
+      'burguerIcon': PackageIcons.burguerIcon,
+      'breakpoints': PackageIcons.breakpoints,
+      'arrowLeft': PackageIcons.arrowLeft,
+      'arrowDown': PackageIcons.arrowDown,
+      'alertIcon': PackageIcons.alertIcon,
+      
+      // Social Icons
+      'whatsappLogo': PackageIcons.whatsappLogo,
+      
+      // Custom Icons
+      'promotions': PackageIcons.promotions,
+    };
+    
+    return iconMapping[iconName];
+  }
+  
+  static bool hasPackageIcon(String iconName) {
+    return getPackageIconPath(iconName) != null;
+  }
+}
+
 class IconsScreen extends StatefulWidget {
   const IconsScreen({super.key});
 
@@ -15,27 +89,26 @@ class _IconsScreenState extends State<IconsScreen> {
 
   final List<IconCategory> _categories = [
     IconCategory('Todos', Icons.all_inclusive),
-    IconCategory('Navegación', Icons.navigation),
-    IconCategory('Usuario', Icons.person),
-    IconCategory('Pedidos', Icons.shopping_cart),
-    IconCategory('Categorías', Icons.category),
-    IconCategory('Favoritos', Icons.favorite),
-    IconCategory('Pagos', Icons.payment),
-    IconCategory('Social', Icons.share),
-    IconCategory('Simbólicos', Icons.star),
+    IconCategory('BLife Icons', Icons.branding_watermark),
+    IconCategory('Filled Icons', Icons.radio_button_checked),
+    IconCategory('Stroke Icons', Icons.radio_button_unchecked),
+    IconCategory('Social Icons', Icons.share),
+    IconCategory('Custom Icons', Icons.extension),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Iconos',
+        title: 'Iconos SVG',
         showMenuButton: false,
       ),
       body: Column(
         children: [
           _buildSearchBar(),
           _buildCategoryFilter(),
+          _buildLegend(),
+          _buildIconStats(),
           Expanded(
             child: _buildIconsGrid(),
           ),
@@ -54,7 +127,7 @@ class _IconsScreenState extends State<IconsScreen> {
           });
         },
         decoration: InputDecoration(
-          hintText: 'Buscar iconos...',
+          hintText: 'Buscar iconos SVG...',
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
@@ -138,6 +211,208 @@ class _IconsScreenState extends State<IconsScreen> {
     );
   }
 
+  Widget _buildLegend() {
+    final packageIconCount = _getPackageIconCount();
+    final totalIconCount = _getTotalIconCount();
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.orangeBrand,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  'PI',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'PackageIcon (Material Design Style) - $totalIconCount iconos',
+                style: AppTypography.bodySmall?.copyWith(
+                  color: AppColors.grayMedium,
+                ) ?? TextStyle(
+                  color: AppColors.grayMedium,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Total: $totalIconCount iconos disponibles',
+            style: AppTypography.bodySmall?.copyWith(
+              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w600,
+            ) ?? TextStyle(
+              color: AppColors.orangeBrand,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  int _getPackageIconCount() {
+    final allIcons = _getAvailableIcons();
+    return allIcons.where((icon) => PackageIconMapper.hasPackageIcon(icon.name)).length;
+  }
+
+  int _getTotalIconCount() {
+    return _getAvailableIcons().length;
+  }
+
+  List<SvgIconData> _getAvailableIcons() {
+    return [
+      // BLife Icons
+      SvgIconData('bToolkitCopia', PackageIcons.bToolkitCopia),
+      SvgIconData('colors', PackageIcons.colors),
+      SvgIconData('blifeLogoActivo', PackageIcons.blifeLogoActivo),
+      SvgIconData('blifeLogoInactivo', PackageIcons.blifeLogoInactivo),
+      
+      // Filled Icons
+      SvgIconData('userActivo', PackageIcons.userActivo),
+      SvgIconData('ubicationActive', PackageIcons.ubicationActive),
+      SvgIconData('ubicationInactive', PackageIcons.ubicationInactive),
+      SvgIconData('pedidosActive', PackageIcons.pedidosActive),
+      SvgIconData('pedidosInactive', PackageIcons.pedidosInactive),
+      SvgIconData('ordersActivo', PackageIcons.ordersActivo),
+      SvgIconData('mailIcon', PackageIcons.mailIcon),
+      SvgIconData('listActive', PackageIcons.listActive),
+      SvgIconData('listInactive', PackageIcons.listInactive),
+      SvgIconData('helpActive', PackageIcons.helpActive),
+      SvgIconData('helpInactive', PackageIcons.helpInactive),
+      SvgIconData('favoritesActivo', PackageIcons.favoritesActivo),
+      SvgIconData('favActive', PackageIcons.favActive),
+      SvgIconData('favInactive', PackageIcons.favInactive),
+      SvgIconData('documentActive', PackageIcons.documentActive),
+      SvgIconData('documentInactive', PackageIcons.documentInactive),
+      SvgIconData('categoriesActivo', PackageIcons.categoriesActivo),
+      SvgIconData('cartActivo', PackageIcons.cartActivo),
+      SvgIconData('cardActive', PackageIcons.cardActive),
+      SvgIconData('cardInactive', PackageIcons.cardInactive),
+      SvgIconData('appleLogo', PackageIcons.appleLogo),
+      
+      // Stroke Icons
+      SvgIconData('zIndex', PackageIcons.zIndex),
+      SvgIconData('userInactivo', PackageIcons.userInactivo),
+      SvgIconData('tipography', PackageIcons.tipography),
+      SvgIconData('shareIcon', PackageIcons.shareIcon),
+      SvgIconData('shadow', PackageIcons.shadow),
+      SvgIconData('rest', PackageIcons.rest),
+      SvgIconData('plusIcon', PackageIcons.plusIcon),
+      SvgIconData('ordesInactivo', PackageIcons.ordesInactivo),
+      SvgIconData('icon', PackageIcons.icon),
+      SvgIconData('hugeiconsNoteAdd', PackageIcons.hugeiconsNoteAdd),
+      SvgIconData('favoritesInactivo', PackageIcons.favoritesInactivo),
+      SvgIconData('espaciados', PackageIcons.espaciados),
+      SvgIconData('delete', PackageIcons.delete),
+      SvgIconData('strokeColors', PackageIcons.strokeColors),
+      SvgIconData('close', PackageIcons.close),
+      SvgIconData('check', PackageIcons.check),
+      SvgIconData('categoriesInactive', PackageIcons.categoriesInactive),
+      SvgIconData('cartInactivo', PackageIcons.cartInactivo),
+      SvgIconData('burguerIcon', PackageIcons.burguerIcon),
+      SvgIconData('breakpoints', PackageIcons.breakpoints),
+      SvgIconData('arrowLeft', PackageIcons.arrowLeft),
+      SvgIconData('arrowDown', PackageIcons.arrowDown),
+      SvgIconData('alertIcon', PackageIcons.alertIcon),
+      
+      // Social Icons
+      SvgIconData('whatsappLogo', PackageIcons.whatsappLogo),
+      
+      // Custom Icons
+      SvgIconData('promotions', PackageIcons.promotions),
+    ];
+  }
+
+  Widget _buildIconStats() {
+    final totalIconCount = _getTotalIconCount();
+    final percentage = 100; // All icons are now PackageIcons
+    
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.backCards,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.analytics,
+            color: AppColors.orangeBrand,
+            size: 20,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Estado de Migración de Iconos',
+                  style: AppTypography.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkGray,
+                  ) ?? TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkGray,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  '$totalIconCount iconos disponibles ($percentage% migrados)',
+                  style: AppTypography.bodySmall?.copyWith(
+                    color: AppColors.grayMedium,
+                  ) ?? TextStyle(
+                    color: AppColors.grayMedium,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: percentage >= 80 
+                  ? Colors.green 
+                  : percentage >= 50 
+                      ? Colors.orange 
+                      : Colors.red,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              '$percentage%',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildIconsGrid() {
     final filteredIcons = _getFilteredIcons();
     
@@ -177,10 +452,10 @@ class _IconsScreenState extends State<IconsScreen> {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.8,
+        childAspectRatio: 1.2,
       ),
       itemCount: filteredIcons.length,
       itemBuilder: (context, index) {
@@ -190,7 +465,7 @@ class _IconsScreenState extends State<IconsScreen> {
     );
   }
 
-  Widget _buildIconCard(IconItem icon) {
+  Widget _buildIconCard(SvgIconData icon) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.backCards,
@@ -203,35 +478,57 @@ class _IconsScreenState extends State<IconsScreen> {
         onTap: () => _showIconDetails(icon),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+              Stack(
+                children: [
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Center(
+                      child: _buildIconWidget(icon.path),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Icon(
-                    icon.iconData,
-                    size: 24,
-                    color: AppColors.darkGray,
+                  // Badge para indicar el tipo de icono
+                  Positioned(
+                    top: 4,
+                    right: 4,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: AppColors.orangeBrand,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        'PI',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 8,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Text(
                 icon.name,
                 style: AppTypography.labelSmall?.copyWith(
                   color: AppColors.grayMedium,
+                  fontSize: 12,
                 ) ?? TextStyle(
                   color: AppColors.grayMedium,
+                  fontSize: 12,
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -244,7 +541,124 @@ class _IconsScreenState extends State<IconsScreen> {
     );
   }
 
-  void _showIconDetails(IconItem icon) {
+  List<SvgIconData> _getFilteredIcons() {
+    List<SvgIconData> allIcons = _getAvailableIcons();
+    
+    // Filtrar por categoría
+    if (_selectedCategory == 'BLife Icons') {
+      allIcons = allIcons.where((icon) => 
+        icon.name == 'bToolkitCopia' || 
+        icon.name == 'colors' || 
+        icon.name == 'blifeLogoActivo' || 
+        icon.name == 'blifeLogoInactivo'
+      ).toList();
+    } else if (_selectedCategory == 'Filled Icons') {
+      allIcons = allIcons.where((icon) => 
+        icon.name == 'userActivo' ||
+        icon.name == 'ubicationActive' ||
+        icon.name == 'ubicationInactive' ||
+        icon.name == 'pedidosActive' ||
+        icon.name == 'pedidosInactive' ||
+        icon.name == 'ordersActivo' ||
+        icon.name == 'mailIcon' ||
+        icon.name == 'listActive' ||
+        icon.name == 'listInactive' ||
+        icon.name == 'helpActive' ||
+        icon.name == 'helpInactive' ||
+        icon.name == 'favoritesActivo' ||
+        icon.name == 'favActive' ||
+        icon.name == 'favInactive' ||
+        icon.name == 'documentActive' ||
+        icon.name == 'documentInactive' ||
+        icon.name == 'categoriesActivo' ||
+        icon.name == 'cartActivo' ||
+        icon.name == 'cardActive' ||
+        icon.name == 'cardInactive' ||
+        icon.name == 'appleLogo'
+      ).toList();
+    } else if (_selectedCategory == 'Stroke Icons') {
+      allIcons = allIcons.where((icon) => 
+        icon.name == 'zIndex' ||
+        icon.name == 'userInactivo' ||
+        icon.name == 'tipography' ||
+        icon.name == 'shareIcon' ||
+        icon.name == 'shadow' ||
+        icon.name == 'rest' ||
+        icon.name == 'plusIcon' ||
+        icon.name == 'ordesInactivo' ||
+        icon.name == 'icon' ||
+        icon.name == 'hugeiconsNoteAdd' ||
+        icon.name == 'favoritesInactivo' ||
+        icon.name == 'espaciados' ||
+        icon.name == 'delete' ||
+        icon.name == 'strokeColors' ||
+        icon.name == 'close' ||
+        icon.name == 'check' ||
+        icon.name == 'categoriesInactive' ||
+        icon.name == 'cartInactivo' ||
+        icon.name == 'burguerIcon' ||
+        icon.name == 'breakpoints' ||
+        icon.name == 'arrowLeft' ||
+        icon.name == 'arrowDown' ||
+        icon.name == 'alertIcon'
+      ).toList();
+    } else if (_selectedCategory == 'Social Icons') {
+      allIcons = allIcons.where((icon) => 
+        icon.name == 'whatsappLogo'
+      ).toList();
+    } else if (_selectedCategory == 'Custom Icons') {
+      allIcons = allIcons.where((icon) => 
+        icon.name == 'promotions'
+      ).toList();
+    }
+    
+    // Filtrar por búsqueda
+    if (_searchQuery.isNotEmpty) {
+      allIcons = allIcons.where((icon) => 
+        icon.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+        icon.path.toLowerCase().contains(_searchQuery.toLowerCase())
+      ).toList();
+    }
+    
+    return allIcons;
+  }
+
+  Widget _buildIconWidget(String iconPath) {
+    // Usar PackageIcon para todos los iconos
+    final packageIconPath = PackageIconMapper.getPackageIconPath(iconPath);
+    if (packageIconPath != null) {
+      // Verificar si el icono termina en _active.svg para mostrar color original
+      final isActiveIcon = packageIconPath.contains('_active.svg');
+      return PackageIcon(
+        iconPath: packageIconPath,
+        size: 32,
+        color: isActiveIcon ? null : AppColors.darkGray, // null = color original del SVG
+      );
+    }
+    
+    // Fallback si no hay PackageIcon disponible
+    final isActiveIcon = iconPath.contains('_active.svg');
+    return PackageIcon(
+      iconPath: iconPath,
+      size: 32,
+      color: isActiveIcon ? null : AppColors.darkGray, // null = color original del SVG
+      fallback: Container(
+        width: 32,
+        height: 32,
+        decoration: BoxDecoration(
+          color: AppColors.grayMedium.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Icon(
+          Icons.image_not_supported,
+          size: 20,
+          color: AppColors.grayMedium,
+        ),
+      ),
+    );
+  }
+
+  void _showIconDetails(SvgIconData icon) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -263,29 +677,68 @@ class _IconsScreenState extends State<IconsScreen> {
                 ),
               ),
               child: Center(
-                child: Icon(
-                  icon.iconData,
-                  size: 40,
-                  color: AppColors.darkGray,
-                ),
+                child: _buildIconWidget(icon.path),
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Categoría: ${icon.category}',
-              style: AppTypography.bodyMedium?.copyWith(
-                color: AppColors.grayMedium,
-              ) ?? TextStyle(
-                color: AppColors.grayMedium,
-              ),
-            ),
-            const SizedBox(height: 8),
             Text(
               'Ruta: ${icon.path}',
               style: AppTypography.bodySmall?.copyWith(
                 color: AppColors.grayMedium.withValues(alpha: 0.7),
               ) ?? TextStyle(
                 color: AppColors.grayMedium.withValues(alpha: 0.7),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.softGray,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Código de uso:',
+                    style: AppTypography.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.darkGray,
+                    ) ?? TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.darkGray,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _getIconCodeExample(icon.path),
+                    style: AppTypography.bodySmall?.copyWith(
+                      fontFamily: 'monospace',
+                      color: AppColors.darkGray,
+                    ) ?? TextStyle(
+                      fontFamily: 'monospace',
+                      color: AppColors.darkGray,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: AppColors.orangeBrand,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      'PackageIcon (Recomendado)',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -300,65 +753,31 @@ class _IconsScreenState extends State<IconsScreen> {
     );
   }
 
-  List<IconItem> _getFilteredIcons() {
-    List<IconItem> allIcons = _getAllIcons();
+  String _getIconCodeExample(String iconPath) {
+    final packageIconPath = PackageIconMapper.getPackageIconPath(iconPath);
+    final isActiveIcon = (packageIconPath ?? iconPath).contains('_active.svg');
+    final colorParam = isActiveIcon ? '  // color: null (color original del SVG)' : '  color: AppColors.darkGray,';
     
-    // Filtrar por categoría
-    if (_selectedCategory != 'Todos') {
-      allIcons = allIcons.where((icon) => icon.category == _selectedCategory).toList();
+    if (packageIconPath != null) {
+      return 'PackageIcon(\n  iconPath: PackageIcons.${_getPackageIconName(packageIconPath)},\n  size: 32,\n$colorParam\n)';
     }
-    
-    // Filtrar por búsqueda
-    if (_searchQuery.isNotEmpty) {
-      allIcons = allIcons.where((icon) => 
-        icon.name.toLowerCase().contains(_searchQuery.toLowerCase())
-      ).toList();
-    }
-    
-    return allIcons;
+    return 'PackageIcon(\n  iconPath: "$iconPath",\n  size: 32,\n$colorParam\n)';
   }
 
-  List<IconItem> _getAllIcons() {
-    return [
-      // Navegación
-      IconItem('Menú', 'Icons.menu', 'Navegación'),
-      IconItem('Flecha Izquierda', 'Icons.arrow_back', 'Navegación'),
-      IconItem('Flecha Abajo', 'Icons.keyboard_arrow_down', 'Navegación'),
-      IconItem('Cerrar', 'Icons.close', 'Navegación'),
-      IconItem('Verificar', 'Icons.check', 'Navegación'),
-      IconItem('Agregar', 'Icons.add', 'Navegación'),
-      IconItem('Restaurar', 'Icons.refresh', 'Navegación'),
-      
-      // Usuario
-      IconItem('Usuario Activo', 'Icons.person', 'Usuario'),
-      IconItem('Usuario Inactivo', 'Icons.person_outline', 'Usuario'),
-      IconItem('Perfil', 'Icons.account_circle', 'Usuario'),
-      
-      // Pedidos
-      IconItem('Pedidos Activo', 'Icons.shopping_cart', 'Pedidos'),
-      IconItem('Pedidos Inactivo', 'Icons.shopping_cart_outlined', 'Pedidos'),
-      IconItem('Carrito Activo', 'Icons.shopping_bag', 'Pedidos'),
-      IconItem('Carrito Inactivo', 'Icons.shopping_bag_outlined', 'Pedidos'),
-      
-      // Categorías
-      IconItem('Categorías Activo', 'Icons.category', 'Categorías'),
-      IconItem('Categorías Inactivo', 'Icons.category_outlined', 'Categorías'),
-      IconItem('Lista Activa', 'Icons.list', 'Categorías'),
-      IconItem('Lista Inactiva', 'Icons.list_outlined', 'Categorías'),
-      IconItem('Agregar Nota', 'Icons.note_add', 'Categorías'),
-      IconItem('Agregar Nota Stroke', 'Icons.note_add_outlined', 'Categorías'),
-      
-      // Favoritos
-      IconItem('Favoritos Activo', 'Icons.favorite', 'Favoritos'),
-      IconItem('Favoritos Inactivo', 'Icons.favorite_border', 'Favoritos'),
-      
-      // Pagos
-      IconItem('Tarjeta Activa', 'Icons.credit_card', 'Pagos'),
-      IconItem('Tarjeta Inactiva', 'Icons.credit_card_outlined', 'Pagos'),
-      
-      // Social
-      IconItem('WhatsApp', 'Icons.chat', 'Social'),
-    ];
+  String _getPackageIconName(String packageIconPath) {
+    // Extraer el nombre del icono de la ruta
+    final parts = packageIconPath.split('/');
+    final fileName = parts.last.replaceAll('.svg', '');
+    
+    // Convertir snake_case a camelCase
+    final words = fileName.split('_');
+    if (words.length == 1) {
+      return words[0];
+    }
+    
+    return words[0] + words.skip(1).map((word) => 
+      word.isNotEmpty ? word[0].toUpperCase() + word.substring(1) : ''
+    ).join('');
   }
 }
 
@@ -367,43 +786,4 @@ class IconCategory {
   final IconData icon;
 
   IconCategory(this.name, this.icon);
-}
-
-class IconItem {
-  final String name;
-  final String path;
-  final String category;
-
-  IconItem(this.name, this.path, this.category);
-
-  IconData get iconData {
-    switch (path) {
-      case 'Icons.menu': return Icons.menu;
-      case 'Icons.arrow_back': return Icons.arrow_back;
-      case 'Icons.keyboard_arrow_down': return Icons.keyboard_arrow_down;
-      case 'Icons.close': return Icons.close;
-      case 'Icons.check': return Icons.check;
-      case 'Icons.add': return Icons.add;
-      case 'Icons.refresh': return Icons.refresh;
-      case 'Icons.person': return Icons.person;
-      case 'Icons.person_outline': return Icons.person_outline;
-      case 'Icons.account_circle': return Icons.account_circle;
-      case 'Icons.shopping_cart': return Icons.shopping_cart;
-      case 'Icons.shopping_cart_outlined': return Icons.shopping_cart_outlined;
-      case 'Icons.shopping_bag': return Icons.shopping_bag;
-      case 'Icons.shopping_bag_outlined': return Icons.shopping_bag_outlined;
-      case 'Icons.category': return Icons.category;
-      case 'Icons.category_outlined': return Icons.category_outlined;
-      case 'Icons.list': return Icons.list;
-      case 'Icons.list_outlined': return Icons.list_outlined;
-      case 'Icons.note_add': return Icons.note_add;
-      case 'Icons.note_add_outlined': return Icons.note_add_outlined;
-      case 'Icons.favorite': return Icons.favorite;
-      case 'Icons.favorite_border': return Icons.favorite_border;
-      case 'Icons.credit_card': return Icons.credit_card;
-      case 'Icons.credit_card_outlined': return Icons.credit_card_outlined;
-      case 'Icons.chat': return Icons.chat;
-      default: return Icons.help_outline;
-    }
-  }
 } 

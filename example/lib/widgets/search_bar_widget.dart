@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchBarWidget extends StatelessWidget {
   // Funcionalidad básica
@@ -116,14 +115,11 @@ class SearchBarWidget extends StatelessWidget {
             future: DefaultAssetBundle.of(context).loadString(iconPath!),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return SvgPicture.string(
-                  snapshot.data!,
+                return SafeSvgIcon(
+                  iconPath: iconPath!,
                   width: 20,
                   height: 20,
-                  colorFilter: ColorFilter.mode(
-                    iconColor,
-                    BlendMode.srcIn,
-                  ),
+                  color: iconColor,
                 );
               } else {
                 return _buildDefaultSearchIcon(iconColor);
@@ -140,14 +136,10 @@ class SearchBarWidget extends StatelessWidget {
   Widget _buildDefaultSearchIcon(Color iconColor) {
     return Padding(
       padding: const EdgeInsets.all(12),
-      child: SvgPicture.asset(
-        'packages/flutter_package_app_mayoreo/assets/icons/stroke/search_icon.svg',
-        width: 20,
-        height: 20,
-        colorFilter: ColorFilter.mode(
-          iconColor,
-          BlendMode.srcIn,
-        ),
+      child: Icon(
+        Icons.search,
+        size: 20,
+        color: iconColor,
       ),
     );
   }

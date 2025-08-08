@@ -26,7 +26,12 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/
+    - assets/icons/blife/
+    - assets/icons/filled/
+    - assets/icons/stroke/
+    - assets/icons/social/
+    - assets/icons/custom/
+    - assets/fonts/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/to/asset-from-package

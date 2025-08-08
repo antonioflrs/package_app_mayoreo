@@ -2,6 +2,8 @@
 /// 
 /// Esta clase organiza todos los iconos SVG personalizados de la aplicación
 /// agrupándolos por categorías y funcionalidad.
+/// 
+/// NOTA: Las rutas están configuradas para uso desde package remoto
 class SvgIcons {
   SvgIcons._();
 
@@ -10,206 +12,206 @@ class SvgIcons {
   // ============================================================================
   
   /// Icono de menú hamburguesa
-  static const String burgerMenu = 'assets/icons/stroke/burguer_icon.svg';
+  static const String burgerMenu = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/burguer_icon.svg';
   
   /// Icono de flecha izquierda
-  static const String arrowLeft = 'assets/icons/stroke/arrow_left.svg';
+  static const String arrowLeft = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/arrow_left.svg';
   
   /// Icono de flecha abajo
-  static const String arrowDown = 'assets/icons/stroke/arrow_down.svg';
+  static const String arrowDown = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/arrow_down.svg';
   
   /// Icono de cerrar
-  static const String close = 'assets/icons/stroke/close.svg';
+  static const String close = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/close.svg';
   
   /// Icono de verificar
-  static const String check = 'assets/icons/stroke/check.svg';
+  static const String check = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/check.svg';
   
   /// Icono de más
-  static const String plus = 'assets/icons/stroke/plus_icon.svg';
+  static const String plus = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/plus_icon.svg';
   
   /// Icono de restaurar
-  static const String reset = 'assets/icons/stroke/rest.svg';
+  static const String reset = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/rest.svg';
 
   // ============================================================================
   // ICONOS DE USUARIO
   // ============================================================================
   
   /// Icono de usuario activo
-  static const String userActive = 'assets/icons/filled/user_activo.svg';
+  static const String userActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/user_activo.svg';
   
   /// Icono de usuario inactivo
-  static const String userInactive = 'assets/icons/stroke/user_inactivo.svg';
+  static const String userInactive = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/user_inactivo.svg';
   
   /// Icono de perfil
-  static const String profile = 'assets/icons/filled/user_activo.svg';
+  static const String profile = 'packages/flutter_package_app_mayoreo/assets/icons/filled/user_activo.svg';
 
   // ============================================================================
   // ICONOS DE PEDIDOS Y CARRITO
   // ============================================================================
   
   /// Icono de pedidos activo
-  static const String ordersActive = 'assets/icons/filled/pedidos_active.svg';
+  static const String ordersActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/pedidos_active.svg';
   
   /// Icono de pedidos inactivo
-  static const String ordersInactive = 'assets/icons/filled/pedidos_inactive.svg';
+  static const String ordersInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/pedidos_inactive.svg';
   
   /// Icono de órdenes activo
-  static const String ordersActivo = 'assets/icons/filled/orders_activo.svg';
+  static const String ordersActivo = 'packages/flutter_package_app_mayoreo/assets/icons/filled/orders_activo.svg';
   
   /// Icono de órdenes inactivo
-  static const String ordersInactivo = 'assets/icons/stroke/ordes_inactivo.svg';
+  static const String ordersInactivo = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/ordes_inactivo.svg';
   
   /// Icono de carrito activo
-  static const String cartActive = 'assets/icons/filled/cart_activo.svg';
+  static const String cartActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/cart_activo.svg';
   
   /// Icono de carrito inactivo
-  static const String cartInactive = 'assets/icons/stroke/cart_inactivo.svg';
+  static const String cartInactive = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/cart_inactivo.svg';
 
   // ============================================================================
   // ICONOS DE CATEGORÍAS Y LISTAS
   // ============================================================================
   
   /// Icono de categorías activo
-  static const String categoriesActive = 'assets/icons/filled/categories_activo.svg';
+  static const String categoriesActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/categories_activo.svg';
   
   /// Icono de categorías inactivo
-  static const String categoriesInactive = 'assets/icons/stroke/categories_inactive.svg';
+  static const String categoriesInactive = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/categories_inactive.svg';
   
   /// Icono de lista activa
-  static const String listActive = 'assets/icons/filled/list_active.svg';
+  static const String listActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/list_active.svg';
   
   /// Icono de lista inactiva
-  static const String listInactive = 'assets/icons/filled/list_inactive.svg';
+  static const String listInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/list_inactive.svg';
   
   /// Icono de agregar nota
-  static const String noteAdd = 'assets/icons/filled/note_add_list.svg';
+  static const String noteAdd = 'packages/flutter_package_app_mayoreo/assets/icons/filled/note_add_list.svg';
   
   /// Icono de agregar nota (stroke)
-  static const String noteAddStroke = 'assets/icons/stroke/hugeicons_note-add.svg';
+  static const String noteAddStroke = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/hugeicons_note-add.svg';
 
   // ============================================================================
   // ICONOS DE FAVORITOS
   // ============================================================================
   
   /// Icono de favoritos activo
-  static const String favoritesActive = 'assets/icons/filled/favorites_activo.svg';
+  static const String favoritesActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/favorites_activo.svg';
   
   /// Icono de favoritos inactivo
-  static const String favoritesInactive = 'assets/icons/stroke/favorites_inactivo.svg';
+  static const String favoritesInactive = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/favorites_inactivo.svg';
   
   /// Icono de favorito activo
-  static const String favActive = 'assets/icons/filled/fav_active.svg';
+  static const String favActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/fav_active.svg';
   
   /// Icono de favorito inactivo
-  static const String favInactive = 'assets/icons/filled/fav_inactive.svg';
+  static const String favInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/fav_inactive.svg';
 
   // ============================================================================
   // ICONOS DE DOCUMENTOS
   // ============================================================================
   
   /// Icono de documento activo
-  static const String documentActive = 'assets/icons/filled/document_active.svg';
+  static const String documentActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/document_active.svg';
   
   /// Icono de documento inactivo
-  static const String documentInactive = 'assets/icons/filled/document_inactive.svg';
+  static const String documentInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/document_inactive.svg';
 
   // ============================================================================
   // ICONOS DE TARJETAS Y PAGOS
   // ============================================================================
   
   /// Icono de tarjeta activa
-  static const String cardActive = 'assets/icons/filled/card_active.svg';
+  static const String cardActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/card_active.svg';
   
   /// Icono de tarjeta inactiva
-  static const String cardInactive = 'assets/icons/filled/card_inactive.svg';
+  static const String cardInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/card_inactive.svg';
 
   // ============================================================================
   // ICONOS DE AYUDA
   // ============================================================================
   
   /// Icono de ayuda activo
-  static const String helpActive = 'assets/icons/filled/help_active.svg';
+  static const String helpActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/help_active.svg';
   
   /// Icono de ayuda inactivo
-  static const String helpInactive = 'assets/icons/filled/help_inactive.svg';
+  static const String helpInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/help_inactive.svg';
 
   // ============================================================================
   // ICONOS DE UBICACIÓN
   // ============================================================================
   
   /// Icono de ubicación activa
-  static const String locationActive = 'assets/icons/filled/ubication_active.svg';
+  static const String locationActive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/ubication_active.svg';
   
   /// Icono de ubicación inactiva
-  static const String locationInactive = 'assets/icons/filled/ubication_inactive.svg';
+  static const String locationInactive = 'packages/flutter_package_app_mayoreo/assets/icons/filled/ubication_inactive.svg';
 
   // ============================================================================
   // ICONOS DE COMUNICACIÓN
   // ============================================================================
   
   /// Icono de correo
-  static const String mail = 'assets/icons/filled/mail_icon.svg';
+  static const String mail = 'packages/flutter_package_app_mayoreo/assets/icons/filled/mail_icon.svg';
   
   /// Icono de compartir
-  static const String share = 'assets/icons/stroke/share_icon.svg';
+  static const String share = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/share_icon.svg';
 
   // ============================================================================
   // ICONOS DE ACCIONES
   // ============================================================================
   
   /// Icono de eliminar
-  static const String delete = 'assets/icons/stroke/delete.svg';
+  static const String delete = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/delete.svg';
   
   /// Icono de alerta
-  static const String alert = 'assets/icons/stroke/alert_icon.svg';
+  static const String alert = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/alert_icon.svg';
 
   // ============================================================================
   // ICONOS DE SISTEMA DE DISEÑO
   // ============================================================================
   
   /// Icono de colores
-  static const String colors = 'assets/icons/stroke/colors.svg';
+  static const String colors = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/colors.svg';
   
   /// Icono de tipografía
-  static const String typography = 'assets/icons/stroke/tipography.svg';
+  static const String typography = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/tipography.svg';
   
   /// Icono de sombras
-  static const String shadows = 'assets/icons/stroke/shadow.svg';
+  static const String shadows = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/shadow.svg';
   
   /// Icono de espaciados
-  static const String spacing = 'assets/icons/stroke/espaciados.svg';
+  static const String spacing = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/espaciados.svg';
   
   /// Icono de breakpoints
-  static const String breakpoints = 'assets/icons/stroke/breakpoints.svg';
+  static const String breakpoints = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/breakpoints.svg';
   
   /// Icono de z-index
-  static const String zIndex = 'assets/icons/stroke/z_index.svg';
+  static const String zIndex = 'packages/flutter_package_app_mayoreo/assets/icons/stroke/z_index.svg';
 
   // ============================================================================
   // ICONOS DE MARCA
   // ============================================================================
   
   /// Logo de B Life Mayoreo
-  static const String logoMayoreo = 'assets/icons/blife/logo_mayoreo.svg';
+  static const String logoMayoreo = 'packages/flutter_package_app_mayoreo/assets/icons/blife/logo_mayoreo.svg';
   
   /// Logo activo
-  static const String logoActive = 'assets/icons/blife/logo_activo.svg';
+  static const String logoActive = 'packages/flutter_package_app_mayoreo/assets/icons/blife/logo_activo.svg';
   
   /// Logo inactivo
-  static const String logoInactive = 'assets/icons/blife/logo_inactivo.svg';
+  static const String logoInactive = 'packages/flutter_package_app_mayoreo/assets/icons/blife/logo_inactivo.svg';
   
   /// B Toolkit
-  static const String bToolkit = 'assets/icons/blife/b_toolkit.svg';
+  static const String bToolkit = 'packages/flutter_package_app_mayoreo/assets/icons/blife/b_toolkit.svg';
   
   /// Logo de Apple
-  static const String appleLogo = 'assets/icons/filled/apple_logo.svg';
+  static const String appleLogo = 'packages/flutter_package_app_mayoreo/assets/icons/filled/apple_logo.svg';
 
   // ============================================================================
   // ICONOS DE REDES SOCIALES
   // ============================================================================
   
   /// Logo de WhatsApp
-  static const String whatsapp = 'assets/icons/social_media/whatsapp_logo.svg';
+  static const String whatsapp = 'packages/flutter_package_app_mayoreo/assets/icons/social_media/whatsapp_logo.svg';
 
   // ============================================================================
   // MÉTODOS DE UTILIDAD

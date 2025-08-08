@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -51,14 +50,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
-            child: SvgPicture.asset(
-              'assets/icons/blife/b_toolkit.svg',
+            child: SafeSvgIcon(
+              iconPath: PackageIcons.bToolkitCopia,
               width: 60,
               height: 24,
-              colorFilter: const ColorFilter.mode(
-                AppColors.black,
-                BlendMode.srcIn,
-              ),
+              color: AppColors.black,
             ),
           ),
         ),

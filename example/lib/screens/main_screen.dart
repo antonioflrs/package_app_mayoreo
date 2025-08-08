@@ -5,6 +5,7 @@ import 'icons_screen.dart';
 import 'documentation_screen.dart';
 import '../widgets/mobile_navigation.dart';
 
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -15,17 +16,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
-
-  final List<Widget> _screens = [
-    HomeScreen(
-      onNavigationRequested: (index) {
-        // This will be handled by the navigation
-      },
-    ),
-    const ComponentsSummaryScreen(),
-    const IconsScreen(),
-    const DocumentationScreen(),
-  ];
 
   @override
   void dispose() {
@@ -46,6 +36,18 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      HomeScreen(
+        onNavigationRequested: (index) {
+          // Handle navigation from HomeScreen menu
+          _onNavigationTap(index);
+        },
+      ),
+      const ComponentsSummaryScreen(),
+      const IconsScreen(), // Restaurado el IconsScreen
+      const DocumentationScreen(),
+    ];
+
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -54,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
-        children: _screens,
+        children: screens,
       ),
       bottomNavigationBar: MobileNavigation(
         currentIndex: _currentIndex,

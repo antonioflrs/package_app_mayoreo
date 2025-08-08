@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/search_bar_widget.dart';
 import '../data/design_system_data.dart';
 import '../models/navigation_item.dart';
 import '../widgets/mobile_card.dart';
 import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
+import 'icon_test_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
   final Function(int)? onNavigationRequested;
@@ -44,6 +45,9 @@ class HomeScreen extends StatelessWidget {
                   // Call to Action Button
                   _buildCallToActionButton(context),
                   
+                  // Icon Test Button
+                  _buildIconTestButton(context),
+                  
                   const SizedBox(height: 48),
                   
                   // Component Cards
@@ -65,28 +69,15 @@ class HomeScreen extends StatelessWidget {
       elevation: 0,
       title: Row(
         children: [
-          // Logo Btoolkit+
+          // Logo Btoolkit+ usando PackageIcon (Material Design Style)
+          // Este icono usa el mismo sistema que se prueba en icon_test_screen.dart
+          // Características: Manejo robusto de errores, placeholder, validación en tiempo de compilación
           Row(
             children: [
-              SvgPicture.asset(
-                'packages/flutter_package_app_mayoreo/assets/icons/blife/b_toolkit.svg',
-                width: 93,
-                height: 24,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.black,
-                  BlendMode.srcIn,
-                ),
-                placeholderBuilder: (BuildContext context) => Container(
-                  width: 93,
-                  height: 24,
-                  color: Colors.red,
-                  child: const Center(
-                    child: Text(
-                      'SVG Error',
-                      style: TextStyle(color: Colors.white, fontSize: 10),
-                    ),
-                  ),
-                ),
+              PackageIcon(
+                iconPath: PackageIcons.bToolkitCopia,
+                size: 24,
+                color: AppColors.black,
               ),
               const SizedBox(width: 4),
               const Text(
@@ -228,6 +219,42 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildIconTestButton(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 12),
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const IconTestScreen(),
+            ),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.orangeBrand,
+          foregroundColor: AppColors.white,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 16,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 0,
+        ),
+        icon: const Icon(Icons.image, size: 20),
+        label: const Text(
+          'Probar Iconos SVG',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildComponentCards(BuildContext context) {
     final designGuides = DesignSystemData.designGuides.take(2).toList();
     final uiComponents = DesignSystemData.uiComponents.take(2).toList();
@@ -340,6 +367,7 @@ class HomeScreen extends StatelessWidget {
                   onNavigationRequested?.call(2);
                 },
               ),
+
             ],
           ),
         );
