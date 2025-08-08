@@ -19,6 +19,10 @@ class SearchResult {
   final VoidCallback? onTap;
   final String? category;
   final String? subcategory;
+  
+  // Campos adicionales para navegación
+  final NavigationItem? navigationItem;
+  final String? navigationType; // 'component', 'icons', 'colors', 'typography'
 
   const SearchResult({
     required this.id,
@@ -30,6 +34,8 @@ class SearchResult {
     this.onTap,
     this.category,
     this.subcategory,
+    this.navigationItem,
+    this.navigationType,
   });
 
   factory SearchResult.fromNavigationItem(NavigationItem item, VoidCallback onTap) {
@@ -44,6 +50,8 @@ class SearchResult {
       iconPath: item.svgIcon,
       onTap: onTap,
       category: item.category.name,
+      navigationItem: item,
+      navigationType: 'component',
     );
   }
 

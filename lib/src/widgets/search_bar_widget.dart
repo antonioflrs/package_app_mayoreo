@@ -28,6 +28,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   late TextEditingController _controller;
   List<SearchResult> _searchResults = [];
   bool _showResults = false;
+  bool _isSearching = false;
   Timer? _debounceTimer;
   final FocusNode _focusNode = FocusNode();
 
@@ -66,20 +67,59 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     // Crear un nuevo timer para debouncing
     _debounceTimer = Timer(const Duration(milliseconds: 300), () {
       if (mounted) {
-        final results = SearchService.search(query, context);
-        setState(() {
-          _searchResults = results;
-          _showResults = query.isNotEmpty && results.isNotEmpty;
-        });
+        _performSearch(query);
       }
     });
   }
 
+  void _performSearch(String query) async {
+    if (query.isEmpty) {
+      setState(() {
+        _searchResults = [];
+        _showResults = false;
+        _isSearching = false;
+      });
+      return;
+    }
+
+    setState(() {
+      _isSearching = true;
+    });
+
+    try {
+      final results = SearchService.search(query, context);
+      if (mounted) {
+        setState(() {
+          _searchResults = results;
+          _showResults = results.isNotEmpty;
+          _isSearching = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _searchResults = [];
+          _showResults = false;
+          _isSearching = false;
+        });
+        // Mostrar error de búsqueda
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error en la búsqueda: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   void _clearSearch() {
     _controller.clear();
+    _debounceTimer?.cancel();
     setState(() {
       _searchResults = [];
       _showResults = false;
+      _isSearching = false;
     });
     widget.onChanged?.call('');
   }
@@ -133,21 +173,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   width: 1.0,
                 ),
               ),
-              suffixIcon: _controller.text.isNotEmpty 
-                  ? IconButton(
-                      onPressed: _clearSearch,
-                      icon: const Icon(
-                        Icons.close,
-                        size: 18.0,
-                        color: AppColors.darkGray,
-                      ),
-                      padding: const EdgeInsets.all(5.0),
-                      constraints: const BoxConstraints(
-                        minWidth: 24.0,
-                        minHeight: 24.0,
-                      ),
-                    )
-                  : _buildSearchIcon(),
+              suffixIcon: _buildSuffixIcon(),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12.0,
                 vertical: 10.0,
@@ -163,15 +189,93 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         ),
         
         // Resultados de búsqueda
-        if (_showResults)
+        if (_showResults || _isSearching)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: SearchResultsWidget(
-              results: _searchResults,
-              onClose: _closeResults,
-            ),
+            child: _isSearching 
+                ? _buildLoadingIndicator()
+                : SearchResultsWidget(
+                    results: _searchResults,
+                    onClose: _closeResults,
+                  ),
           ),
       ],
+    );
+  }
+
+  Widget _buildSuffixIcon() {
+    if (_isSearching) {
+      return const Padding(
+        padding: EdgeInsets.all(5.0),
+        child: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.orangeBrand),
+          ),
+        ),
+      );
+    }
+
+    if (_controller.text.isNotEmpty) {
+      return IconButton(
+        onPressed: _clearSearch,
+        icon: const Icon(
+          Icons.close,
+          size: 18.0,
+          color: AppColors.darkGray,
+        ),
+        padding: const EdgeInsets.all(5.0),
+        constraints: const BoxConstraints(
+          minWidth: 24.0,
+          minHeight: 24.0,
+        ),
+      );
+    }
+
+    return _buildSearchIcon();
+  }
+
+  Widget _buildLoadingIndicator() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12.0),
+        border: Border.all(
+          color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+          width: 1.0,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.1),
+            blurRadius: 8.0,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: const Row(
+        children: [
+          SizedBox(
+            width: 16,
+            height: 16,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.orangeBrand),
+            ),
+          ),
+          SizedBox(width: 12),
+          Text(
+            'Buscando...',
+            style: TextStyle(
+              fontSize: 14.0,
+              color: AppColors.darkGray,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

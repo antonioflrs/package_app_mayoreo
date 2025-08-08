@@ -94,6 +94,7 @@ class SearchService {
           onTap: () => _navigateToColors(context),
           category: 'Tokens',
           subcategory: 'Colores',
+          navigationType: 'colors',
         ));
       }
     }
@@ -126,6 +127,7 @@ class SearchService {
           onTap: () => _navigateToTypography(context),
           category: 'Tokens',
           subcategory: 'Tipografía',
+          navigationType: 'typography',
         ));
       }
     }
@@ -149,82 +151,29 @@ class SearchService {
           onTap: () => _navigateToIcons(context),
           category: 'Tokens',
           subcategory: 'Iconos',
+          navigationType: 'icons',
         ));
       }
     }
   }
 
   static void _navigateToItem(NavigationItem item, BuildContext context) {
-    // TODO: Implementar navegación específica del proyecto
-    // final searchResult = SearchResult.fromNavigationItem(
-    //   item,
-    //   () {}, // Callback vacío ya que la navegación se maneja aquí
-    // );
-    
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => AssetDetailScreen(asset: searchResult),
-    //   ),
-    // );
+    // La navegación se maneja en el SearchResultsWidget
+    // Aquí solo creamos el SearchResult con la información necesaria
   }
 
   static void _navigateToColors(BuildContext context) {
-    // TODO: Implementar navegación específica del proyecto
-    // final searchResult = SearchResult(
-    //   id: 'colors_section',
-    //   title: 'Tokens de Color',
-    //   description: 'Paleta de colores del sistema de diseño',
-    //   type: SearchResultType.color,
-    //   icon: Icons.palette,
-    //   onTap: () {},
-    //   category: 'Tokens',
-    //   subcategory: 'Colores',
-    // );
-    
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => AssetDetailScreen(asset: searchResult),
-    //   ),
-    // );
+    // La navegación se maneja en el SearchResultsWidget
+    // Aquí solo creamos el SearchResult con la información necesaria
   }
 
   static void _navigateToTypography(BuildContext context) {
-    // TODO: Implementar navegación específica del proyecto
-    // final searchResult = SearchResult(
-    //   id: 'typography_section',
-    //   title: 'Tokens de Tipografía',
-    //   description: 'Sistema de tipografía del diseño',
-    //   type: SearchResultType.typography,
-    //   icon: Icons.text_fields,
-    //   onTap: () {},
-    //   category: 'Tokens',
-    //   subcategory: 'Tipografía',
-    // );
-    
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => AssetDetailScreen(asset: searchResult),
-    //   ),
-    // );
+    // La navegación se maneja en el SearchResultsWidget
+    // Aquí solo creamos el SearchResult con la información necesaria
   }
 
   static void _navigateToIcons(BuildContext context) {
-    // TODO: Implementar navegación específica del proyecto
-    // final searchResult = SearchResult(
-    //   id: 'icons_section',
-    //   title: 'Iconos del Package',
-    //   description: 'Biblioteca de iconos SVG del sistema',
-    //   type: SearchResultType.icon,
-    //   icon: Icons.style,
-    //   onTap: () {},
-    //   category: 'Tokens',
-    //   subcategory: 'Iconos',
-    // );
-    
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => AssetDetailScreen(asset: searchResult),
-    //   ),
-    // );
+    // La navegación se maneja en el SearchResultsWidget
+    // Aquí solo creamos el SearchResult con la información necesaria
   }
 }

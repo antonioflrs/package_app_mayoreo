@@ -89,7 +89,8 @@ class SearchResultsWidget extends StatelessWidget {
                 color: AppColors.silverGrayMedium.withValues(alpha: 0.2),
               ),
               itemBuilder: (context, index) {
-                return _SearchResultItem(result: results[index]);
+                final result = results[index];
+                return _SearchResultItem(result: result);
               },
             ),
           ),
@@ -107,7 +108,19 @@ class _SearchResultItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: result.onTap,
+      onTap: () {
+        try {
+          result.onTap?.call();
+        } catch (e) {
+          // Mostrar error si la navegación falla
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error al navegar: $e'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
       borderRadius: BorderRadius.circular(8.0),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -128,6 +141,11 @@ class _SearchResultItem extends StatelessWidget {
                         width: 16.0,
                         height: 16.0,
                         color: _getTypeColor(),
+                        fallback: Icon(
+                          result.icon ?? Icons.widgets,
+                          size: 16.0,
+                          color: _getTypeColor(),
+                        ),
                       )
                     : Icon(
                         result.icon ?? Icons.widgets,
@@ -144,39 +162,39 @@ class _SearchResultItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                                     Text(
-                     result.title,
-                     style: const TextStyle(
-                       fontSize: 14.0,
-                       fontWeight: FontWeight.w600,
-                       color: AppColors.black,
-                     ),
-                     maxLines: 1,
-                     overflow: TextOverflow.ellipsis,
-                   ),
-                   const SizedBox(height: 2.0),
-                   Text(
-                     result.description,
-                     style: const TextStyle(
-                       fontSize: 12.0,
-                       color: AppColors.darkGray,
-                     ),
-                     maxLines: 1,
-                     overflow: TextOverflow.ellipsis,
-                   ),
-                   if (result.iconPath != null) ...[
-                     const SizedBox(height: 4.0),
-                     Text(
-                       result.iconPath!,
-                       style: const TextStyle(
-                         fontSize: 10.0,
-                         color: AppColors.grayMedium,
-                         fontFamily: 'monospace',
-                       ),
-                       maxLines: 1,
-                       overflow: TextOverflow.ellipsis,
-                     ),
-                   ],
+                  Text(
+                    result.title,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.black,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 2.0),
+                  Text(
+                    result.description,
+                    style: const TextStyle(
+                      fontSize: 12.0,
+                      color: AppColors.darkGray,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if (result.iconPath != null) ...[
+                    const SizedBox(height: 4.0),
+                    Text(
+                      result.iconPath!,
+                      style: const TextStyle(
+                        fontSize: 10.0,
+                        color: AppColors.grayMedium,
+                        fontFamily: 'monospace',
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                   if (result.category != null) ...[
                     const SizedBox(height: 4.0),
                     Container(

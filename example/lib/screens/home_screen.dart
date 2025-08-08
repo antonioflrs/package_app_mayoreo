@@ -3,6 +3,7 @@ import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 import 'design_system_screen.dart';
 import 'component_detail_screen.dart';
 import 'icon_test_screen.dart';
+import '../widgets/search_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final Function(int)? onNavigationRequested;
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 0),
-      child: SearchBarWidget(
+      child: CustomSearchBarWidget(
         hintText: 'Buscar componentes, tokens, iconos...',
         onChanged: (value) {
           // La búsqueda se maneja internamente en el widget
