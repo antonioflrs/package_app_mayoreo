@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildTechnologyTags(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 6, bottom: 30),
+      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 10, bottom: 30),
       child: Column(
         children: [
           _TechTag(
@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 10),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 60, bottom: 0),
       child: SearchBarWidget(
         hintText: 'Buscar componentes, tokens, iconos...',
         onChanged: (value) {
