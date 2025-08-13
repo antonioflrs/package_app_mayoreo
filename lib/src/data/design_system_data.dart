@@ -18,6 +18,7 @@ import '../widgets/component_content/breadcrumbs_content.dart';
 import '../widgets/component_content/search_bar_content.dart';
 import '../widgets/component_content/bottom_navigation_content.dart';
 import '../widgets/component_content/tabs_content.dart';
+import '../widgets/component_content/product_card_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -202,6 +203,14 @@ class DesignSystemData {
       icon: Icons.tab,
       category: NavigationCategory.uiComponents,
       content: TabsContent(),
+    ),
+    NavigationItem.material(
+      id: 'product-card',
+      title: 'Product Card',
+      description: 'Tarjeta de producto para mostrar información básica de productos',
+      icon: Icons.shopping_bag,
+      category: NavigationCategory.uiComponents,
+      content: ProductCardContent(),
     ),
   ];
 

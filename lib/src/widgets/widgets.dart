@@ -2,6 +2,7 @@
 export 'buttons/ui_button.dart';
 export 'inputs/app_text_field.dart';
 export 'custom_svg_icon.dart';
+export 'product_card.dart';
 
 // Navigation widgets
 export 'navigation/mobile_navigation.dart';
@@ -33,5 +34,6 @@ export 'component_content/typography_content.dart';
 export 'component_content/z_index_content.dart';
 export 'component_content/screen_template.dart';
 export 'component_content/example_usage_template.dart';
+export 'component_content/product_card_content.dart';
 export 'tabs_widget.dart';
 export 'badge_widget.dart'; 
