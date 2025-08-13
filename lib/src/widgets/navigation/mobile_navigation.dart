@@ -55,15 +55,15 @@ class _MobileNavigationState extends State<MobileNavigation> {
                 onTap: () => widget.onItemTapped(1),
               ),
               _buildNavigationItem(
-                icon: PackageIcons.documentInactive,
-                activeIcon: PackageIcons.documentActive,
+                icon: PackageIcons.icon,
+                activeIcon: PackageIcons.icon,
                 label: 'Iconos',
                 isSelected: widget.selectedIndex == 2,
                 onTap: () => widget.onItemTapped(2),
               ),
               _buildNavigationItem(
-                icon: PackageIcons.helpInactive,
-                activeIcon: PackageIcons.helpActive,
+                icon: PackageIcons.documentInactive,
+                activeIcon: PackageIcons.documentActive,
                 label: 'Docs',
                 isSelected: widget.selectedIndex == 3,
                 onTap: () => widget.onItemTapped(3),
@@ -83,27 +83,31 @@ class _MobileNavigationState extends State<MobileNavigation> {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Icono simple
-          SafeSvgIcon(
-            iconPath: isSelected ? activeIcon : icon,
-            height: 24,
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SafeSvgIcon(
+                iconPath: isSelected ? activeIcon : icon,
+                height: 24,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                  color: isSelected ? AppColors.orangeBrand : AppColors.grayMedium,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
-          // Etiqueta
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              color: isSelected ? AppColors.orangeBrand : AppColors.grayMedium,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

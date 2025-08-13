@@ -190,7 +190,7 @@ class _IconsScreenState extends State<IconsScreen> {
               ),
               const SizedBox(width: 8),
               Text(
-                'PackageIcon (Material Design Style) - $totalIconCount iconos',
+                'PackageIcon - $totalIconCount iconos',
                 style: AppTypography.bodySmall?.copyWith(
                   color: AppColors.grayMedium,
                 ) ?? TextStyle(
