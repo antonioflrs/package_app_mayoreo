@@ -95,6 +95,28 @@ class ComponentDetailScreen extends StatelessWidget {
           const SizedBox(height: 16),
           // Category Badge
           _buildCategoryBadge(),
+          const SizedBox(height: 12),
+          // Badges informativos adicionales
+          Row(
+            children: [
+              StatusBadge(
+                text: 'Disponible',
+                color: AppColors.greenFree,
+                size: BadgeSize.small,
+              ),
+              const SizedBox(width: 8),
+              NotificationBadge(
+                text: 'Flutter',
+                color: AppColors.orangeBrand,
+              ),
+              const SizedBox(width: 8),
+              StatusBadge(
+                text: 'Material 3',
+                color: AppColors.ochreBrand,
+                size: BadgeSize.small,
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -4,10 +4,11 @@ import 'typography/app_typography.dart';
 import 'icons/app_icons.dart';
 
 /// Main theme configuration for the app_mayoreo package
+/// Tema principal con InterVariable + características OpenType por defecto
 class AppTheme {
-  static const String _fontFamily = 'Inter';
+  static const String _fontFamily = 'InterVariable';
 
-  /// Main theme configuration (single theme)
+  /// Main theme configuration
   static ThemeData get theme {
     return ThemeData(
       useMaterial3: true,

@@ -96,6 +96,13 @@ class _DocumentationScreenState extends State<DocumentationScreen> {
                         ],
                       ),
                     ),
+                    // Badge de estado para la sección seleccionada
+                    if (_selectedIndex == index)
+                      StatusBadge(
+                        text: 'Activo',
+                        color: AppColors.orangeBrand,
+                        size: BadgeSize.small,
+                      ),
                   ],
                 ),
               );
@@ -105,59 +112,158 @@ class _DocumentationScreenState extends State<DocumentationScreen> {
       ),
       body: Column(
         children: [
-          // Category selector
-          Container(
-            height: 60,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _sections.length,
-              itemBuilder: (context, index) {
-                final section = _sections[index];
-                final isSelected = _selectedIndex == index;
-                
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          section.icon,
-                          size: 16,
-                          color: isSelected ? AppColors.white : AppColors.grayMedium,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(section.title),
-                      ],
-                    ),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
-                    backgroundColor: AppColors.backCards,
-                    selectedColor: AppColors.orangeBrand,
-                    checkmarkColor: AppColors.white,
-                    labelStyle: TextStyle(
-                                              color: isSelected ? AppColors.white : AppColors.grayMedium,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          // Content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: _buildSectionContent(_sections[_selectedIndex]),
-            ),
+          _buildHeader(),
+          _buildContent(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24.0),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.orangeBrand,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.description,
+                  color: AppColors.white,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Documentación del Paquete',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Guías completas para implementar el sistema de diseño',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: AppColors.darkGray,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Badges informativos
+          Row(
+            children: [
+              StatusBadge(
+                text: '${_sections.length} Secciones',
+                color: AppColors.ochreBrand,
+                size: BadgeSize.small,
+              ),
+              const SizedBox(width: 8),
+              StatusBadge(
+                text: 'Flutter',
+                color: AppColors.oliveBrand,
+                size: BadgeSize.small,
+              ),
+              const SizedBox(width: 8),
+              NotificationBadge(
+                text: 'Completa',
+                color: AppColors.greenFree,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContent() {
+    return Column(
+      children: [
+        // Category selector
+        Container(
+          height: 60,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: _sections.length,
+            itemBuilder: (context, index) {
+              final section = _sections[index];
+              final isSelected = _selectedIndex == index;
+              
+              return Container(
+                margin: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  label: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        section.icon,
+                        size: 16,
+                        color: isSelected ? AppColors.white : AppColors.grayMedium,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(section.title),
+                    ],
+                  ),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  backgroundColor: AppColors.backCards,
+                  selectedColor: AppColors.orangeBrand,
+                  checkmarkColor: AppColors.white,
+                  labelStyle: TextStyle(
+                    color: isSelected ? AppColors.white : AppColors.grayMedium,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        // Content
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: _buildSectionContent(_sections[_selectedIndex]),
+          ),
+        ),
+      ],
     );
   }
 
@@ -354,7 +460,7 @@ class _DocumentationScreenState extends State<DocumentationScreen> {
         color: AppColors.backCards,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+          color: AppColors.grayMedium.withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -391,4 +497,4 @@ class DocumentationSection {
   final String description;
 
   DocumentationSection(this.title, this.icon, this.description);
-} 
+}

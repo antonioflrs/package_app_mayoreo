@@ -84,18 +84,27 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Inter
+    # Fuente Inter Variable con soporte completo de OpenType
+    - family: InterVariable
       fonts:
-        - asset: ../assets/fonts/Inter-Light.ttf
+        - asset: ../assets/fonts/InterVariable.ttf
+          weight: 100
+        - asset: ../assets/fonts/InterVariable.ttf
+          weight: 200
+        - asset: ../assets/fonts/InterVariable.ttf
           weight: 300
-        - asset: ../assets/fonts/Inter-Regular.ttf
+        - asset: ../assets/fonts/InterVariable.ttf
           weight: 400
-        - asset: ../assets/fonts/Inter-Medium.ttf
+        - asset: ../assets/fonts/InterVariable.ttf
           weight: 500
-        - asset: ../assets/fonts/Inter-SemiBold.ttf
+        - asset: ../assets/fonts/InterVariable.ttf
           weight: 600
-        - asset: ../assets/fonts/Inter-Bold.ttf
+        - asset: ../assets/fonts/InterVariable.ttf
           weight: 700
+        - asset: ../assets/fonts/InterVariable.ttf
+          weight: 800
+        - asset: ../assets/fonts/InterVariable.ttf
+          weight: 900
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

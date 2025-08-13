@@ -101,11 +101,34 @@ class AssetDetailScreen extends StatelessWidget {
       children: [
         Text(
           'Información del Asset',
-          style: const TextStyle(
-            fontSize: 16,
+          style: AppTypography.titleLarge?.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.black,
+          ) ?? const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
+        ),
+        const SizedBox(height: 16),
+        // Badges informativos
+        Row(
+          children: [
+            CategoryBadge(
+              text: asset.category ?? 'Asset',
+              color: _getCategoryColor(asset.category),
+              size: BadgeSize.small,
+            ),
+            const SizedBox(width: 8),
+            StatusBadge(
+              text: 'Disponible',
+              color: AppColors.greenFree,
+              size: BadgeSize.small,
+            ),
+            const SizedBox(width: 8),
+            NotificationBadge(
+              text: 'SVG',
+              color: AppColors.orangeBrand,
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         
@@ -291,17 +314,23 @@ class AssetDetailScreen extends StatelessWidget {
   }
 
   Color _getAssetColor() {
-    switch (asset.type) {
-      case SearchResultType.component:
+    return AppColors.orangeBrand;
+  }
+
+  Color _getCategoryColor(String? category) {
+    if (category == null) return AppColors.grayMedium;
+    
+    switch (category.toLowerCase()) {
+      case 'icon':
         return AppColors.orangeBrand;
-      case SearchResultType.token:
-        return AppColors.black;
-      case SearchResultType.icon:
-        return AppColors.orangeBrand;
-      case SearchResultType.color:
-        return Colors.purple;
-      case SearchResultType.typography:
-        return Colors.blue;
+      case 'logo':
+        return AppColors.ochreBrand;
+      case 'social':
+        return AppColors.oliveBrand;
+      case 'custom':
+        return AppColors.greenFree;
+      default:
+        return AppColors.grayMedium;
     }
   }
 

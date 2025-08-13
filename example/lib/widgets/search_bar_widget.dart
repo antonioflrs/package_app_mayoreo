@@ -157,62 +157,109 @@ class _CustomSearchBarWidgetState extends State<CustomSearchBarWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildSearchTextField(),
+        _buildSearchBar(),
         if (_showResults || _isSearching) _buildSearchResults(),
       ],
     );
   }
 
-  Widget _buildSearchTextField() {
-    return Padding(
-      padding: widget.margin ?? const EdgeInsets.symmetric(horizontal: 15.0),
-      child: TextField(
-        controller: _controller,
-        focusNode: _focusNode,
-        enabled: widget.enabled,
-        onChanged: _onSearchChanged,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: const TextStyle(
-            color: AppColors.darkGray,
-            fontSize: 14.0,
-            fontWeight: FontWeight.w400,
-          ),
-          filled: true,
-          fillColor: AppColors.white,
-          border: _buildBorder(),
-          enabledBorder: _buildBorder(),
-          focusedBorder: _buildBorder(isFocused: true),
-          suffixIcon: _buildSuffixIcon(),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 12.0,
-            vertical: 10.0,
-          ),
+  Widget _buildSearchBar() {
+    return Container(
+      margin: widget.margin,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppColors.grayMedium.withValues(alpha: 0.3),
+          width: 1,
         ),
-        textAlignVertical: TextAlignVertical.center,
-        style: const TextStyle(
-          fontSize: 14.0,
-          color: AppColors.black,
-          fontWeight: FontWeight.w400,
-        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Barra de búsqueda principal
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  enabled: widget.enabled,
+                  onChanged: _onSearchChanged,
+                  decoration: InputDecoration(
+                    hintText: widget.hintText,
+                    hintStyle: TextStyle(
+                      color: AppColors.grayMedium,
+                      fontSize: 16,
+                    ),
+                    prefixIcon: _buildPrefixIcon(),
+                    suffixIcon: _buildSuffixIcon(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // Badges informativos
+          if (_searchResults.isNotEmpty || _isSearching)
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+              child: Row(
+                children: [
+                  if (_isSearching)
+                    StatusBadge(
+                      text: 'Buscando...',
+                      color: AppColors.orangeBrand,
+                    )
+                  else if (_searchResults.isNotEmpty)
+                    StatusBadge(
+                      text: '${_searchResults.length} resultados',
+                      color: AppColors.greenFree,
+                    ),
+                  const SizedBox(width: 8),
+                  if (_searchResults.isNotEmpty)
+                    CategoryBadge(
+                      text: 'Flutter',
+                      color: AppColors.ochreBrand,
+                    ),
+                ],
+              ),
+            ),
+        ],
       ),
     );
   }
 
-  OutlineInputBorder _buildBorder({bool isFocused = false}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30.0),
-      borderSide: BorderSide(
-        color: isFocused ? AppColors.orangeBrand : AppColors.silverGrayMedium,
-        width: isFocused ? 1.0 : 0.5,
-      ),
+  Widget _buildPrefixIcon() {
+    if (widget.iconPath != null) {
+      return SafeSvgIcon(
+        iconPath: widget.iconPath!,
+        width: 20,
+        height: 20,
+        color: AppColors.grayMedium,
+      );
+    }
+    return Icon(
+      Icons.search,
+      color: AppColors.grayMedium,
+      size: 20,
     );
   }
 
-  Widget _buildSuffixIcon() {
+  Widget? _buildSuffixIcon() {
     if (_isSearching) {
       return const Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.only(right: 16),
         child: SizedBox(
           width: 20,
           height: 20,
@@ -240,30 +287,7 @@ class _CustomSearchBarWidgetState extends State<CustomSearchBarWidget> {
       );
     }
 
-    return _buildSearchIcon();
-  }
-
-  Widget _buildSearchIcon() {
-    if (widget.iconPath != null) {
-      return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: SafeSvgIcon(
-          iconPath: widget.iconPath!,
-          width: 20,
-          height: 20,
-          color: AppColors.grayMedium,
-        ),
-      );
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Icon(
-        Icons.search,
-        size: 20,
-        color: AppColors.grayMedium,
-      ),
-    );
+    return null;
   }
 
   Widget _buildSearchResults() {
@@ -286,7 +310,7 @@ class _CustomSearchBarWidgetState extends State<CustomSearchBarWidget> {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(
-          color: AppColors.silverGrayMedium.withValues(alpha: 0.3),
+          color: AppColors.grayMedium.withValues(alpha: 0.3),
           width: 1.0,
         ),
         boxShadow: [
