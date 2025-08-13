@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/navigation_item.dart';
+import '../widgets/component_content/component_card_content.dart';
 import '../widgets/component_content/colors_content.dart';
 import '../widgets/component_content/typography_content.dart';
 import '../widgets/component_content/buttons_content.dart';
@@ -18,6 +19,7 @@ import '../widgets/component_content/breadcrumbs_content.dart';
 import '../widgets/component_content/search_bar_content.dart';
 import '../widgets/component_content/bottom_navigation_content.dart';
 import '../widgets/component_content/tabs_content.dart';
+import '../widgets/component_content/content_app_bar_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -102,6 +104,22 @@ class DesignSystemData {
   ];
 
   static const List<NavigationItem> uiComponents = [
+    NavigationItem.material(
+      id: 'content-app-bar',
+      title: 'Content App Bar',
+      description: 'App bar unificado con back, título y sugerencia UX',
+      icon: Icons.arrow_back,
+      category: NavigationCategory.uiComponents,
+      content: ContentAppBarContent(),
+    ),
+    NavigationItem.material(
+      id: 'component-card',
+      title: 'Component Card',
+      description: 'Card reutilizable para listar componentes',
+      icon: Icons.view_agenda,
+      category: NavigationCategory.uiComponents,
+      content: ComponentCardContent(),
+    ),
     NavigationItem.material(
       id: 'buttons',
       title: 'Botones',

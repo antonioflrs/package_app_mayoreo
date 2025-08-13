@@ -1,0 +1,26 @@
+### Regla: Auto-registrar nuevos widgets de componentes
+
+Cuando crees un nuevo widget reutilizable en `lib/src/widgets/` (por ejemplo, `ComponentX`):
+
+- Exporta el widget en `lib/src/widgets/widgets.dart` sin duplicados.
+- Crea su pantalla de documentación en `lib/src/widgets/component_content/ComponentX_content.dart` usando `ComponentScreenTemplate` y ejemplos mínimos de uso real.
+- Registra el componente en `lib/src/data/design_system_data.dart` (lista `uiComponents` o `designGuides` según corresponda):
+  - `id`: en kebab-case del nombre (p. ej., `component-x`).
+  - `title`: nombre legible (p. ej., `Component X`).
+  - `description`: breve y clara (1 línea).
+  - `icon`: usa un `Icons.*` apropiado.
+  - `content`: `ComponentXContent()` con la import correspondiente.
+  - Mantén el orden y estilo existentes; no dupliques entradas.
+- Asegura imports necesarios y evita exportaciones repetidas.
+- Ejecuta una revisión de lints de los archivos tocados y corrige warnings/errores obvios.
+
+Restricciones de iconos y estilo:
+- Usa solo iconos del proyecto con `SafeSvgIcon` cuando aplique y respeta los assets declarados.
+- Mantén el estilo visual existente (bordes, sombras, tipografías, colores `AppColors`).
+
+Buenas prácticas:
+- Propiedades claras y tipadas; evita abreviaturas en nombres.
+- Ejemplos de uso concisos y funcionales, relacionados con la vista previa.
+- No crear archivos de test nuevos; usa los existentes si aplica.
+
+

@@ -12,6 +12,7 @@ export 'app_bar_widget.dart';
 export 'search_bar_widget.dart';
 export 'search_results_widget.dart';
 export 'mobile_card.dart';
+export 'component_card.dart';
 
 // Component content widgets
 export 'component_content/accordion_content.dart';
@@ -35,3 +36,6 @@ export 'component_content/screen_template.dart';
 export 'component_content/example_usage_template.dart';
 export 'tabs_widget.dart';
 export 'badge_widget.dart'; 
+export 'component_content/component_card_content.dart';
+export 'content_app_bar.dart';
+export 'component_content/content_app_bar_content.dart';

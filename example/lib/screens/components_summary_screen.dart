@@ -217,7 +217,8 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
   }
 
   Widget _buildComponentCard(NavigationItem component) {
-    return GestureDetector(
+    return ComponentCard(
+      component: component,
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -225,157 +226,10 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.grayMedium.withValues(alpha: 0.2),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Icon and Category Badge
-              Row(
-                children: [
-                  _buildComponentIcon(component),
-                  const Spacer(),
-                  _buildCategoryBadge(component.category),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Title
-              Text(
-                component.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.black,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              // Description
-              Expanded(
-                child: Text(
-                  component.description,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.darkGray,
-                    height: 1.4,
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(height: 16),
-              // CTA Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ComponentDetailScreen(component: component),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.orangeBrand,
-                    foregroundColor: AppColors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: const Text(
-                    'Ver Detalles',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
-  Widget _buildComponentIcon(NavigationItem component) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: component.category == NavigationCategory.designGuides
-            ? AppColors.orangeBrand.withValues(alpha: 0.1)
-            : AppColors.greenFree.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: component.iconType == IconType.material
-            ? Icon(
-                component.icon,
-                size: 20,
-                color: component.category == NavigationCategory.designGuides
-                    ? AppColors.orangeBrand
-                    : AppColors.greenFree,
-              )
-            : Icon(
-                Icons.widgets,
-                size: 20,
-                color: component.category == NavigationCategory.designGuides
-                    ? AppColors.orangeBrand
-                    : AppColors.greenFree,
-              ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryBadge(NavigationCategory category) {
-    final categoryText = category == NavigationCategory.designGuides
-        ? 'Guía'
-        : 'UI';
-    
-    final categoryColor = category == NavigationCategory.designGuides
-        ? AppColors.orangeBrand
-        : AppColors.greenFree;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: categoryColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: categoryColor.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Text(
-        categoryText,
-        style: TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.w600,
-          color: categoryColor,
-        ),
-      ),
-    );
-  }
+  // Eliminado: icono y badge individuales ahora los maneja ComponentCard
 
   Widget _buildEmptyState() {
     return Center(
