@@ -17,6 +17,7 @@ import '../widgets/component_content/badge_content.dart';
 import '../widgets/component_content/breadcrumbs_content.dart';
 import '../widgets/component_content/search_bar_content.dart';
 import '../widgets/component_content/bottom_navigation_content.dart';
+import '../widgets/component_content/tabs_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -193,6 +194,14 @@ class DesignSystemData {
       icon: Icons.navigation,
       category: NavigationCategory.uiComponents,
       content: BottomNavigationContent(),
+    ),
+    NavigationItem.material(
+      id: 'tabs',
+      title: 'Tabs',
+      description: 'Widget de tabs personalizable con estados activo/inactivo',
+      icon: Icons.tab,
+      category: NavigationCategory.uiComponents,
+      content: TabsContent(),
     ),
   ];
 

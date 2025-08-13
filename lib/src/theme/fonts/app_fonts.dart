@@ -1,80 +1,75 @@
 import 'package:flutter/material.dart';
 
 /// Font configuration for the app_mayoreo package
+/// Configuración exclusiva de InterVariable con características OpenType ss01 + cv11
 class AppFonts {
   // Private constructor to prevent instantiation
   AppFonts._();
 
-  // Font families
-  static const String inter = 'Inter';
-  static const String robotoMono = 'RobotoMono';
+  // Font family name
+  static const String interVariable = 'InterVariable';
 
-  // Font weights for Inter
-  static const FontWeight light = FontWeight.w300;
-  static const FontWeight regular = FontWeight.w400;
-  static const FontWeight medium = FontWeight.w500;
-  static const FontWeight semiBold = FontWeight.w600;
-  static const FontWeight bold = FontWeight.w700;
-
-  /// Get font family with fallback
-  static String getFontFamily(String? fontFamily) {
-    return fontFamily ?? inter;
-  }
-
-  /// Get font weight with fallback
-  static FontWeight getFontWeight(FontWeight? fontWeight) {
-    return fontWeight ?? regular;
-  }
-
-  /// Create TextStyle with Inter font family
-  static TextStyle interStyle({
+  /// Get InterVariable font with OpenType features (ss01 + cv11) by default
+  /// Obtiene la fuente InterVariable con características OpenType por defecto
+  static TextStyle get({
     double? fontSize,
     FontWeight? fontWeight,
-    double? letterSpacing,
-    double? height,
     Color? color,
-    TextDecoration? decoration,
+    double? height,
+    double? letterSpacing,
+    List<FontFeature>? fontFeatures,
   }) {
     return TextStyle(
-      fontFamily: inter,
+      fontFamily: interVariable,
       fontSize: fontSize,
-      fontWeight: getFontWeight(fontWeight),
-      letterSpacing: letterSpacing,
-      height: height,
+      fontWeight: fontWeight,
       color: color,
-      decoration: decoration,
+      height: height,
+      letterSpacing: letterSpacing,
+      fontFeatures: fontFeatures ?? [
+        FontFeature.stylisticSet(1), // ss01 - Stylistic Set 01
+        FontFeature('cv11'),          // cv11 - Character Variant 11
+      ],
     );
   }
 
-  /// Create TextStyle with RobotoMono font family
-  static TextStyle monoStyle({
+  /// Get InterVariable font without OpenType features (for specific cases)
+  /// Obtiene la fuente InterVariable sin características OpenType
+  static TextStyle getBasic({
     double? fontSize,
     FontWeight? fontWeight,
-    double? letterSpacing,
-    double? height,
     Color? color,
-    TextDecoration? decoration,
+    double? height,
+    double? letterSpacing,
   }) {
     return TextStyle(
-      fontFamily: robotoMono,
+      fontFamily: interVariable,
       fontSize: fontSize,
-      fontWeight: getFontWeight(fontWeight),
-      letterSpacing: letterSpacing,
-      height: height,
+      fontWeight: fontWeight,
       color: color,
-      decoration: decoration,
+      height: height,
+      letterSpacing: letterSpacing,
     );
   }
 
-  /// Predefined Inter styles for common use cases
-  static TextStyle get interLight => interStyle(fontWeight: light);
-  static TextStyle get interRegular => interStyle(fontWeight: regular);
-  static TextStyle get interMedium => interStyle(fontWeight: medium);
-  static TextStyle get interSemiBold => interStyle(fontWeight: semiBold);
-  static TextStyle get interBold => interStyle(fontWeight: bold);
-
-  /// Predefined RobotoMono styles
-  static TextStyle get monoRegular => monoStyle(fontWeight: regular);
-  static TextStyle get monoMedium => monoStyle(fontWeight: medium);
-  static TextStyle get monoBold => monoStyle(fontWeight: bold);
+  /// Get InterVariable font with custom OpenType features
+  /// Obtiene la fuente InterVariable con características OpenType personalizadas
+  static TextStyle getWithFeatures({
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    double? height,
+    double? letterSpacing,
+    required List<FontFeature> fontFeatures,
+  }) {
+    return TextStyle(
+      fontFamily: interVariable,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+      height: height,
+      letterSpacing: letterSpacing,
+      fontFeatures: fontFeatures,
+    );
+  }
 } 

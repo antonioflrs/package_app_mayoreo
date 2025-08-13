@@ -143,8 +143,8 @@ class BottomNavBarState extends State<BottomNavBar> {
               ),
             ),
             MobileNavigation(
-              currentIndex: _currentIndex,
-              onTap: _onNavigationTap,
+              selectedIndex: _currentIndex,
+              onItemTapped: _onNavigationTap,
             ),
           ],
         ),
@@ -535,8 +535,8 @@ BottomNavigationBar(
               ),
             ),
             MobileNavigation(
-              currentIndex: _currentIndex,
-              onTap: _onNavigationTap,
+              selectedIndex: _currentIndex,
+              onItemTapped: _onNavigationTap,
             ),
           ],
         ),
@@ -617,8 +617,8 @@ SafeSvgIcon(
               ),
             ),
             MobileNavigation(
-              currentIndex: _currentIndex,
-              onTap: _onNavigationTap,
+              selectedIndex: _currentIndex,
+              onItemTapped: _onNavigationTap,
             ),
           ],
         ),
@@ -774,24 +774,25 @@ unselectedItemColor: AppColors.black,        // Color de items no seleccionados
           // Toggle tabs
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                _buildTab(
-                  theme: theme,
+            child: CustomTabsWidget(
+              tabs: [
+                TabItem(
+                  id: 'preview',
                   title: 'Vista previa',
-                  icon: Icons.visibility,
                   isSelected: !(_showCodeStates[exampleId] ?? false),
-                  onTap: () => setState(() => _showCodeStates[exampleId] = false),
                 ),
-                const SizedBox(width: 8),
-                _buildTab(
-                  theme: theme,
+                TabItem(
+                  id: 'code',
                   title: 'Código',
-                  icon: Icons.code,
                   isSelected: _showCodeStates[exampleId] ?? false,
-                  onTap: () => setState(() => _showCodeStates[exampleId] = true),
                 ),
               ],
+              variant: TabVariant.underlined,
+              onTabChanged: (tabId) {
+                setState(() {
+                  _showCodeStates[exampleId] = (tabId == 'code');
+                });
+              },
             ),
           ),
           
@@ -807,46 +808,7 @@ unselectedItemColor: AppColors.black,        // Color de items no seleccionados
     );
   }
 
-  Widget _buildTab({
-    required ThemeData theme,
-    required String title,
-    required IconData icon,
-    required bool isSelected,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.orangeBrand : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: isSelected ? AppColors.orangeBrand : AppColors.grayMedium.withValues(alpha: 0.3),
-            width: 1,
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 16,
-              color: isSelected ? AppColors.white : AppColors.grayMedium,
-            ),
-            const SizedBox(width: 6),
-            Text(
-              title,
-              style: theme.textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: isSelected ? AppColors.white : AppColors.grayMedium,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildCodeSection(ThemeData theme, String codeExample) {
     return Container(

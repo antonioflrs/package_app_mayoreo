@@ -6,364 +6,369 @@ class BadgeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle('Descripción'),
-        _buildDescription(),
-        const SizedBox(height: 24),
-        _buildSectionTitle('Tipos de Badge'),
-        const SizedBox(height: 16),
-        _buildBadgeExamples(),
-        const SizedBox(height: 24),
-        _buildSectionTitle('Tamaños'),
-        const SizedBox(height: 16),
-        _buildSizeExamples(),
-        const SizedBox(height: 24),
-        _buildSectionTitle('Uso'),
-        _buildUsageInstructions(),
-      ],
-    );
-  }
-
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: AppColors.black,
-      ),
-    );
-  }
-
-  Widget _buildDescription() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.grayMedium.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
-      child: const Text(
-        'Los componentes Badge se utilizan para mostrar información adicional como notificaciones, '
-        'estados, o contadores. Pueden aparecer como pequeños indicadores sobre otros elementos.',
-        style: TextStyle(
-          fontSize: 14,
-          color: AppColors.darkGray,
-          height: 1.5,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBadgeExamples() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.grayMedium.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildBadgeItem('Nuevo', AppColors.greenFree),
-              _buildBadgeItem('Pro', AppColors.orangeBrand),
-              _buildBadgeItem('Beta', AppColors.yellow),
-              _buildBadgeItem('Error', AppColors.digitalRed),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildBadgeWithIcon('3', Icons.notifications, AppColors.digitalRed),
-              _buildBadgeWithIcon('12', Icons.mail, AppColors.orangeBrand),
-              _buildBadgeWithIcon('99+', Icons.message, AppColors.greenFree),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildDotBadge('Activo', AppColors.greenFree),
-              _buildDotBadge('Pendiente', AppColors.yellow),
-              _buildDotBadge('Inactivo', AppColors.grayMedium),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBadgeItem(String text, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: AppColors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBadgeWithIcon(String text, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: AppColors.white,
-            size: 14,
-          ),
-          const SizedBox(width: 4),
-          Text(
-            text,
-            style: const TextStyle(
-              color: AppColors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDotBadge(String label, Color color) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(4),
-          ),
-        ),
-        const SizedBox(width: 6),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.darkGray,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSizeExamples() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.grayMedium.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildSizeItem('Pequeño', 16),
-              _buildSizeItem('Mediano', 20),
-              _buildSizeItem('Grande', 24),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSizeItem(String size, double dimension) {
-    return Column(
-      children: [
-        Container(
-          width: dimension,
-          height: dimension,
-          decoration: BoxDecoration(
-            color: AppColors.orangeBrand,
-            borderRadius: BorderRadius.circular(dimension / 2),
-          ),
-          child: Center(
-            child: Text(
-              '3',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: dimension * 0.4,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          size,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.darkGray,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          '${dimension.toInt()}px',
-          style: const TextStyle(
-            fontSize: 10,
-            color: AppColors.grayMedium,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildUsageInstructions() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.backCards,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.grayMedium.withValues(alpha: 0.2),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Implementación básica:',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(12),
+    return ComponentScreenTemplate(
+      componentTitle: 'Badges',
+      componentDescription: 'Los componentes Badge se utilizan para mostrar información adicional como notificaciones, estados, o contadores. Pueden aparecer como pequeños indicadores sobre otros elementos.',
+      
+      examples: [
+        ComponentExample(
+          id: 'basic_badges',
+          title: 'Badges Básicos',
+          description: 'Badges con diferentes colores y paddings optimizados para legibilidad.',
+          previewWidget: Container(
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: AppColors.grayMedium.withValues(alpha: 0.3),
+                color: AppColors.grayMedium.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
-            child: const Text(
-              '// Badge simple\n'
-              'Container(\n'
-              '  padding: EdgeInsets.symmetric(\n'
-              '    horizontal: 12, vertical: 6\n'
-              '  ),\n'
-              '  decoration: BoxDecoration(\n'
-              '    color: AppColors.greenFree,\n'
-              '    borderRadius: BorderRadius.circular(16),\n'
-              '  ),\n'
-              '  child: Text(\n'
-              '    "Nuevo",\n'
-              '    style: TextStyle(\n'
-              '      color: AppColors.white,\n'
-              '      fontSize: 12,\n'
-              '      fontWeight: FontWeight.w600,\n'
-              '    ),\n'
-              '  ),\n'
-              ')\n\n'
-              '// Badge con Stack\n'
-              'Stack(\n'
-              '  children: [\n'
-              '    Icon(Icons.notifications),\n'
-              '    Positioned(\n'
-              '      right: 0,\n'
-              '      top: 0,\n'
-              '      child: Container(\n'
-              '        width: 16,\n'
-              '        height: 16,\n'
-              '        decoration: BoxDecoration(\n'
-              '          color: AppColors.digitalRed,\n'
-              '          borderRadius: BorderRadius.circular(8),\n'
-              '        ),\n'
-              '        child: Center(\n'
-              '          child: Text("3", style: TextStyle(color: AppColors.white)),\n'
-              '        ),\n'
-              '      ),\n'
-              '    ),\n'
-              '  ],\n'
-              ')',
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: 'monospace',
-                color: AppColors.darkGray,
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Mejores prácticas:',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: AppColors.grayMedium.withValues(alpha: 0.3),
-                width: 1,
-              ),
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BadgeWidget(text: 'Nuevo', color: AppColors.greenFree),
+                    BadgeWidget(text: 'Pro', color: AppColors.orangeBrand),
+                    BadgeWidget(text: 'Beta', color: AppColors.yellow),
+                    BadgeWidget(text: 'Error', color: AppColors.digitalRed),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BadgeWithIcon(text: '3', icon: Icons.notifications, color: AppColors.digitalRed),
+                    BadgeWithIcon(text: '12', icon: Icons.mail, color: AppColors.orangeBrand),
+                    BadgeWithIcon(text: '99+', icon: Icons.message, color: AppColors.greenFree),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BadgeWidget(text: 'Activo', color: AppColors.greenFree, showDot: true),
+                    BadgeWidget(text: 'Pendiente', color: AppColors.yellow, showDot: true),
+                    BadgeWidget(text: 'Inactivo', color: AppColors.grayMedium, showDot: true),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          codeExample: '''// Badge básico con padding optimizado
+Container(
+  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Padding ideal para legibilidad
+  decoration: BoxDecoration(
+    color: AppColors.greenFree,
+    borderRadius: BorderRadius.circular(20), // Radio proporcional al padding
+  ),
+  child: Text(
+    'Nuevo',
+    style: TextStyle(
+      color: AppColors.white,
+      fontSize: 14, // Tamaño de fuente proporcional al padding
+      fontWeight: FontWeight.w600,
+      height: 1.2, // Line height optimizado
+      letterSpacing: 0.2, // Espaciado de letras para legibilidad
+    ),
+  ),
+)''',
+        ),
+        
+        ComponentExample(
+          id: 'size_variants',
+          title: 'Variantes de Tamaño',
+          description: 'Diferentes tamaños de badges con paddings proporcionales para cada caso de uso.',
+          previewWidget: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.grayMedium.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BadgeWidget(text: 'Pequeño', color: AppColors.orangeBrand, size: BadgeSize.small),
+                    BadgeWidget(text: 'Mediano', color: AppColors.orangeBrand, size: BadgeSize.medium),
+                    BadgeWidget(text: 'Grande', color: AppColors.orangeBrand, size: BadgeSize.large),
+                    BadgeWidget(text: 'Extra Grande', color: AppColors.orangeBrand, size: BadgeSize.extraLarge),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 Text(
-                  '• Usa colores consistentes para cada tipo de badge\n'
-                  '• Mantén el texto corto y legible\n'
-                  '• Considera el contraste para accesibilidad\n'
-                  '• Usa tamaños apropiados para el contexto\n'
-                  '• Evita usar demasiados badges en una pantalla',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.darkGray,
-                    height: 1.4,
+                  'Tamaños: Small (20px) | Medium (24px) | Large (28px) | Extra Large (32px)',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.grayMedium,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ],
             ),
           ),
-        ],
+          codeExample: '''// Paddings optimizados por tamaño
+// Pequeño: horizontal 8, vertical 4
+Container(
+  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+  height: 20,
+  child: Text('3', style: TextStyle(fontSize: 10)),
+)
+
+// Mediano: horizontal 12, vertical 6
+Container(
+  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+  height: 24,
+  child: Text('3', style: TextStyle(fontSize: 12)),
+)
+
+// Grande: horizontal 16, vertical 8
+Container(
+  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  height: 28,
+  child: Text('3', style: TextStyle(fontSize: 14)),
+)''',
+        ),
+        
+        ComponentExample(
+          id: 'spacing_best_practices',
+          title: 'Mejores Prácticas de Espaciado',
+          description: 'Ejemplos de espaciado y padding que siguen las mejores prácticas de UI.',
+          previewWidget: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.grayMedium.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Espaciado entre elementos:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    BadgeWidget(text: 'Badge 1', color: AppColors.orangeBrand),
+                    const SizedBox(width: 12), // Espaciado consistente entre badges
+                    BadgeWidget(text: 'Badge 2', color: AppColors.greenFree),
+                    const SizedBox(width: 12),
+                    BadgeWidget(text: 'Badge 3', color: AppColors.digitalRed),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'Espaciado con iconos:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    BadgeWithIcon(text: '5', icon: Icons.notifications, color: AppColors.digitalRed),
+                    const SizedBox(width: 16), // Más espacio para badges con iconos
+                    BadgeWithIcon(text: '12', icon: Icons.mail, color: AppColors.orangeBrand),
+                    const SizedBox(width: 16),
+                    BadgeWithIcon(text: '99+', icon: Icons.message, color: AppColors.greenFree),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          codeExample: '''// Espaciado consistente entre badges
+Row(
+  children: [
+    BadgeWidget(text: 'Badge 1'),
+    SizedBox(width: 12), // Espaciado estándar entre badges
+    BadgeWidget(text: 'Badge 2'),
+    SizedBox(width: 12),
+    BadgeWidget(text: 'Badge 3'),
+  ],
+)
+
+// Espaciado con iconos (más espacio)
+Row(
+  children: [
+    BadgeWithIcon(text: '5', icon: Icons.notifications),
+    SizedBox(width: 16), // Más espacio para badges con iconos
+    BadgeWithIcon(text: '12', icon: Icons.mail),
+  ],
+)''',
+        ),
+        
+        ComponentExample(
+          id: 'accessibility_badges',
+          title: 'Badges para Accesibilidad',
+          description: 'Badges con paddings y tamaños optimizados para mejor accesibilidad y legibilidad.',
+          previewWidget: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.grayMedium.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Tamaños disponibles:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    BadgeWidget(text: 'Badge', color: AppColors.orangeBrand, size: BadgeSize.large),
+                    const SizedBox(width: 16),
+                    BadgeWidget(text: 'Badge', color: AppColors.orangeBrand, size: BadgeSize.extraLarge),
+                    const SizedBox(width: 16),
+                    BadgeWidget(text: 'Badge', color: AppColors.orangeBrand, size: BadgeSize.extraLarge),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Tamaños: Large (28px) | Extra Large (32px)',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.grayMedium,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          codeExample: '''// Badge con tamaño mínimo para toque (44px)
+Container(
+  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Mínimo recomendado
+  height: 44, // Tamaño mínimo para toque
+  decoration: BoxDecoration(
+    color: AppColors.orangeBrand,
+    borderRadius: BorderRadius.circular(22), // Radio = height / 2
+  ),
+  child: Center(
+    child: Text(
+      'Badge',
+      style: TextStyle(
+        color: AppColors.white,
+        fontSize: 14, // Tamaño proporcional al padding
+        fontWeight: FontWeight.w600,
+        height: 1.2,
       ),
+    ),
+  ),
+)''',
+        ),
+      ],
+      
+      properties: [
+        ComponentProperty(
+          name: 'padding',
+          type: 'EdgeInsets',
+          description: 'Padding interno del badge. Recomendado: horizontal 12-16px, vertical 6-8px.',
+          required: true,
+          defaultValue: 'EdgeInsets.symmetric(horizontal: 12, vertical: 6)',
+        ),
+        ComponentProperty(
+          name: 'borderRadius',
+          type: 'BorderRadius',
+          description: 'Radio de los bordes. Recomendado: proporcional al padding (8-20px).',
+          required: true,
+          defaultValue: 'BorderRadius.circular(12)',
+        ),
+        ComponentProperty(
+          name: 'fontSize',
+          type: 'double',
+          description: 'Tamaño de fuente. Recomendado: proporcional al padding (10-16px).',
+          required: true,
+          defaultValue: '12.0',
+        ),
+        ComponentProperty(
+          name: 'height',
+          type: 'double',
+          description: 'Altura del badge. Mínimo recomendado: 44px para accesibilidad.',
+          required: true,
+          defaultValue: '24.0',
+        ),
+        ComponentProperty(
+          name: 'spacing',
+          type: 'double',
+          description: 'Espaciado entre badges. Recomendado: 12-16px.',
+          required: false,
+          defaultValue: '12.0',
+        ),
+      ],
+      
+      methods: [
+        ComponentMethod(
+          name: 'build',
+          returnType: 'Widget',
+          description: 'Construye el badge con padding y espaciado optimizados.',
+          parameters: ['BuildContext context'],
+        ),
+        ComponentMethod(
+          name: '_getOptimalPadding',
+          returnType: 'EdgeInsets',
+          description: 'Calcula el padding óptimo basado en el tamaño del badge.',
+          parameters: ['BadgeSize size'],
+        ),
+        ComponentMethod(
+          name: '_getOptimalSpacing',
+          returnType: 'double',
+          description: 'Calcula el espaciado óptimo entre elementos del badge.',
+          parameters: ['BadgeSize size'],
+        ),
+      ],
+      
+      usageNotes: '''
+• **Paddings Óptimos**: 
+  - Horizontal: 12-16px para legibilidad
+  - Vertical: 6-8px para proporción visual
+  - Proporción recomendada: 2:1 (horizontal:vertical)
+
+• **Tamaños de Fuente**:
+  - Pequeño (20px): 10px
+  - Mediano (24px): 12px
+  - Grande (28px): 14px
+  - Extra Grande (32px): 16px
+
+• **Espaciado entre Badges**:
+  - Badges simples: 12px
+  - Badges con iconos: 16px
+  - Badges en grupos: 8px
+
+• **Accesibilidad**:
+  - Altura mínima: 44px para toque
+  - Padding mínimo: 16x8px
+  - Contraste de color: 4.5:1 mínimo
+
+• **Buenas Prácticas**:
+  - Mantener consistencia en paddings
+  - Usar espaciado proporcional al contenido
+  - Considerar el contexto de uso
+  - Optimizar para diferentes tamaños de pantalla
+      ''',
     );
   }
+
+
 } 

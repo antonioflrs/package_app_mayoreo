@@ -161,7 +161,14 @@ class UiButton extends StatelessWidget {
   }
 
   TextStyle _getTextStyle() {
-    return AppTypography.getButtonTextStyle(size);
+    switch (size) {
+      case UiButtonSize.small:
+        return AppTypography.labelLarge ?? AppTypography.bodySmall ?? const TextStyle();
+      case UiButtonSize.medium:
+        return AppTypography.labelLarge ?? AppTypography.bodyMedium ?? const TextStyle();
+      case UiButtonSize.large:
+        return AppTypography.titleSmall ?? AppTypography.bodyLarge ?? const TextStyle();
+    }
   }
 
   double _getIconSize() {

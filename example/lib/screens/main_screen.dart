@@ -59,8 +59,8 @@ class _MainScreenState extends State<MainScreen> {
         children: screens,
       ),
       bottomNavigationBar: MobileNavigation(
-        currentIndex: _currentIndex,
-        onTap: _onNavigationTap,
+        selectedIndex: _currentIndex,
+        onItemTapped: _onNavigationTap,
       ),
     );
   }

@@ -57,10 +57,98 @@ class _DesignSystemScreenState extends State<DesignSystemScreen> {
         },
       ),
       body: _selectedItem != null
-          ? ComponentViewer(item: _selectedItem!)
+          ? Column(
+              children: [
+                _buildComponentHeader(),
+                Expanded(
+                  child: ComponentViewer(item: _selectedItem!),
+                ),
+              ],
+            )
           : const Center(
               child: Text('Selecciona un componente para ver su documentación'),
             ),
+    );
+  }
+
+  Widget _buildComponentHeader() {
+    if (_selectedItem == null) return const SizedBox.shrink();
+    
+    final isDesignGuide = DesignSystemData.designGuides.contains(_selectedItem);
+    
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(16),
+          bottomRight: Radius.circular(16),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                _selectedItem!.icon ?? Icons.widgets,
+                color: AppColors.orangeBrand,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  _selectedItem!.title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            _selectedItem!.description,
+            style: TextStyle(
+              fontSize: 14,
+              color: AppColors.darkGray,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Badges informativos
+          Row(
+            children: [
+              CategoryBadge(
+                text: isDesignGuide ? 'Token' : 'Componente',
+                color: isDesignGuide ? AppColors.oliveBrand : AppColors.ochreBrand,
+                size: BadgeSize.small,
+              ),
+              const SizedBox(width: 8),
+              StatusBadge(
+                text: 'Disponible',
+                color: AppColors.greenFree,
+                size: BadgeSize.small,
+              ),
+              const SizedBox(width: 8),
+              NotificationBadge(
+                text: 'Flutter',
+                color: AppColors.orangeBrand,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

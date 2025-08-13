@@ -98,6 +98,28 @@ class _IconTestScreenState extends State<IconTestScreen> {
               ),
             ),
             const SizedBox(height: 24),
+            // Badges informativos
+            Row(
+              children: [
+                StatusBadge(
+                  text: 'Material Design Style',
+                  color: AppColors.orangeBrand,
+                  size: BadgeSize.medium,
+                ),
+                const SizedBox(width: 8),
+                StatusBadge(
+                  text: 'SVG',
+                  color: AppColors.greenFree,
+                  size: BadgeSize.medium,
+                ),
+                const SizedBox(width: 8),
+                NotificationBadge(
+                  text: 'Validado',
+                  color: AppColors.ochreBrand,
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             
             // Sección 1: Iconos de Material Design (Control)
             _buildSectionTitle('✅ Control: Iconos de Material Design'),
