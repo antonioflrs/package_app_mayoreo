@@ -41,3 +41,5 @@ export 'badge_widget.dart';
 export 'component_content/component_card_content.dart';
 export 'content_app_bar.dart';
 export 'component_content/content_app_bar_content.dart';
+export 'bienestar_banner.dart';
+export 'promotions_carousel.dart';

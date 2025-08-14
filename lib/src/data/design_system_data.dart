@@ -21,6 +21,8 @@ import '../widgets/component_content/bottom_navigation_content.dart';
 import '../widgets/component_content/tabs_content.dart';
 import '../widgets/component_content/content_app_bar_content.dart';
 import '../widgets/component_content/product_card_content.dart';
+import '../widgets/component_content/bienestar_banner_content.dart';
+import '../widgets/component_content/promotions_carousel_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -229,6 +231,22 @@ class DesignSystemData {
       icon: Icons.shopping_bag,
       category: NavigationCategory.uiComponents,
       content: ProductCardContent(),
+    ),
+    NavigationItem.material(
+      id: 'bienestar-banner',
+      title: 'Bienestar Banner',
+      description: 'Banner promocional con contador regresivo para ofertas',
+      icon: Icons.local_offer,
+      category: NavigationCategory.uiComponents,
+      content: BienestarBannerContent(),
+    ),
+    NavigationItem.material(
+      id: 'promotions-carousel',
+      title: 'Promotions Carousel',
+      description: 'Carrusel de promociones con autoplay y controles personalizables',
+      icon: Icons.view_carousel,
+      category: NavigationCategory.uiComponents,
+      content: PromotionsCarouselContent(),
     ),
   ];
 
