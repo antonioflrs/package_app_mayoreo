@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import '../product_card.dart';
 
 class ProductCardContent extends StatefulWidget {
   const ProductCardContent({super.key});

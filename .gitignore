@@ -59,3 +59,37 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Reglas de seguridad
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.p7b
+*.p7c
+*.p8
+.env
+config.json
+secrets.json
+credentials.json
+*.log
+*.tmp
+*.temp
+*.cache
+*.bak
+*.backup
+
+# Directorios de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Directorios de build
+build/
+dist/
+node_modules/
+*.pyc
+__pycache__/
