@@ -62,10 +62,13 @@ class ComponentCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
-              Expanded(
+              SizedBox(
+                // Altura mínima para mostrar 3 líneas de texto de 14px con height 1.4 + padding
+                // 14 * 1.4 = 19.6 por línea, 3 líneas ≈ 59, más margen de seguridad
+                height: 62,
                 child: Text(
                   component.description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: AppColors.darkGray,
                     height: 1.4,

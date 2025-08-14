@@ -424,15 +424,15 @@ class _IconsScreenState extends State<IconsScreen> {
         onTap: () => _showIconDetails(icon),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(
                 children: [
                   Container(
-                    width: 64,
-                    height: 64,
+                    width: 84,
+                    height: 84,
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(12),

@@ -96,12 +96,12 @@ class _MobileNavigationState extends State<MobileNavigation> {
                 iconPath: isSelected ? activeIcon : icon,
                 height: 24,
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                  fontSize: 11,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300,
                   color: isSelected ? AppColors.orangeBrand : AppColors.grayMedium,
                 ),
               ),

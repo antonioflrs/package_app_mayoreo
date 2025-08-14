@@ -117,7 +117,8 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20, bottom: 0),
+      
       child: CustomSearchBarWidget(
         hintText: 'Buscar componentes, tokens, iconos...',
         onChanged: (value) {
@@ -177,8 +178,8 @@ class HomeScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: const Text(
-              'Explorar componentes',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              'Componentes',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
         ),
