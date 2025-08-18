@@ -7,9 +7,6 @@ class SearchBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'Barra de Búsqueda',
-      componentDescription: 'Widget de búsqueda con autocompletado y resultados dinámicos. Proporciona una experiencia de búsqueda fluida y responsiva con soporte para iconos personalizados y estados configurables.',
-      
       examples: [
         ComponentExample(
           id: 'basic_usage',

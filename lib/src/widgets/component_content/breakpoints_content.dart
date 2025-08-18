@@ -1,178 +1,222 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class BreakpointsContent extends StatelessWidget {
   const BreakpointsContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
-    
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildMainTitle(theme, 'Breakpoints'),
-          const SizedBox(height: 8),
-          _buildSubtitle(theme, 'Puntos de quiebre para diseño responsivo que definen los tamaños de pantalla'),
-          
-          const SizedBox(height: 32),
-          _buildUsageSection(theme, isMobile, context),
-          
-          const SizedBox(height: 32),
-          _buildImportSection(theme, isMobile, context),
-          
-          const SizedBox(height: 32),
-          _buildTokensSection(theme, isMobile),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMainTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.displaySmall?.copyWith(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-      ),
-    );
-  }
-
-  Widget _buildSubtitle(ThemeData theme, String subtitle) {
-    return Text(
-      subtitle,
-      style: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-        fontSize: 16,
-      ),
-    );
-  }
-
-  Widget _buildUsageSection(ThemeData theme, bool isMobile, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Uso'),
-        const SizedBox(height: 16),
-        Text(
-          'Los breakpoints se utilizan para crear diseños responsivos siguiendo esta sintaxis:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+    return ComponentScreenTemplate(
+      componentTitle: 'Breakpoints',
+      componentDescription: 'Sistema de puntos de quiebre responsivos para adaptar la interfaz a diferentes tamaños de pantalla',
+      examples: [
+        ComponentExample(
+          id: 'breakpoints-usage',
+          title: 'Uso de Breakpoints',
+          description: 'Los breakpoints se utilizan para crear diseños responsivos',
+          previewWidget: _buildBreakpointsUsagePreview(),
+          codeExample: _getBreakpointsUsageCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Sintaxis\nMediaQuery.of(context).size.width\n\n// Detección de breakpoint\nif (screenWidth < 768) {\n  // Mobile\n} else if (screenWidth < 1024) {\n  // Tablet\n}',
-          isMobile,
-          context,
+        ComponentExample(
+          id: 'breakpoints-import',
+          title: 'Importación',
+          description: 'Los valores de breakpoint están disponibles como constantes en el paquete',
+          previewWidget: _buildBreakpointsImportPreview(),
+          codeExample: _getBreakpointsImportCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Ejemplo práctico\nWidget build(BuildContext context) {\n  final screenWidth = MediaQuery.of(context).size.width;\n  final isMobile = screenWidth < 768;\n  \n  return isMobile ? MobileLayout() : DesktopLayout();\n}',
-          isMobile,
-          context,
+        ComponentExample(
+          id: 'breakpoints-tokens',
+          title: 'Tokens de Breakpoints',
+          description: 'Lista completa de valores de breakpoint disponibles en el sistema',
+          previewWidget: _buildBreakpointsTokensPreview(),
+          codeExample: _getBreakpointsTokensCode(),
         ),
       ],
-    );
-  }
-
-  Widget _buildImportSection(ThemeData theme, bool isMobile, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Importación'),
-        const SizedBox(height: 16),
-        Text(
-          'Los breakpoints están disponibles como constantes en el paquete:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+      properties: [
+        ComponentProperty(
+          name: 'xs',
+          type: 'double',
+          description: 'Breakpoint extra pequeño (0px - 575px)',
+          required: false,
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Usar breakpoints\nfinal screenWidth = MediaQuery.of(context).size.width;\nfinal isMobile = screenWidth < 768; // Mobile breakpoint',
-          isMobile,
-          context,
+        ComponentProperty(
+          name: 'sm',
+          type: 'double',
+          description: 'Breakpoint pequeño (576px - 767px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'md',
+          type: 'double',
+          description: 'Breakpoint mediano (768px - 991px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'lg',
+          type: 'double',
+          description: 'Breakpoint grande (992px - 1199px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'xl',
+          type: 'double',
+          description: 'Breakpoint extra grande (1200px - 1399px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'xxl',
+          type: 'double',
+          description: 'Breakpoint máximo (1400px+)',
+          required: false,
         ),
       ],
+      usageNotes: 'Los breakpoints se utilizan para crear diseños responsivos. Usa MediaQuery.of(context).size.width para obtener el ancho de pantalla y compara con los valores de breakpoint para aplicar estilos diferentes. Mantén consistencia en el uso de estos valores.',
     );
   }
 
-  Widget _buildTokensSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Tokens'),
-        const SizedBox(height: 16),
-        _buildBreakpointTokens(theme, isMobile),
-      ],
-    );
-  }
-
-  Widget _buildSectionTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-        fontSize: 24,
-      ),
-    );
-  }
-
-  Widget _buildCodeBlock(ThemeData theme, String code, bool isMobile, BuildContext context) {
+  Widget _buildBreakpointsUsagePreview() {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: AppColors.backCards,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            'Sintaxis:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'MediaQuery.of(context).size.width < 768',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Ejemplo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Código',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.orangeBrand,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Mobile',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10,
+                    ),
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: code));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Código copiado al portapapeles'),
-                      duration: Duration(seconds: 2),
+              const SizedBox(width: 16),
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.greenFree,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Tablet',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10,
                     ),
-                  );
-                },
-                icon: const Icon(Icons.copy, size: 16),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-                iconSize: 16,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.ochreBrand,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Desktop',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBreakpointsImportPreview() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.softGray,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Importación automática:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
           const SizedBox(height: 8),
-          SelectableText(
-            code,
-            style: theme.textTheme.bodyMedium?.copyWith(
+          Text(
+            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';',
+            style: TextStyle(
               fontFamily: 'RobotoMono',
-              fontSize: isMobile ? 12 : 14,
-              color: theme.colorScheme.onSurface,
+              fontSize: 12,
+              color: AppColors.greenFree,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Uso directo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'MediaQuery.of(context).size.width < 768',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.orangeBrand,
             ),
           ),
         ],
@@ -180,192 +224,111 @@ class BreakpointsContent extends StatelessWidget {
     );
   }
 
-  Widget _buildBreakpointTokens(ThemeData theme, bool isMobile) {
-    final breakpointTokens = [
-      {'token': 'mobile', 'valor': '320px - 768px', 'descripcion': 'Dispositivos móviles y smartphones'},
-      {'token': 'tablet', 'valor': '768px - 1024px', 'descripcion': 'Tablets y dispositivos medianos'},
-      {'token': 'desktop', 'valor': '1024px - 1440px', 'descripcion': 'Computadoras de escritorio'},
-      {'token': 'large', 'valor': '1440px+', 'descripcion': 'Pantallas grandes y ultra-wide'},
+  Widget _buildBreakpointsTokensPreview() {
+    final sampleBreakpoints = [
+      {'name': 'XS', 'range': '0px - 575px', 'color': AppColors.orangeBrand},
+      {'name': 'SM', 'range': '576px - 767px', 'color': AppColors.greenFree},
+      {'name': 'MD', 'range': '768px - 991px', 'color': AppColors.ochreBrand},
+      {'name': 'LG', 'range': '992px - 1199px', 'color': AppColors.oliveBrand},
+      {'name': 'XL', 'range': '1200px - 1399px', 'color': AppColors.digitalRed},
+      {'name': 'XXL', 'range': '1400px+', 'color': AppColors.yellow},
     ];
 
-    if (isMobile) {
-      return _buildMobileBreakpointList(theme, breakpointTokens);
-    } else {
-      return _buildDesktopBreakpointTable(theme, breakpointTokens);
-    }
-  }
-
-  Widget _buildDesktopBreakpointTable(ThemeData theme, List<Map<String, dynamic>> tokens) {
     return Container(
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              ),
+          Text(
+            'Rangos de breakpoint:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
             ),
+          ),
+          const SizedBox(height: 12),
+          ...sampleBreakpoints.map((breakpoint) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               children: [
-                Expanded(
-                  flex: 2,
+                SizedBox(
+                  width: 50,
                   child: Text(
-                    'Token',
-                    style: theme.textTheme.titleSmall?.copyWith(
+                    breakpoint['name'] as String,
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
+                      color: AppColors.black,
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Valor',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                const SizedBox(width: 16),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: breakpoint['color'] as Color,
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                ),
-                Expanded(
-                  flex: 4,
                   child: Text(
-                    'Descripción',
-                    style: theme.textTheme.titleSmall?.copyWith(
+                    breakpoint['range'] as String,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 10,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          // Rows
-          ...tokens.map((token) => _buildBreakpointTableRow(theme, token)),
+          )),
         ],
       ),
     );
   }
 
-  Widget _buildMobileBreakpointList(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Column(
-      children: tokens.map((token) => _buildMobileBreakpointCard(theme, token)).toList(),
-    );
+  String _getBreakpointsUsageCode() {
+    return '''// Sintaxis
+MediaQuery.of(context).size.width < 768
+
+// Ejemplo
+Widget build(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final isMobile = screenWidth < 768;
+  
+  return isMobile 
+    ? MobileLayout()
+    : DesktopLayout();
+}''';
   }
 
-  Widget _buildBreakpointTableRow(ThemeData theme, Map<String, dynamic> token) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: theme.colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              token['token'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Text(
-                token['valor'] as String,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontFamily: 'RobotoMono',
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Text(
-              token['descripcion'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getBreakpointsImportCode() {
+    return '''import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+
+// Usar valores de breakpoint
+MediaQuery.of(context).size.width < 768''';
   }
 
-  Widget _buildMobileBreakpointCard(ThemeData theme, Map<String, dynamic> token) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                token['token'] as String,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontFamily: 'RobotoMono',
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  token['valor'] as String,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.primary,
-                    fontFamily: 'RobotoMono',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            token['descripcion'] as String,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getBreakpointsTokensCode() {
+    return '''// Rangos de breakpoint
+const double xs = 0;      // 0px - 575px
+const double sm = 576;    // 576px - 767px
+const double md = 768;    // 768px - 991px
+const double lg = 992;    // 992px - 1199px
+const double xl = 1200;   // 1200px - 1399px
+const double xxl = 1400;  // 1400px+
+
+// Uso en widgets
+final screenWidth = MediaQuery.of(context).size.width;
+if (screenWidth < md) {
+  // Mobile layout
+} else if (screenWidth < lg) {
+  // Tablet layout
+} else {
+  // Desktop layout
+}''';
   }
 } 

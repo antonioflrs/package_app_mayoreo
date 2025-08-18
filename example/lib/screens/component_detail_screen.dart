@@ -13,41 +13,32 @@ class ComponentDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.softGray,
-      appBar: _buildAppBar(context),
+      appBar: AppBarWidget(
+        title: component.title,
+        showMenuButton: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: AppColors.black),
+            onPressed: () => _showComponentInfo(context),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Section
-            _buildHeaderSection(context),
-            
-            // Content Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _buildContentSection(context),
-            ),
+            _buildHeaderSection(),
+            if (component.content != null)
+              component.content!
+            else
+              _buildPlaceholderContent(),
           ],
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBarWidget(
-      title: component.title,
-      showMenuButton: false,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.info_outline, color: AppColors.black),
-          onPressed: () => _showComponentInfo(context),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildHeaderSection(BuildContext context) {
+  Widget _buildHeaderSection() {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.only(
@@ -62,10 +53,10 @@ class ComponentDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon and Title
           Row(
             children: [
               _buildComponentIcon(),
@@ -82,8 +73,7 @@ class ComponentDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          // Description
+          const SizedBox(height: 16),
           Text(
             component.description,
             style: const TextStyle(
@@ -92,11 +82,9 @@ class ComponentDetailScreen extends StatelessWidget {
               height: 1.5,
             ),
           ),
-          const SizedBox(height: 16),
-          // Category Badge
+          const SizedBox(height: 20),
           _buildCategoryBadge(),
-          const SizedBox(height: 12),
-          // Badges informativos adicionales
+          const SizedBox(height: 16),
           Row(
             children: [
               StatusBadge(
@@ -132,28 +120,16 @@ class ComponentDetailScreen extends StatelessWidget {
       ),
       child: Center(
         child: component.iconType == IconType.material
-            ? Icon(
-                component.icon,
-                size: 24,
-                color: AppColors.black,
-              )
-            : Icon(
-                Icons.widgets,
-                size: 24,
-                color: AppColors.black,
-              ),
+            ? Icon(component.icon, size: 24, color: AppColors.black)
+            : Icon(Icons.widgets, size: 24, color: AppColors.black),
       ),
     );
   }
 
   Widget _buildCategoryBadge() {
-    final categoryText = component.category == NavigationCategory.designGuides
-        ? 'Guía de Diseño'
-        : 'Componente UI';
-    
-    final categoryColor = component.category == NavigationCategory.designGuides
-        ? AppColors.orangeBrand
-        : AppColors.greenFree;
+    final isGuide = component.category == NavigationCategory.designGuides;
+    final categoryText = isGuide ? 'Guía de Diseño' : 'Componente UI';
+    final categoryColor = isGuide ? AppColors.orangeBrand : AppColors.greenFree;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -176,16 +152,9 @@ class ComponentDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContentSection(BuildContext context) {
-    if (component.content != null) {
-      return component.content!;
-    } else {
-      return _buildPlaceholderContent(context);
-    }
-  }
-
-  Widget _buildPlaceholderContent(BuildContext context) {
+  Widget _buildPlaceholderContent() {
     return Container(
+      margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -195,49 +164,42 @@ class ComponentDetailScreen extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: Column(
-        children: [
-          Icon(
-            Icons.construction,
-            size: 48,
-            color: AppColors.grayMedium,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Contenido en desarrollo',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'El contenido para ${component.title.toLowerCase()} estará disponible próximamente.',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.darkGray,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.black,
-              foregroundColor: AppColors.white,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 12,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+      child: Builder(
+        builder: (context) => Column(
+          children: [
+            Icon(Icons.construction, size: 48, color: AppColors.grayMedium),
+            const SizedBox(height: 16),
+            Text(
+              'Contenido en desarrollo',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
               ),
             ),
-            child: const Text('Volver'),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              'El contenido para ${component.title.toLowerCase()} estará disponible próximamente.',
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.darkGray,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.black,
+                foregroundColor: AppColors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+              child: const Text('Volver'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -248,9 +210,7 @@ class ComponentDetailScreen extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text(
             'Información del Componente',
             style: TextStyle(

@@ -168,7 +168,7 @@ class _CustomSearchBarWidgetState extends State<CustomSearchBarWidget> {
       margin: widget.margin,
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(60),
         border: Border.all(
           color: AppColors.grayMedium.withValues(alpha: 0.3),
           width: 1,
@@ -308,7 +308,7 @@ class _CustomSearchBarWidgetState extends State<CustomSearchBarWidget> {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(60.0),
         border: Border.all(
           color: AppColors.grayMedium.withValues(alpha: 0.3),
           width: 1.0,

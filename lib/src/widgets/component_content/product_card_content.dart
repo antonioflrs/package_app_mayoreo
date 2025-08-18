@@ -14,8 +14,6 @@ class _ProductCardContentState extends State<ProductCardContent> {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'Product Card',
-      componentDescription: 'Tarjeta de producto para mostrar información básica de productos en listas o grids. Incluye imagen, nombre, precio, rating, estado de favorito y opciones de comparación de descuentos.',
       examples: [
         ComponentExample(
           id: 'basic',

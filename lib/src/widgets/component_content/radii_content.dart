@@ -1,387 +1,342 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class RadiiContent extends StatelessWidget {
   const RadiiContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
-    
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildMainTitle(theme, 'Radios'),
-          const SizedBox(height: 8),
-          _buildSubtitle(theme, 'Sistema de bordes redondeados para crear consistencia visual en la interfaz'),
-          
-          const SizedBox(height: 32),
-          _buildUsageSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildImportSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildTokensSection(theme, isMobile),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMainTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.displaySmall?.copyWith(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-      ),
-    );
-  }
-
-  Widget _buildSubtitle(ThemeData theme, String subtitle) {
-    return Text(
-      subtitle,
-      style: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-        fontSize: 16,
-      ),
-    );
-  }
-
-  Widget _buildUsageSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Uso'),
-        const SizedBox(height: 16),
-        Text(
-          'Los radios se aplican mediante BorderRadius siguiendo esta sintaxis:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+    return ComponentScreenTemplate(
+      componentTitle: 'Radios',
+      componentDescription: 'Sistema de bordes redondeados que proporciona consistencia visual en toda la interfaz',
+      examples: [
+        ComponentExample(
+          id: 'radii-usage',
+          title: 'Uso de Radios',
+          description: 'Los valores de radio se aplican mediante constantes predefinidas',
+          previewWidget: _buildRadiiUsagePreview(),
+          codeExample: _getRadiiUsageCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Sintaxis\nBorderRadius.circular([valor])\n\n// O para diferentes radios\nBorderRadius.only(\n  topLeft: Radius.circular(8),\n  topRight: Radius.circular(8),\n)',
-          isMobile,
+        ComponentExample(
+          id: 'radii-import',
+          title: 'Importación',
+          description: 'Los valores de radio están disponibles como constantes en el paquete',
+          previewWidget: _buildRadiiImportPreview(),
+          codeExample: _getRadiiImportCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    borderRadius: BorderRadius.circular(12),\n    color: AppColors.orangeBrand,\n  ),\n  child: Text(\'Mi contenedor\'),\n)',
-          isMobile,
+        ComponentExample(
+          id: 'radii-tokens',
+          title: 'Tokens de Radios',
+          description: 'Lista completa de valores de radio disponibles en el sistema',
+          previewWidget: _buildRadiiTokensPreview(),
+          codeExample: _getRadiiTokensCode(),
         ),
       ],
-    );
-  }
-
-  Widget _buildImportSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Importación'),
-        const SizedBox(height: 16),
-        Text(
-          'Los valores de radio están disponibles como constantes en el paquete:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+      properties: [
+        ComponentProperty(
+          name: 'xs',
+          type: 'double',
+          description: 'Radio extra pequeño (2px)',
+          required: false,
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Usar valores de radio\nBorderRadius.circular(8) // 8px\nBorderRadius.circular(16) // 16px',
-          isMobile,
+        ComponentProperty(
+          name: 'sm',
+          type: 'double',
+          description: 'Radio pequeño (4px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'md',
+          type: 'double',
+          description: 'Radio mediano (8px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'lg',
+          type: 'double',
+          description: 'Radio grande (12px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'xl',
+          type: 'double',
+          description: 'Radio extra grande (16px)',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'xxl',
+          type: 'double',
+          description: 'Radio máximo (24px)',
+          required: false,
         ),
       ],
+      usageNotes: 'El sistema de radios utiliza una escala progresiva (2, 4, 8, 12, 16, 24). Usa radios pequeños para elementos sutiles, medianos para componentes estándar y grandes para elementos destacados. Mantén consistencia en el uso de estos valores.',
     );
   }
 
-  Widget _buildTokensSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Tokens'),
-        const SizedBox(height: 16),
-        _buildRadiiTokens(theme, isMobile),
-      ],
-    );
-  }
-
-  Widget _buildSectionTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-        fontSize: 24,
-      ),
-    );
-  }
-
-  Widget _buildCodeBlock(ThemeData theme, String code, bool isMobile) {
+  Widget _buildRadiiUsagePreview() {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: AppColors.backCards,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            'Sintaxis:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'BorderRadius.circular(8.0) // o md',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Ejemplo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Código',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.orangeBrand,
+                  borderRadius: BorderRadius.circular(4), // sm
+                ),
+                child: const Center(
+                  child: Text(
+                    'SM',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
                 ),
               ),
-              Builder(
-                builder: (context) => IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: code));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Código copiado al portapapeles'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.copy, size: 16),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  iconSize: 16,
+              const SizedBox(width: 16),
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.greenFree,
+                  borderRadius: BorderRadius.circular(8), // md
+                ),
+                child: const Center(
+                  child: Text(
+                    'MD',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(
+                width: 60,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.ochreBrand,
+                  borderRadius: BorderRadius.circular(16), // xl
+                ),
+                child: const Center(
+                  child: Text(
+                    'XL',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          SelectableText(
-            code,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontFamily: 'RobotoMono',
-              fontSize: isMobile ? 12 : 14,
-              color: theme.colorScheme.onSurface,
-            ),
-          ),
         ],
       ),
     );
   }
 
-  Widget _buildRadiiTokens(ThemeData theme, bool isMobile) {
-    final radiiTokens = [
-      {'token': '0', 'valor': '0px', 'size': 0.0},
-      {'token': '1', 'valor': '4px', 'size': 4.0},
-      {'token': '2', 'valor': '8px', 'size': 8.0},
-      {'token': '3', 'valor': '12px', 'size': 12.0},
-      {'token': '4', 'valor': '16px', 'size': 16.0},
-      {'token': '6', 'valor': '24px', 'size': 24.0},
-      {'token': '8', 'valor': '32px', 'size': 32.0},
-      {'token': 'full', 'valor': '50px', 'size': 50.0},
-    ];
-
-    if (isMobile) {
-      return _buildMobileRadiiList(theme, radiiTokens);
-    } else {
-      return _buildDesktopRadiiTable(theme, radiiTokens);
-    }
-  }
-
-  Widget _buildDesktopRadiiTable(ThemeData theme, List<Map<String, dynamic>> tokens) {
+  Widget _buildRadiiImportPreview() {
     return Container(
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: AppColors.softGray,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              ),
+          Text(
+            'Importación automática:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
             ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.greenFree,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Uso directo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'BorderRadius.circular(8.0) // 8px',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.orangeBrand,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRadiiTokensPreview() {
+    final sampleRadii = [
+      {'name': 'XS', 'value': 2.0, 'color': AppColors.orangeBrand},
+      {'name': 'SM', 'value': 4.0, 'color': AppColors.greenFree},
+      {'name': 'MD', 'value': 8.0, 'color': AppColors.ochreBrand},
+      {'name': 'LG', 'value': 12.0, 'color': AppColors.oliveBrand},
+      {'name': 'XL', 'value': 16.0, 'color': AppColors.digitalRed},
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Escala de radios:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 12),
+          ...sampleRadii.map((radius) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               children: [
-                Expanded(
-                  flex: 1,
+                SizedBox(
+                  width: 40,
                   child: Text(
-                    'Token',
-                    style: theme.textTheme.titleSmall?.copyWith(
+                    radius['name'] as String,
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
+                      color: AppColors.black,
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Valor',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
+                const SizedBox(width: 16),
+                Container(
+                  width: 60,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: radius['color'] as Color,
+                    borderRadius: BorderRadius.circular(radius['value'] as double),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${radius['value']}px',
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Muestra',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                const SizedBox(width: 16),
+                Text(
+                  '${radius['value']}px',
+                  style: TextStyle(
+                    fontFamily: 'RobotoMono',
+                    fontSize: 12,
+                    color: AppColors.black,
                   ),
                 ),
               ],
             ),
-          ),
-          // Rows
-          ...tokens.map((token) => _buildRadiiTableRow(theme, token)),
+          )),
         ],
       ),
     );
   }
 
-  Widget _buildMobileRadiiList(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Column(
-      children: tokens.map((token) => _buildMobileRadiiCard(theme, token)).toList(),
-    );
+  String _getRadiiUsageCode() {
+    return '''// Sintaxis
+BorderRadius.circular(8.0) // o md
+
+// Ejemplo
+Container(
+  decoration: BoxDecoration(
+    color: AppColors.orangeBrand,
+    borderRadius: BorderRadius.circular(8.0), // md
+  ),
+  child: Text('Mi elemento'),
+)''';
   }
 
-  Widget _buildRadiiTableRow(ThemeData theme, Map<String, dynamic> token) {
-    final size = token['size'] as double;
-    
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: theme.colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              token['token'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              token['valor'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              height: 40,
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.primary,
-                      borderRadius: BorderRadius.circular(size),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getRadiiImportCode() {
+    return '''import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+
+// Usar valores de radio
+BorderRadius.circular(8.0) // 8px''';
   }
 
-  Widget _buildMobileRadiiCard(ThemeData theme, Map<String, dynamic> token) {
-    final size = token['size'] as double;
-    
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.2),
-              ),
-            ),
-            child: Center(
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(size),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  token['token'] as String,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontFamily: 'RobotoMono',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  token['valor'] as String,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'RobotoMono',
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getRadiiTokensCode() {
+    return '''// Escala de radios
+const double xs = 2.0;   // Extra pequeño
+const double sm = 4.0;   // Pequeño
+const double md = 8.0;   // Mediano
+const double lg = 12.0;  // Grande
+const double xl = 16.0;  // Extra grande
+const double xxl = 24.0; // Máximo
+
+// Uso en widgets
+BorderRadius.circular(xs),  // 2px
+BorderRadius.circular(sm),  // 4px
+BorderRadius.circular(md),  // 8px
+BorderRadius.circular(lg),  // 12px
+BorderRadius.circular(xl),  // 16px
+BorderRadius.circular(xxl), // 24px''';
   }
 } 

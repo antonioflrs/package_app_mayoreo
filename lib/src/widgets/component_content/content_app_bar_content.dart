@@ -7,8 +7,6 @@ class ContentAppBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'ContentAppBar',
-      componentDescription: 'App bar unificado para pantallas de contenido con botón de retroceso, título y sugerencia UX opcional.',
       examples: const [
         ComponentExample(
           id: 'basic',

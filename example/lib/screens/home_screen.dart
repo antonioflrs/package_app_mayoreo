@@ -31,7 +31,12 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     // Hero Content
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 60.0, bottom: 20.0),
+                      padding: const EdgeInsets.only(
+                        left: 16.0,
+                        right: 16.0,
+                        top: 60.0,
+                        bottom: 20.0,
+                      ),
                       child: _buildHeroContent(context),
                     ),
 
@@ -117,8 +122,13 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSearchBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20, bottom: 0),
-      
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        right: 16.0,
+        top: 20,
+        bottom: 0,
+      ),
+
       child: CustomSearchBarWidget(
         hintText: 'Buscar componentes, tokens, iconos...',
         onChanged: (value) {
@@ -134,7 +144,7 @@ class HomeScreen extends StatelessWidget {
         // Título del hero
         Text(
           'Sistema de diseño\npara Flutter',
-                      style: AppTypography.headlineSmall!.copyWith(
+          style: AppTypography.headlineSmall!.copyWith(
             color: AppColors.black,
             fontWeight: FontWeight.w700,
             fontSize: 32,
@@ -151,12 +161,10 @@ class HomeScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-          const SizedBox(height: 0),
-        ],
+        const SizedBox(height: 0),
+      ],
     );
   }
-
- 
 
   Widget _buildActionButtons(BuildContext context) {
     return Row(
@@ -165,7 +173,9 @@ class HomeScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const DesignSystemScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const DesignSystemScreen(),
+                ),
               );
             },
             style: ElevatedButton.styleFrom(
@@ -413,10 +423,13 @@ class _TechTag extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (iconPath != null)
-            PackageIcon(
-              iconPath: iconPath!,
-              size: 16,
-              color: iconColor,
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: PackageIcon(
+                iconPath: iconPath!,
+                size: 16,
+                color: iconColor,
+              ),
             ),
           const SizedBox(width: 6),
           Text(
