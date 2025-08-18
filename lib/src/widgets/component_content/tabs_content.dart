@@ -24,9 +24,6 @@ class _TabsContentState extends State<TabsContent> {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'Widget de Tabs',
-      componentDescription: 'Widget de tabs personalizable con diferentes variantes de diseño. Soporta estados activo/inactivo, items dinámicos y múltiples estilos visuales.',
-      
       examples: [
         ComponentExample(
           id: 'variants_showcase',

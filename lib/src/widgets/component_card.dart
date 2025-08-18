@@ -2,12 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 /// Card reutilizable para listar componentes del Design System.
-/// Replica el diseño utilizado en `ComponentsSummaryScreen`.
+/// Estructura optimizada y configurable para evitar dobles contenedores y overflows.
 class ComponentCard extends StatelessWidget {
   final NavigationItem component;
   final VoidCallback? onTap;
   final String ctaText;
   final bool showCtaButton;
+  
+  // Variables de diseño configurables
+  final double cardBorderRadius;
+  final double cardBorderWidth;
+  final Color cardBorderColor;
+  final Color cardBackgroundColor;
+  final double cardShadowBlur;
+  final Offset cardShadowOffset;
+  final Color cardShadowColor;
+  final double cardPadding;
+  final double iconSize;
+  final double iconBorderRadius;
+  final double titleFontSize;
+  final FontWeight titleFontWeight;
+  final Color titleColor;
+  final int titleMaxLines;
+  final double descriptionFontSize;
+  final Color descriptionColor;
+  final double descriptionLineHeight;
+  final int descriptionMaxLines;
+  final double spacingBetweenElements;
+  final double buttonHeight;
+  final double buttonBorderRadius;
+  final Color buttonBackgroundColor;
+  final Color buttonTextColor;
+  final double buttonFontSize;
+  final FontWeight buttonFontWeight;
 
   const ComponentCard({
     super.key,
@@ -15,6 +42,32 @@ class ComponentCard extends StatelessWidget {
     this.onTap,
     this.ctaText = 'Ver Detalles',
     this.showCtaButton = true,
+    // Valores por defecto para diseño
+    this.cardBorderRadius = 16.0,
+    this.cardBorderWidth = 1.0,
+    this.cardBorderColor = AppColors.grayMedium,
+    this.cardBackgroundColor = AppColors.white,
+    this.cardShadowBlur = 8.0,
+    this.cardShadowOffset = const Offset(0, 2),
+    this.cardShadowColor = AppColors.black,
+    this.cardPadding = 10.0,
+    this.iconSize = 40.0,
+    this.iconBorderRadius = 10.0,
+    this.titleFontSize = 16.0,
+    this.titleFontWeight = FontWeight.w600,
+    this.titleColor = AppColors.black,
+    this.titleMaxLines = 2,
+    this.descriptionFontSize = 14.0,
+    this.descriptionColor = AppColors.darkGray,
+    this.descriptionLineHeight = 1.4,
+    this.descriptionMaxLines = 3,
+    this.spacingBetweenElements = 10.0,
+    this.buttonHeight = 36.0,
+    this.buttonBorderRadius = 8.0,
+    this.buttonBackgroundColor = AppColors.orangeBrand,
+    this.buttonTextColor = AppColors.white,
+    this.buttonFontSize = 12.0,
+    this.buttonFontWeight = FontWeight.w600,
   });
 
   @override
@@ -24,25 +77,27 @@ class ComponentCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(16),
+          color: cardBackgroundColor,
+          borderRadius: BorderRadius.circular(cardBorderRadius),
           border: Border.all(
-            color: AppColors.grayMedium.withValues(alpha: 0.2),
-            width: 1,
+            color: cardBorderColor.withValues(alpha: 0.2),
+            width: cardBorderWidth,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withValues(alpha: 0.05),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+              color: cardShadowColor.withValues(alpha: 0.05),
+              blurRadius: cardShadowBlur,
+              offset: cardShadowOffset,
             ),
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(cardPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
+              // Header con icono y badge
               Row(
                 children: [
                   _buildComponentIcon(),
@@ -50,53 +105,61 @@ class ComponentCard extends StatelessWidget {
                   _buildCategoryBadge(),
                 ],
               ),
-              const SizedBox(height: 16),
-              Text(
-                component.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.black,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              SizedBox(
-                // Altura mínima para mostrar 3 líneas de texto de 14px con height 1.4 + padding
-                // 14 * 1.4 = 19.6 por línea, 3 líneas ≈ 59, más margen de seguridad
-                height: 62,
+              
+              SizedBox(height: spacingBetweenElements),
+              
+              // Título del componente
+              Flexible(
                 child: Text(
-                  component.description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppColors.darkGray,
-                    height: 1.4,
+                  component.title,
+                  style: TextStyle(
+                    fontSize: titleFontSize,
+                    fontWeight: titleFontWeight,
+                    color: titleColor,
                   ),
-                  maxLines: 3,
+                  maxLines: titleMaxLines,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              
+              SizedBox(height: spacingBetweenElements),
+              
+              // Descripción del componente
+              Flexible(
+                child: Text(
+                  component.description,
+                  style: TextStyle(
+                    fontSize: descriptionFontSize,
+                    color: descriptionColor,
+                    height: descriptionLineHeight,
+                  ),
+                  maxLines: descriptionMaxLines,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+
+              // Botón CTA (opcional)
               if (showCtaButton) ...[
-                const SizedBox(height: 16),
+                SizedBox(height: spacingBetweenElements + 8),
                 SizedBox(
                   width: double.infinity,
+                  height: buttonHeight,
                   child: ElevatedButton(
                     onPressed: onTap,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.orangeBrand,
-                      foregroundColor: AppColors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      backgroundColor: buttonBackgroundColor,
+                      foregroundColor: buttonTextColor,
+                      padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(buttonBorderRadius),
                       ),
                       elevation: 0,
                     ),
                     child: Text(
                       ctaText,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                      style: TextStyle(
+                        fontSize: buttonFontSize,
+                        fontWeight: buttonFontWeight,
                       ),
                     ),
                   ),
@@ -114,23 +177,23 @@ class ComponentCard extends StatelessWidget {
     final Color accent = isGuide ? AppColors.orangeBrand : AppColors.greenFree;
 
     return Container(
-      width: 40,
-      height: 40,
+      width: iconSize,
+      height: iconSize,
       decoration: BoxDecoration(
         color: accent.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(iconBorderRadius),
       ),
       child: Center(
         child: component.iconType == IconType.svg && component.svgIcon != null
             ? SafeSvgIcon(
                 iconPath: component.svgIcon!,
-                height: 20,
+                height: iconSize * 0.5, // 50% del tamaño del contenedor
                 color: accent,
               )
             : Icon(
-                component.icon ?? Icons.widgets,
-                size: 20,
-                color: accent,
+                component.icon ?? Icons.widgets, 
+                size: iconSize * 0.5, // 50% del tamaño del contenedor
+                color: accent
               ),
       ),
     );
@@ -146,10 +209,7 @@ class ComponentCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: accent.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: accent.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1),
       ),
       child: Text(
         categoryText,
@@ -162,5 +222,3 @@ class ComponentCard extends StatelessWidget {
     );
   }
 }
-
-

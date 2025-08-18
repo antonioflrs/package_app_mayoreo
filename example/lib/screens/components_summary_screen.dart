@@ -6,7 +6,8 @@ class ComponentsSummaryScreen extends StatefulWidget {
   const ComponentsSummaryScreen({super.key});
 
   @override
-  State<ComponentsSummaryScreen> createState() => _ComponentsSummaryScreenState();
+  State<ComponentsSummaryScreen> createState() =>
+      _ComponentsSummaryScreenState();
 }
 
 class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
@@ -26,17 +27,12 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.softGray,
-      appBar: AppBarWidget(
-        title: 'Componentes',
-        showMenuButton: false,
-      ),
+      appBar: AppBarWidget(title: 'Componentes', showMenuButton: false),
       body: Column(
         children: [
           _buildHeader(),
           _buildCategoryFilter(),
-          Expanded(
-            child: _buildComponentsGrid(filteredComponents),
-          ),
+          Expanded(child: _buildComponentsGrid(filteredComponents)),
         ],
       ),
     );
@@ -109,18 +105,11 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
             const SizedBox(height: 16),
             Row(
               children: [
-                Icon(
-                  Icons.search,
-                  size: 16,
-                  color: AppColors.grayMedium,
-                ),
+                Icon(Icons.search, size: 16, color: AppColors.grayMedium),
                 const SizedBox(width: 8),
                 Text(
                   'Buscando: "$_searchQuery"',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.grayMedium,
-                  ),
+                  style: TextStyle(fontSize: 14, color: AppColors.grayMedium),
                 ),
                 const Spacer(),
                 TextButton(
@@ -154,13 +143,17 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
           _buildFilterChip(
             label: 'Guías de Diseño',
             isSelected: _selectedCategory == NavigationCategory.designGuides,
-            onTap: () => setState(() => _selectedCategory = NavigationCategory.designGuides),
+            onTap: () => setState(
+              () => _selectedCategory = NavigationCategory.designGuides,
+            ),
           ),
           const SizedBox(width: 8),
           _buildFilterChip(
             label: 'Componentes UI',
             isSelected: _selectedCategory == NavigationCategory.uiComponents,
-            onTap: () => setState(() => _selectedCategory = NavigationCategory.uiComponents),
+            onTap: () => setState(
+              () => _selectedCategory = NavigationCategory.uiComponents,
+            ),
           ),
         ],
       ),
@@ -180,7 +173,9 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
           color: isSelected ? AppColors.orangeBrand : AppColors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? AppColors.orangeBrand : AppColors.grayMedium.withValues(alpha: 0.3),
+            color: isSelected
+                ? AppColors.orangeBrand
+                : AppColors.grayMedium.withValues(alpha: 0.3),
             width: 1,
           ),
         ),
@@ -201,18 +196,85 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
       return _buildEmptyState();
     }
 
-    return GridView.builder(
+    return Padding(
       padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 0.85,
+      child: _buildMasonryLayout(components),
+    );
+  }
+
+  Widget _buildMasonryLayout(List<NavigationItem> components) {
+    return SingleChildScrollView(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final crossAxisCount = 2;
+          final crossAxisSpacing = 16.0;
+          final mainAxisSpacing = 16.0;
+          final availableWidth = constraints.maxWidth;
+          final itemWidth =
+              (availableWidth - (crossAxisSpacing * (crossAxisCount - 1))) /
+              crossAxisCount;
+
+          // Listas para almacenar las alturas de cada columna
+          List<double> columnHeights = List.filled(crossAxisCount, 0.0);
+          List<List<Widget>> columns = List.generate(
+            crossAxisCount,
+            (index) => [],
+          );
+
+          // Distribuir los componentes en las columnas
+          for (int i = 0; i < components.length; i++) {
+            // Encontrar la columna con menor altura
+            int shortestColumn = 0;
+            for (int j = 1; j < crossAxisCount; j++) {
+              if (columnHeights[j] < columnHeights[shortestColumn]) {
+                shortestColumn = j;
+              }
+            }
+
+            // Agregar el componente a la columna más corta
+            columns[shortestColumn].add(
+              Padding(
+                padding: EdgeInsets.only(bottom: mainAxisSpacing),
+                child: SizedBox(
+                  width: itemWidth,
+                  child: _buildComponentCard(components[i]),
+                ),
+              ),
+            );
+
+            // Actualizar la altura de la columna (estimación más precisa)
+            columnHeights[shortestColumn] +=
+                180; // Altura estimada más realista
+          }
+          // Construir las columnas con IntrinsicHeight para manejar alturas variables
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Primera columna
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: columns[0],
+                    ),
+                  ),
+                  // Gap de 16px entre columnas
+                  SizedBox(width: crossAxisSpacing),
+                  // Segunda columna
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: columns[1],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
-      itemCount: components.length,
-      itemBuilder: (context, index) {
-        return _buildComponentCard(components[index]);
-      },
     );
   }
 
@@ -236,11 +298,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.search_off,
-            size: 64,
-            color: AppColors.grayMedium,
-          ),
+          Icon(Icons.search_off, size: 64, color: AppColors.grayMedium),
           const SizedBox(height: 16),
           Text(
             'No se encontraron componentes',
@@ -253,10 +311,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
           const SizedBox(height: 8),
           Text(
             'Intenta con otros términos de búsqueda',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.darkGray,
-            ),
+            style: TextStyle(fontSize: 14, color: AppColors.darkGray),
           ),
           const SizedBox(height: 24),
           ElevatedButton(
@@ -284,23 +339,23 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
 
   List<NavigationItem> _getFilteredComponents() {
     List<NavigationItem> allComponents = DesignSystemData.getAllItems();
-    
+
     // Filter by category
     if (_selectedCategory != null) {
-      allComponents = allComponents.where(
-        (component) => component.category == _selectedCategory
-      ).toList();
+      allComponents = allComponents
+          .where((component) => component.category == _selectedCategory)
+          .toList();
     }
-    
+
     // Filter by search query
     if (_searchQuery.isNotEmpty) {
       allComponents = allComponents.where((component) {
         final query = _searchQuery.toLowerCase();
         return component.title.toLowerCase().contains(query) ||
-               component.description.toLowerCase().contains(query);
+            component.description.toLowerCase().contains(query);
       }).toList();
     }
-    
+
     return allComponents;
   }
-} 
+}

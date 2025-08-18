@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
-/// Template reutilizable para mostrar información de componentes
-/// Basado en la estructura de search_bar_content.dart
+/// Template reutilizable y estandarizado para mostrar información de componentes
+/// Proporciona una estructura homogénea y optimizada para todas las pantallas de contenido
 class ComponentScreenTemplate extends StatefulWidget {
-  final String componentTitle;
-  final String componentDescription;
+  final String? componentTitle;
+  final String? componentDescription;
   final List<ComponentExample> examples;
   final List<ComponentProperty>? properties;
   final List<ComponentMethod>? methods;
   final String? usageNotes;
+  final List<Widget>? customSections;
+  final EdgeInsets? customPadding;
 
   const ComponentScreenTemplate({
     super.key,
-    required this.componentTitle,
-    required this.componentDescription,
+    this.componentTitle,
+    this.componentDescription,
     required this.examples,
     this.properties,
     this.methods,
     this.usageNotes,
+    this.customSections,
+    this.customPadding,
   });
 
   @override
@@ -30,10 +34,20 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
   final Map<String, bool> _showCodeStates = {};
   final Map<String, bool> _expandedSections = {};
 
+  // Constantes estandarizadas para espaciado
+  static const double _sectionSpacing = 32.0;
+  static const double _contentPadding = 16.0;
+  static const double _containerPadding = 20.0;
+  static const double _itemSpacing = 16.0;
+  static const double _smallSpacing = 8.0;
+
   @override
   void initState() {
     super.initState();
-    // Inicializar estados de expansión para secciones opcionales
+    _initializeSections();
+  }
+
+  void _initializeSections() {
     if (widget.properties != null) _expandedSections['properties'] = false;
     if (widget.methods != null) _expandedSections['methods'] = false;
     if (widget.usageNotes != null) _expandedSections['usage'] = false;
@@ -44,69 +58,50 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
     final theme = Theme.of(context);
     
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: widget.customPadding ?? const EdgeInsets.all(_contentPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildHeader(theme),
-          
-          const SizedBox(height: 32),
-          
           // Ejemplos del componente
           ...widget.examples.map((example) => 
             Padding(
-              padding: const EdgeInsets.only(bottom: 32),
-              child: _buildExampleContainer(
-                theme: theme,
-                example: example,
-              ),
+              padding: const EdgeInsets.only(bottom: _sectionSpacing),
+              child: _buildExampleContainer(theme: theme, example: example),
             ),
           ),
           
           // Propiedades del componente (opcional)
           if (widget.properties != null) ...[
-            const SizedBox(height: 32),
+            SizedBox(height: _sectionSpacing),
             _buildPropertiesSection(theme),
           ],
           
           // Métodos del componente (opcional)
           if (widget.methods != null) ...[
-            const SizedBox(height: 32),
+            SizedBox(height: _sectionSpacing),
             _buildMethodsSection(theme),
           ],
           
           // Notas de uso (opcional)
           if (widget.usageNotes != null) ...[
-            const SizedBox(height: 32),
+            SizedBox(height: _sectionSpacing),
             _buildUsageNotesSection(theme),
           ],
           
-          const SizedBox(height: 32),
+          // Secciones personalizadas (opcional)
+          if (widget.customSections != null) ...[
+            SizedBox(height: _sectionSpacing),
+            ...widget.customSections!.map((section) => 
+              Padding(
+                padding: const EdgeInsets.only(bottom: _sectionSpacing),
+                child: section,
+              ),
+            ),
+          ],
+          
+          SizedBox(height: _sectionSpacing),
         ],
       ),
-    );
-  }
-
-  Widget _buildHeader(ThemeData theme) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.componentTitle,
-          style: theme.textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: AppColors.black,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          widget.componentDescription,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-            height: 1.6,
-          ),
-        ),
-      ],
     );
   }
 
@@ -115,7 +110,6 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
     required ComponentExample example,
   }) {
     return Container(
-      width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
@@ -136,7 +130,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
         children: [
           // Header del ejemplo
           Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(_containerPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -147,7 +141,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                     color: AppColors.black,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: _smallSpacing),
                 Text(
                   example.description,
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -161,7 +155,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
           
           // Tabs de vista previa/código
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: _containerPadding),
             child: CustomTabsWidget(
               tabs: [
                 TabItem(
@@ -186,7 +180,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
           
           // Contenido basado en el toggle
           Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(_containerPadding),
             child: (_showCodeStates[example.id] ?? false)
                 ? _buildCodeSection(theme, example.codeExample)
                 : example.previewWidget,
@@ -250,7 +244,6 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
     final isExpanded = _expandedSections[sectionKey] ?? false;
     
     return Container(
-      width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12),
@@ -267,7 +260,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
             ),
             borderRadius: BorderRadius.circular(12),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(_itemSpacing),
               child: Row(
                 children: [
                   Icon(
@@ -275,7 +268,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                     color: AppColors.orangeBrand,
                     size: 20,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: _smallSpacing),
                   Text(
                     title,
                     style: theme.textTheme.titleMedium?.copyWith(
@@ -296,7 +289,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
           // Contenido expandible
           if (isExpanded)
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const EdgeInsets.fromLTRB(_itemSpacing, 0, _itemSpacing, _itemSpacing),
               child: child,
             ),
         ],
@@ -306,8 +299,8 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
 
   Widget _buildPropertyItem(ThemeData theme, ComponentProperty property) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: _itemSpacing),
+      padding: const EdgeInsets.all(_itemSpacing),
       decoration: BoxDecoration(
         color: AppColors.softGray,
         borderRadius: BorderRadius.circular(8),
@@ -328,7 +321,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                   color: AppColors.black,
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: _smallSpacing),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
@@ -344,25 +337,25 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                 ),
               ),
               if (property.required)
-                                  Container(
-                    margin: const EdgeInsets.only(left: 6),
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: AppColors.digitalRed.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'Requerido',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: AppColors.digitalRed,
-                        fontWeight: FontWeight.w500,
-                      ),
+                Container(
+                  margin: const EdgeInsets.only(left: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.digitalRed.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    'Requerido',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: AppColors.digitalRed,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
+                ),
             ],
           ),
           if (property.description.isNotEmpty) ...[
-            const SizedBox(height: 8),
+            SizedBox(height: _smallSpacing),
             Text(
               property.description,
               style: theme.textTheme.bodySmall?.copyWith(
@@ -388,8 +381,8 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
 
   Widget _buildMethodItem(ThemeData theme, ComponentMethod method) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: _itemSpacing),
+      padding: const EdgeInsets.all(_itemSpacing),
       decoration: BoxDecoration(
         color: AppColors.softGray,
         borderRadius: BorderRadius.circular(8),
@@ -410,25 +403,25 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                   color: AppColors.black,
                 ),
               ),
-              const SizedBox(width: 8),
-                              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: AppColors.oliveBrand.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    method.returnType,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: AppColors.oliveBrand,
-                      fontWeight: FontWeight.w500,
-                    ),
+              SizedBox(width: _smallSpacing),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.oliveBrand.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  method.returnType,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: AppColors.oliveBrand,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
+              ),
             ],
           ),
           if (method.description.isNotEmpty) ...[
-            const SizedBox(height: 8),
+            SizedBox(height: _smallSpacing),
             Text(
               method.description,
               style: theme.textTheme.bodySmall?.copyWith(
@@ -438,7 +431,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
             ),
           ],
           if (method.parameters.isNotEmpty) ...[
-            const SizedBox(height: 8),
+            SizedBox(height: _smallSpacing),
             Text(
               'Parámetros: ${method.parameters.join(', ')}',
               style: theme.textTheme.bodySmall?.copyWith(
@@ -456,8 +449,7 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
 
   Widget _buildCodeSection(ThemeData theme, String codeExample) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(_itemSpacing),
       decoration: BoxDecoration(
         color: AppColors.softGray,
         borderRadius: BorderRadius.circular(12),
@@ -497,12 +489,12 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(_contentPadding),
           ),
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(_smallSpacing),
         decoration: BoxDecoration(
           color: AppColors.white.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(6),

@@ -7,9 +7,6 @@ class BadgeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'Badges',
-      componentDescription: 'Los componentes Badge se utilizan para mostrar información adicional como notificaciones, estados, o contadores. Pueden aparecer como pequeños indicadores sobre otros elementos.',
-      
       examples: [
         ComponentExample(
           id: 'basic_badges',

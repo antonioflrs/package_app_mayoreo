@@ -7,8 +7,6 @@ class ComponentCardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'ComponentCard',
-      componentDescription: 'Card reutilizable para listar componentes en grillas o listas, replicando el estilo usado en la pantalla de resumen de componentes.',
       examples: [
         ComponentExample(
           id: 'basic_card',

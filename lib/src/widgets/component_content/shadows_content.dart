@@ -1,442 +1,302 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
-import 'package:flutter/services.dart';
 
 class ShadowsContent extends StatelessWidget {
   const ShadowsContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
-    
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildMainTitle(theme, 'Sombras'),
-          const SizedBox(height: 8),
-          _buildSubtitle(theme, 'Sistema de sombras y elevación para crear profundidad visual en la interfaz'),
-          
-          const SizedBox(height: 32),
-          _buildUsageSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildImportSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildTokensSection(theme, isMobile),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMainTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.displaySmall?.copyWith(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-      ),
-    );
-  }
-
-  Widget _buildSubtitle(ThemeData theme, String subtitle) {
-    return Text(
-      subtitle,
-      style: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-        fontSize: 16,
-      ),
-    );
-  }
-
-  Widget _buildUsageSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Uso'),
-        const SizedBox(height: 16),
-        Text(
-          'Las sombras se aplican mediante BoxShadow siguiendo esta sintaxis:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+    return ComponentScreenTemplate(
+      componentTitle: 'Sombras',
+      componentDescription: 'Sistema de sombras y elevación para crear profundidad visual en la interfaz',
+      examples: [
+        ComponentExample(
+          id: 'shadows-usage',
+          title: 'Uso de Sombras',
+          description: 'Las sombras se aplican mediante BoxShadow siguiendo esta sintaxis',
+          previewWidget: _buildShadowsUsagePreview(),
+          codeExample: _getShadowsUsageCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Sintaxis\nBoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
-          isMobile,
+        ComponentExample(
+          id: 'shadows-import',
+          title: 'Importación',
+          description: 'Los valores de sombra están disponibles como constantes en el paquete',
+          previewWidget: _buildShadowsImportPreview(),
+          codeExample: _getShadowsImportCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Ejemplo\nContainer(\n  decoration: BoxDecoration(\n    boxShadow: [\n      BoxShadow(\n        color: AppColors.pureBlack.withValues(alpha: 0.1),\n        blurRadius: 4,\n        offset: Offset(0, 2),\n      ),\n    ],\n  ),\n  child: Text(\'Mi elemento\'),\n)',
-          isMobile,
+        ComponentExample(
+          id: 'shadows-tokens',
+          title: 'Tokens de Sombras',
+          description: 'Lista completa de valores de sombra disponibles en el sistema',
+          previewWidget: _buildShadowsTokensPreview(),
+          codeExample: _getShadowsTokensCode(),
         ),
       ],
-    );
-  }
-
-  Widget _buildImportSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Importación'),
-        const SizedBox(height: 16),
-        Text(
-          'Los valores de sombra están disponibles como constantes en el paquete:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+      properties: [
+        ComponentProperty(
+          name: 'color',
+          type: 'Color',
+          description: 'Color de la sombra (usar AppColors.pureBlack con alpha)',
+          required: true,
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Usar valores de sombra\nBoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
-          isMobile,
+        ComponentProperty(
+          name: 'blurRadius',
+          type: 'double',
+          description: 'Radio de desenfoque de la sombra',
+          required: true,
+        ),
+        ComponentProperty(
+          name: 'offset',
+          type: 'Offset',
+          description: 'Desplazamiento de la sombra (x, y)',
+          required: true,
+        ),
+        ComponentProperty(
+          name: 'spreadRadius',
+          type: 'double',
+          description: 'Radio de expansión de la sombra (opcional)',
+          required: false,
+          defaultValue: '0.0',
         ),
       ],
+      usageNotes: 'Las sombras se organizan en niveles de elevación: small (4px), medium (8px), large (16px) y extra-large (24px). Usa sombras pequeñas para elementos cercanos y sombras grandes para elementos elevados. Mantén consistencia en la dirección de las sombras (generalmente hacia abajo).',
     );
   }
 
-  Widget _buildTokensSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Tokens'),
-        const SizedBox(height: 16),
-        _buildShadowTokens(theme, isMobile),
-      ],
-    );
-  }
-
-  Widget _buildSectionTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-        fontSize: 24,
-      ),
-    );
-  }
-
-  Widget _buildCodeBlock(ThemeData theme, String code, bool isMobile) {
+  Widget _buildShadowsUsagePreview() {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: AppColors.backCards,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Código',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              Builder(
-                builder: (context) => IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: code));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Código copiado al portapapeles'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.copy, size: 16),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  iconSize: 16,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          SelectableText(
-            code,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontFamily: 'RobotoMono',
-              fontSize: isMobile ? 12 : 14,
-              color: theme.colorScheme.onSurface,
+          Text(
+            'Sintaxis:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildShadowTokens(ThemeData theme, bool isMobile) {
-    final shadowTokens = [
-      {
-        'token': 'sm',
-        'valor': '0 1px 2px 0',
-        'descripcion': 'Sombra pequeña para elementos sutiles',
-        'shadow': BoxShadow(
-          color: AppColors.pureBlack.withValues(alpha: 0.05),
-          blurRadius: 2,
-          offset: const Offset(0, 1),
-        ),
-      },
-      {
-        'token': 'md',
-        'valor': '0 4px 6px -1px',
-        'descripcion': 'Sombra mediana para tarjetas y contenedores',
-        'shadow': BoxShadow(
-          color: AppColors.pureBlack.withValues(alpha: 0.1),
-          blurRadius: 6,
-          offset: const Offset(0, 4),
-        ),
-      },
-      {
-        'token': 'lg',
-        'valor': '0 10px 15px -3px',
-        'descripcion': 'Sombra grande para elementos elevados',
-        'shadow': BoxShadow(
-          color: AppColors.pureBlack.withValues(alpha: 0.1),
-          blurRadius: 15,
-          offset: const Offset(0, 10),
-        ),
-      },
-      {
-        'token': 'xl',
-        'valor': '0 20px 25px -5px',
-        'descripcion': 'Sombra extra grande para modales y overlays',
-        'shadow': BoxShadow(
-          color: AppColors.pureBlack.withValues(alpha: 0.1),
-          blurRadius: 25,
-          offset: const Offset(0, 20),
-        ),
-      },
-      {
-        'token': '2xl',
-        'valor': '0 25px 50px -12px',
-        'descripcion': 'Sombra máxima para elementos de máxima elevación',
-        'shadow': BoxShadow(
-          color: AppColors.pureBlack.withValues(alpha: 0.25),
-          blurRadius: 50,
-          offset: const Offset(0, 25),
-        ),
-      },
-    ];
-
-    if (isMobile) {
-      return _buildMobileShadowList(theme, shadowTokens);
-    } else {
-      return _buildDesktopShadowTable(theme, shadowTokens);
-    }
-  }
-
-  Widget _buildDesktopShadowTable(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
-      ),
-      child: Column(
-        children: [
-          // Header
+          const SizedBox(height: 8),
+          Text(
+            'BoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Ejemplo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.pureBlack.withValues(alpha: 0.1),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: const Text(
+              'Elemento con sombra',
+              style: TextStyle(
+                color: AppColors.black,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            child: Row(
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildShadowsImportPreview() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.softGray,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Importación automática:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.greenFree,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Uso directo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'BoxShadow(\n  color: AppColors.pureBlack.withValues(alpha: 0.1),\n  blurRadius: 4,\n  offset: Offset(0, 2),\n)',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.orangeBrand,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildShadowsTokensPreview() {
+    final sampleShadows = [
+      {'name': 'Small', 'shadow': BoxShadow(color: AppColors.pureBlack.withValues(alpha: 0.1), blurRadius: 4, offset: const Offset(0, 2))},
+      {'name': 'Medium', 'shadow': BoxShadow(color: AppColors.pureBlack.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 4))},
+      {'name': 'Large', 'shadow': BoxShadow(color: AppColors.pureBlack.withValues(alpha: 0.2), blurRadius: 16, offset: const Offset(0, 8))},
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Niveles de sombra:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 12),
+          ...sampleShadows.map((shadow) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    'Token',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                Text(
+                  shadow['name'] as String,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Valor',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [shadow['shadow'] as BoxShadow],
                   ),
-                ),
-                Expanded(
-                  flex: 3,
                   child: Text(
-                    'Descripción',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Muestra',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
+                    'Sombra ${shadow['name']}',
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          // Rows
-          ...tokens.map((token) => _buildShadowTableRow(theme, token)),
+          )),
         ],
       ),
     );
   }
 
-  Widget _buildMobileShadowList(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Column(
-      children: tokens.map((token) => _buildMobileShadowCard(theme, token)).toList(),
-    );
+  String _getShadowsUsageCode() {
+    return '''// Sintaxis
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.1),
+  blurRadius: 4,
+  offset: Offset(0, 2),
+)
+
+// Ejemplo
+Container(
+  decoration: BoxDecoration(
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.pureBlack.withValues(alpha: 0.1),
+        blurRadius: 4,
+        offset: Offset(0, 2),
+      ),
+    ],
+  ),
+  child: Text('Mi elemento'),
+)''';
   }
 
-  Widget _buildShadowTableRow(ThemeData theme, Map<String, dynamic> token) {
-    final shadow = token['shadow'] as BoxShadow;
-    
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: theme.colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              token['token'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              token['valor'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              token['descripcion'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              height: 40,
-              child: Center(
-                child: SizedBox(
-                  width: 60,
-                  height: 30,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(4),
-                      boxShadow: [shadow],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getShadowsImportCode() {
+    return '''import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+
+// Usar valores de sombra
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.1),
+  blurRadius: 4,
+  offset: Offset(0, 2),
+)''';
   }
 
-  Widget _buildMobileShadowCard(ThemeData theme, Map<String, dynamic> token) {
-    final shadow = token['shadow'] as BoxShadow;
-    
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                token['token'] as String,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontFamily: 'RobotoMono',
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Container(
-                width: 50,
-                height: 30,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surface,
-                  borderRadius: BorderRadius.circular(4),
-                  boxShadow: [shadow],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            token['valor'] as String,
-            style: theme.textTheme.bodySmall?.copyWith(
-              fontFamily: 'RobotoMono',
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            token['descripcion'] as String,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
-    );
+  String _getShadowsTokensCode() {
+    return '''// Sombras pequeñas (elementos cercanos)
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.1),
+  blurRadius: 4,
+  offset: Offset(0, 2),
+)
+
+// Sombras medianas (elementos intermedios)
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.15),
+  blurRadius: 8,
+  offset: Offset(0, 4),
+)
+
+// Sombras grandes (elementos elevados)
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.2),
+  blurRadius: 16,
+  offset: Offset(0, 8),
+)
+
+// Sombras extra grandes (modales, overlays)
+BoxShadow(
+  color: AppColors.pureBlack.withValues(alpha: 0.25),
+  blurRadius: 24,
+  offset: Offset(0, 12),
+)''';
   }
 } 

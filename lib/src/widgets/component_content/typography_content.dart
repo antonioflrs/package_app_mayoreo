@@ -1,177 +1,175 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 class TypographyContent extends StatelessWidget {
   const TypographyContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
-    
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildMainTitle(theme, 'Tipografía'),
-          const SizedBox(height: 8),
-          _buildSubtitle(theme, 'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara'),
-          
-          const SizedBox(height: 32),
-          _buildUsageSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildImportSection(theme, isMobile),
-          
-          const SizedBox(height: 32),
-          _buildTokensSection(theme, isMobile),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMainTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.displaySmall?.copyWith(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-      ),
-    );
-  }
-
-  Widget _buildSubtitle(ThemeData theme, String subtitle) {
-    return Text(
-      subtitle,
-      style: theme.textTheme.bodyLarge?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-        fontSize: 16,
-      ),
-    );
-  }
-
-  Widget _buildUsageSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Uso'),
-        const SizedBox(height: 16),
-        Text(
-          'Los estilos de tipografía se aplican mediante el ThemeData siguiendo esta sintaxis:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+    return ComponentScreenTemplate(
+      componentTitle: 'Tipografía',
+      componentDescription: 'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara',
+      examples: [
+        ComponentExample(
+          id: 'typography-usage',
+          title: 'Uso de Tipografía',
+          description: 'Los estilos de tipografía se aplican mediante el ThemeData siguiendo esta sintaxis',
+          previewWidget: _buildTypographyUsagePreview(),
+          codeExample: _getTypographyUsageCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Sintaxis\nTheme.of(context).textTheme.[estilo]',
-          isMobile,
+        ComponentExample(
+          id: 'typography-import',
+          title: 'Importación',
+          description: 'La tipografía se configura automáticamente al usar el tema del paquete',
+          previewWidget: _buildTypographyImportPreview(),
+          codeExample: _getTypographyImportCode(),
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          '// Ejemplo\nText(\n  \'Mi texto\',\n  style: theme.textTheme.headlineLarge,\n)',
-          isMobile,
+        ComponentExample(
+          id: 'typography-tokens',
+          title: 'Tokens de Tipografía',
+          description: 'Lista completa de estilos de tipografía disponibles en el sistema',
+          previewWidget: _buildTypographyTokensPreview(),
+          codeExample: _getTypographyTokensCode(),
         ),
       ],
-    );
-  }
-
-  Widget _buildImportSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Importación'),
-        const SizedBox(height: 16),
-        Text(
-          'La tipografía se configura automáticamente al usar el tema del paquete:',
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+      properties: [
+        ComponentProperty(
+          name: 'displayLarge',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos principales muy grandes',
+          required: false,
         ),
-        const SizedBox(height: 16),
-        _buildCodeBlock(
-          theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// El tema incluye la tipografía automáticamente\nMaterialApp(\n  theme: AppTheme.lightTheme,\n  // ...\n)',
-          isMobile,
+        ComponentProperty(
+          name: 'displayMedium',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos principales medianos',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'displaySmall',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos principales pequeños',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'headlineLarge',
+          type: 'TextStyle',
+          description: 'Estilo de texto para encabezados grandes',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'headlineMedium',
+          type: 'TextStyle',
+          description: 'Estilo de texto para encabezados medianos',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'headlineSmall',
+          type: 'TextStyle',
+          description: 'Estilo de texto para encabezados pequeños',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'titleLarge',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos de sección grandes',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'titleMedium',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos de sección medianos',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'titleSmall',
+          type: 'TextStyle',
+          description: 'Estilo de texto para títulos de sección pequeños',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'bodyLarge',
+          type: 'TextStyle',
+          description: 'Estilo de texto para contenido principal grande',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'bodyMedium',
+          type: 'TextStyle',
+          description: 'Estilo de texto para contenido principal mediano',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'bodySmall',
+          type: 'TextStyle',
+          description: 'Estilo de texto para contenido principal pequeño',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'labelLarge',
+          type: 'TextStyle',
+          description: 'Estilo de texto para etiquetas grandes',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'labelMedium',
+          type: 'TextStyle',
+          description: 'Estilo de texto para etiquetas medianas',
+          required: false,
+        ),
+        ComponentProperty(
+          name: 'labelSmall',
+          type: 'TextStyle',
+          description: 'Estilo de texto para etiquetas pequeñas',
+          required: false,
         ),
       ],
+      usageNotes: 'La tipografía utiliza la fuente Inter con pesos variables (wght) de 100 a 900. Los estilos se organizan en jerarquías: display (títulos principales), headline (encabezados), title (títulos de sección), body (contenido principal) y label (etiquetas). Usa los estilos apropiados para mantener la consistencia visual.',
     );
   }
 
-  Widget _buildTokensSection(ThemeData theme, bool isMobile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSectionTitle(theme, 'Tokens'),
-        const SizedBox(height: 16),
-        _buildTypographyTokens(theme, isMobile),
-      ],
-    );
-  }
-
-  Widget _buildSectionTitle(ThemeData theme, String title) {
-    return Text(
-      title,
-      style: theme.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-        fontSize: 24,
-      ),
-    );
-  }
-
-  Widget _buildCodeBlock(ThemeData theme, String code, bool isMobile) {
+  Widget _buildTypographyUsagePreview() {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: AppColors.backCards,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Código',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              Builder(
-                builder: (context) => IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: code));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Código copiado al portapapeles'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.copy, size: 16),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  iconSize: 16,
-                ),
-              ),
-            ],
+          Text(
+            'Sintaxis:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
           ),
           const SizedBox(height: 8),
-          SelectableText(
-            code,
-            style: theme.textTheme.bodyMedium?.copyWith(
+          Text(
+            'Theme.of(context).textTheme.[estilo]',
+            style: TextStyle(
               fontFamily: 'RobotoMono',
-              fontSize: isMobile ? 12 : 14,
-              color: theme.colorScheme.onSurface,
+              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Ejemplo:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Mi texto',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: AppColors.orangeBrand,
             ),
           ),
         ],
@@ -179,283 +177,156 @@ class TypographyContent extends StatelessWidget {
     );
   }
 
-  Widget _buildTypographyTokens(ThemeData theme, bool isMobile) {
-    final typographyTokens = [
-      {
-        'category': 'Display',
-        'tokens': [
-          {'token': 'displayLarge', 'style': theme.textTheme.displayLarge, 'sample': 'Display Large'},
-          {'token': 'displayMedium', 'style': theme.textTheme.displayMedium, 'sample': 'Display Medium'},
-          {'token': 'displaySmall', 'style': theme.textTheme.displaySmall, 'sample': 'Display Small'},
-        ]
-      },
-      {
-        'category': 'Headline',
-        'tokens': [
-          {'token': 'headlineLarge', 'style': theme.textTheme.headlineLarge, 'sample': 'Headline Large'},
-          {'token': 'headlineMedium', 'style': theme.textTheme.headlineMedium, 'sample': 'Headline Medium'},
-          {'token': 'headlineSmall', 'style': theme.textTheme.headlineSmall, 'sample': 'Headline Small'},
-        ]
-      },
-      {
-        'category': 'Title',
-        'tokens': [
-          {'token': 'titleLarge', 'style': theme.textTheme.titleLarge, 'sample': 'Title Large'},
-          {'token': 'titleMedium', 'style': theme.textTheme.titleMedium, 'sample': 'Title Medium'},
-          {'token': 'titleSmall', 'style': theme.textTheme.titleSmall, 'sample': 'Title Small'},
-        ]
-      },
-      {
-        'category': 'Body',
-        'tokens': [
-          {'token': 'bodyLarge', 'style': theme.textTheme.bodyLarge, 'sample': 'Body Large Text'},
-          {'token': 'bodyMedium', 'style': theme.textTheme.bodyMedium, 'sample': 'Body Medium Text'},
-          {'token': 'bodySmall', 'style': theme.textTheme.bodySmall, 'sample': 'Body Small Text'},
-        ]
-      },
-      {
-        'category': 'Label',
-        'tokens': [
-          {'token': 'labelLarge', 'style': theme.textTheme.labelLarge, 'sample': 'Label Large'},
-          {'token': 'labelMedium', 'style': theme.textTheme.labelMedium, 'sample': 'Label Medium'},
-          {'token': 'labelSmall', 'style': theme.textTheme.labelSmall, 'sample': 'Label Small'},
-        ]
-      },
+  Widget _buildTypographyImportPreview() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.softGray,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Configuración automática:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.greenFree,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'El tema incluye la tipografía automáticamente:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'MaterialApp(theme: AppTheme.lightTheme)',
+            style: TextStyle(
+              fontFamily: 'RobotoMono',
+              fontSize: 12,
+              color: AppColors.orangeBrand,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTypographyTokensPreview() {
+    final sampleStyles = [
+      {'name': 'displayLarge', 'style': TextStyle(fontSize: 57, fontWeight: FontWeight.w400)},
+      {'name': 'headlineLarge', 'style': TextStyle(fontSize: 32, fontWeight: FontWeight.w400)},
+      {'name': 'titleLarge', 'style': TextStyle(fontSize: 22, fontWeight: FontWeight.w400)},
+      {'name': 'bodyLarge', 'style': TextStyle(fontSize: 16, fontWeight: FontWeight.w400)},
+      {'name': 'labelMedium', 'style': TextStyle(fontSize: 12, fontWeight: FontWeight.w500)},
     ];
 
-    return Column(
-      children: typographyTokens.map((category) => _buildCategorySection(theme, category, isMobile)).toList(),
-    );
-  }
-
-  Widget _buildCategorySection(ThemeData theme, Map<String, dynamic> category, bool isMobile) {
-    final categoryName = category['category'] as String;
-    final tokens = category['tokens'] as List<Map<String, dynamic>>;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 24),
-        Text(
-          categoryName,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: theme.colorScheme.primary,
-          ),
-        ),
-        const SizedBox(height: 16),
-        if (isMobile)
-          _buildMobileTypographyList(theme, tokens)
-        else
-          _buildDesktopTypographyTable(theme, tokens),
-      ],
-    );
-  }
-
-  Widget _buildDesktopTypographyTable(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
-      ),
-      child: Column(
-        children: [
-          // Header
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Token',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    'Muestra',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Especificaciones',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Rows
-          ...tokens.map((token) => _buildTypographyTableRow(theme, token)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMobileTypographyList(ThemeData theme, List<Map<String, dynamic>> tokens) {
-    return Column(
-      children: tokens.map((token) => _buildMobileTypographyCard(theme, token)).toList(),
-    );
-  }
-
-  Widget _buildTypographyTableRow(ThemeData theme, Map<String, dynamic> token) {
-    final style = token['style'] as TextStyle?;
-    final sample = token['sample'] as String;
-    
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: theme.colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              token['token'] as String,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              sample,
-              style: style,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${style?.fontSize?.toStringAsFixed(0)}px',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'RobotoMono',
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                Text(
-                  _getFontWeightName(style?.fontWeight),
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'RobotoMono',
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMobileTypographyCard(ThemeData theme, Map<String, dynamic> token) {
-    final style = token['style'] as TextStyle?;
-    final sample = token['sample'] as String;
-    
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                token['token'] as String,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontFamily: 'RobotoMono',
-                  fontWeight: FontWeight.w600,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  '${style?.fontSize?.toStringAsFixed(0)}px',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.primary,
-                    fontFamily: 'RobotoMono',
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
           Text(
-            sample,
-            style: style,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Inter ${_getFontWeightName(style?.fontWeight)}',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              fontFamily: 'RobotoMono',
+            'Estilos disponibles:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
             ),
           ),
+          const SizedBox(height: 12),
+          ...sampleStyles.map((style) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Row(
+              children: [
+                Text(
+                  style['name'] as String,
+                  style: TextStyle(
+                    fontFamily: 'RobotoMono',
+                    fontSize: 12,
+                    color: AppColors.black,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    'Texto de ejemplo',
+                    style: (style['style'] as TextStyle).copyWith(
+                      color: AppColors.orangeBrand,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
         ],
       ),
     );
   }
 
-  String _getFontWeightName(FontWeight? weight) {
-    if (weight == null) return 'Regular';
-    switch (weight) {
-      case FontWeight.w300:
-        return 'Light';
-      case FontWeight.w400:
-        return 'Regular';
-      case FontWeight.w500:
-        return 'Medium';
-      case FontWeight.w600:
-        return 'SemiBold';
-      case FontWeight.w700:
-        return 'Bold';
-      default:
-        return 'Regular';
-    }
+  String _getTypographyUsageCode() {
+    return '''// Sintaxis
+Theme.of(context).textTheme.[estilo]
+
+// Ejemplo
+Text(
+  'Mi texto',
+  style: theme.textTheme.headlineLarge,
+)''';
+  }
+
+  String _getTypographyImportCode() {
+    return '''import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+
+// El tema incluye la tipografía automáticamente
+MaterialApp(
+  theme: AppTheme.lightTheme,
+  // ...
+)''';
+  }
+
+  String _getTypographyTokensCode() {
+    return '''// Estilos de display (títulos principales)
+theme.textTheme.displayLarge    // 57px, w400
+theme.textTheme.displayMedium   // 45px, w400
+theme.textTheme.displaySmall    // 36px, w400
+
+// Estilos de headline (encabezados)
+theme.textTheme.headlineLarge   // 32px, w400
+theme.textTheme.headlineMedium  // 28px, w400
+theme.textTheme.headlineSmall   // 24px, w400
+
+// Estilos de title (títulos de sección)
+theme.textTheme.titleLarge      // 22px, w400
+theme.textTheme.titleMedium     // 16px, w500
+theme.textTheme.titleSmall      // 14px, w500
+
+// Estilos de body (contenido principal)
+theme.textTheme.bodyLarge       // 16px, w400
+theme.textTheme.bodyMedium      // 14px, w400
+theme.textTheme.bodySmall       // 12px, w400
+
+// Estilos de label (etiquetas)
+theme.textTheme.labelLarge      // 14px, w500
+theme.textTheme.labelMedium     // 12px, w500
+theme.textTheme.labelSmall      // 11px, w500''';
   }
 } 

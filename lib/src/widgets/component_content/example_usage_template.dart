@@ -9,9 +9,6 @@ class ExampleUsageTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
-      componentTitle: 'Ejemplo de Componente',
-      componentDescription: 'Este es un ejemplo de cómo usar el ComponentScreenTemplate para mostrar información completa de cualquier componente de la aplicación.',
-      
       // Ejemplos del componente
       examples: [
         ComponentExample(
