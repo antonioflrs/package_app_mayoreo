@@ -53,14 +53,14 @@ class ComponentDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               _buildComponentIcon(),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   component.title,
@@ -73,18 +73,18 @@ class ComponentDetailScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Text(
             component.description,
             style: const TextStyle(
               fontSize: 16,
               color: AppColors.darkGray,
-              height: 1.5,
+              height: 1.4,
             ),
           ),
           const SizedBox(height: 20),
           _buildCategoryBadge(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Row(
             children: [
               StatusBadge(
@@ -115,7 +115,7 @@ class ComponentDetailScreen extends StatelessWidget {
       width: 48,
       height: 48,
       decoration: BoxDecoration(
-        color: AppColors.softGray,
+        color: AppColors.backCards,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
@@ -135,7 +135,7 @@ class ComponentDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: categoryColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: categoryColor.withValues(alpha: 0.3),
           width: 1,
@@ -155,7 +155,7 @@ class ComponentDetailScreen extends StatelessWidget {
   Widget _buildPlaceholderContent() {
     return Container(
       margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),

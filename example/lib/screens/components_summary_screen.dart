@@ -41,7 +41,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: const BorderRadius.only(
@@ -74,7 +74,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
                   size: 24,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,16 +82,16 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
                     const Text(
                       'Biblioteca de Componentes',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: AppColors.black,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 1),
                     Text(
-                      'Explora todos los componentes del sistema de diseño',
+                      'Diseñados para el sistema App Mayoreo',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: AppColors.darkGray,
                         height: 1.4,
                       ),
@@ -131,7 +131,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
 
   Widget _buildCategoryFilter() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 8),
       child: Row(
         children: [
           _buildFilterChip(
@@ -197,7 +197,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       child: _buildMasonryLayout(components),
     );
   }

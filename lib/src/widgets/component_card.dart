@@ -3,7 +3,7 @@ import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
 
 /// Card reutilizable para listar componentes del Design System.
 /// Estructura optimizada y configurable para evitar dobles contenedores y overflows.
-class ComponentCard extends StatelessWidget {
+class ComponentCard extends StatefulWidget {
   final NavigationItem component;
   final VoidCallback? onTap;
   final String ctaText;
@@ -23,11 +23,9 @@ class ComponentCard extends StatelessWidget {
   final double titleFontSize;
   final FontWeight titleFontWeight;
   final Color titleColor;
-  final int titleMaxLines;
   final double descriptionFontSize;
   final Color descriptionColor;
   final double descriptionLineHeight;
-  final int descriptionMaxLines;
   final double spacingBetweenElements;
   final double buttonHeight;
   final double buttonBorderRadius;
@@ -35,6 +33,7 @@ class ComponentCard extends StatelessWidget {
   final Color buttonTextColor;
   final double buttonFontSize;
   final FontWeight buttonFontWeight;
+  final double cardHeight;
 
   const ComponentCard({
     super.key,
@@ -50,52 +49,58 @@ class ComponentCard extends StatelessWidget {
     this.cardShadowBlur = 8.0,
     this.cardShadowOffset = const Offset(0, 2),
     this.cardShadowColor = AppColors.black,
-    this.cardPadding = 10.0,
-    this.iconSize = 40.0,
+    this.cardPadding = 16.0,
+    this.iconSize = 35.0,
     this.iconBorderRadius = 10.0,
-    this.titleFontSize = 16.0,
+    this.titleFontSize = 18.0,
     this.titleFontWeight = FontWeight.w600,
     this.titleColor = AppColors.black,
-    this.titleMaxLines = 2,
     this.descriptionFontSize = 14.0,
     this.descriptionColor = AppColors.darkGray,
     this.descriptionLineHeight = 1.4,
-    this.descriptionMaxLines = 3,
-    this.spacingBetweenElements = 10.0,
-    this.buttonHeight = 36.0,
+    this.spacingBetweenElements = 12.0,
+    this.buttonHeight = 40.0,
     this.buttonBorderRadius = 8.0,
     this.buttonBackgroundColor = AppColors.orangeBrand,
     this.buttonTextColor = AppColors.white,
-    this.buttonFontSize = 12.0,
+    this.buttonFontSize = 14.0,
     this.buttonFontWeight = FontWeight.w600,
+    this.cardHeight = 210.0,
   });
+
+  @override
+  State<ComponentCard> createState() => _ComponentCardState();
+}
+
+class _ComponentCardState extends State<ComponentCard> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Container(
+        height: widget.cardHeight,
         decoration: BoxDecoration(
-          color: cardBackgroundColor,
-          borderRadius: BorderRadius.circular(cardBorderRadius),
+          color: widget.cardBackgroundColor,
+          borderRadius: BorderRadius.circular(widget.cardBorderRadius),
           border: Border.all(
-            color: cardBorderColor.withValues(alpha: 0.2),
-            width: cardBorderWidth,
+            color: widget.cardBorderColor.withOpacity(0.2),
+            width: widget.cardBorderWidth,
           ),
           boxShadow: [
             BoxShadow(
-              color: cardShadowColor.withValues(alpha: 0.05),
-              blurRadius: cardShadowBlur,
-              offset: cardShadowOffset,
+              color: widget.cardShadowColor.withOpacity(0.05),
+              blurRadius: widget.cardShadowBlur,
+              offset: widget.cardShadowOffset,
             ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(cardPadding),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
             children: [
               // Header con icono y badge
               Row(
@@ -106,60 +111,72 @@ class ComponentCard extends StatelessWidget {
                 ],
               ),
               
-              SizedBox(height: spacingBetweenElements),
+              SizedBox(height: 8), // Gap reducido entre icono y título
               
-              // Título del componente
-              Flexible(
-                child: Text(
-                  component.title,
-                  style: TextStyle(
-                    fontSize: titleFontSize,
-                    fontWeight: titleFontWeight,
-                    color: titleColor,
-                  ),
-                  maxLines: titleMaxLines,
-                  overflow: TextOverflow.ellipsis,
+              // Título del componente - UNA LÍNEA SIN ANIMACIÓN
+              Text(
+                widget.component.title,
+                style: TextStyle(
+                  fontSize: widget.titleFontSize,
+                  fontWeight: widget.titleFontWeight,
+                  color: widget.titleColor,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               
-              SizedBox(height: spacingBetweenElements),
+              SizedBox(height: 6), // Gap reducido entre título y descripción
               
-              // Descripción del componente
-              Flexible(
-                child: Text(
-                  component.description,
-                  style: TextStyle(
-                    fontSize: descriptionFontSize,
-                    color: descriptionColor,
-                    height: descriptionLineHeight,
-                  ),
-                  maxLines: descriptionMaxLines,
-                  overflow: TextOverflow.ellipsis,
+              // Descripción del componente - MÁXIMO 2 LÍNEAS CON MÁS ESPACIO
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.component.description,
+                      style: TextStyle(
+                        fontSize: widget.descriptionFontSize,
+                        color: widget.descriptionColor,
+                        height: widget.descriptionLineHeight,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    
+                    // Espacio adicional para la descripción
+                    const Spacer(),
+                    
+                    // Indicador de información faltante
+                    if (_hasTruncatedContent()) ...[
+                      SizedBox(height: 8),
+                      _buildExpandableIndicator(),
+                    ],
+                  ],
                 ),
               ),
 
-              // Botón CTA (opcional)
-              if (showCtaButton) ...[
-                SizedBox(height: spacingBetweenElements + 8),
+              // Botón CTA
+              if (widget.showCtaButton) ...[
+                SizedBox(height: widget.spacingBetweenElements),
                 SizedBox(
                   width: double.infinity,
-                  height: buttonHeight,
+                  height: widget.buttonHeight,
                   child: ElevatedButton(
-                    onPressed: onTap,
+                    onPressed: widget.onTap,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: buttonBackgroundColor,
-                      foregroundColor: buttonTextColor,
+                      backgroundColor: widget.buttonBackgroundColor,
+                      foregroundColor: widget.buttonTextColor,
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(buttonBorderRadius),
+                        borderRadius: BorderRadius.circular(widget.buttonBorderRadius),
                       ),
                       elevation: 0,
                     ),
                     child: Text(
-                      ctaText,
+                      widget.ctaText,
                       style: TextStyle(
-                        fontSize: buttonFontSize,
-                        fontWeight: buttonFontWeight,
+                        fontSize: widget.buttonFontSize,
+                        fontWeight: widget.buttonFontWeight,
                       ),
                     ),
                   ),
@@ -172,27 +189,94 @@ class ComponentCard extends StatelessWidget {
     );
   }
 
+  bool _hasTruncatedContent() {
+    // Verificar si el título o descripción se están truncando
+    final titleTextPainter = TextPainter(
+      text: TextSpan(
+        text: widget.component.title,
+        style: TextStyle(
+          fontSize: widget.titleFontSize,
+          fontWeight: widget.titleFontWeight,
+        ),
+      ),
+      maxLines: 1,
+      textDirection: TextDirection.ltr,
+    );
+    titleTextPainter.layout();
+    
+    final descriptionTextPainter = TextPainter(
+      text: TextSpan(
+        text: widget.component.description,
+        style: TextStyle(
+          fontSize: widget.descriptionFontSize,
+          height: widget.descriptionLineHeight,
+        ),
+      ),
+      maxLines: 2,
+      textDirection: TextDirection.ltr,
+    );
+    descriptionTextPainter.layout();
+    
+    return titleTextPainter.didExceedMaxLines || descriptionTextPainter.didExceedMaxLines;
+  }
+
+  Widget _buildExpandableIndicator() {
+    return GestureDetector(
+      onTap: _toggleExpanded,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                 decoration: BoxDecoration(
+           color: AppColors.orangeBrand.withOpacity(0.1),
+           borderRadius: BorderRadius.circular(12),
+           border: Border.all(
+             color: AppColors.orangeBrand.withOpacity(0.3),
+             width: 1,
+           ),
+         ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              _isExpanded ? Icons.expand_less : Icons.expand_more,
+              size: 12,
+              color: AppColors.orangeBrand,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              _isExpanded ? 'Menos' : 'Más info',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: AppColors.orangeBrand,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildComponentIcon() {
-    final bool isGuide = component.category == NavigationCategory.designGuides;
+    final bool isGuide = widget.component.category == NavigationCategory.designGuides;
     final Color accent = isGuide ? AppColors.orangeBrand : AppColors.greenFree;
 
     return Container(
-      width: iconSize,
-      height: iconSize,
-      decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(iconBorderRadius),
-      ),
+      width: widget.iconSize,
+      height: widget.iconSize,
+             decoration: BoxDecoration(
+         color: accent.withOpacity(0.1),
+         borderRadius: BorderRadius.circular(widget.iconBorderRadius),
+       ),
       child: Center(
-        child: component.iconType == IconType.svg && component.svgIcon != null
+        child: widget.component.iconType == IconType.svg && widget.component.svgIcon != null
             ? SafeSvgIcon(
-                iconPath: component.svgIcon!,
-                height: iconSize * 0.5, // 50% del tamaño del contenedor
+                iconPath: widget.component.svgIcon!,
+                height: widget.iconSize * 0.5,
                 color: accent,
               )
             : Icon(
-                component.icon ?? Icons.widgets, 
-                size: iconSize * 0.5, // 50% del tamaño del contenedor
+                widget.component.icon ?? Icons.widgets, 
+                size: widget.iconSize * 0.5,
                 color: accent
               ),
       ),
@@ -200,25 +284,31 @@ class ComponentCard extends StatelessWidget {
   }
 
   Widget _buildCategoryBadge() {
-    final bool isGuide = component.category == NavigationCategory.designGuides;
+    final bool isGuide = widget.component.category == NavigationCategory.designGuides;
     final String categoryText = isGuide ? 'Guía' : 'UI';
     final Color accent = isGuide ? AppColors.orangeBrand : AppColors.greenFree;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1),
-      ),
+             decoration: BoxDecoration(
+         color: accent.withOpacity(0.1),
+         borderRadius: BorderRadius.circular(12),
+         border: Border.all(color: accent.withOpacity(0.3), width: 1),
+       ),
       child: Text(
         categoryText,
         style: TextStyle(
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: FontWeight.w600,
           color: accent,
         ),
       ),
     );
+  }
+
+  void _toggleExpanded() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
   }
 }

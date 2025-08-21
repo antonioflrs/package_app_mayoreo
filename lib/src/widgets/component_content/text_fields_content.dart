@@ -32,7 +32,7 @@ class _TextFieldsContentState extends State<TextFieldsContent> {
         children: [
           _buildMainTitle(theme, 'Campos de Texto'),
           const SizedBox(height: 8),
-          _buildSubtitle(theme, 'Sistema de campos de texto para entrada de datos del usuario con validación y estilos consistentes'),
+          _buildSubtitle(theme, 'Sistema de campos de texto personalizado con comportamiento de etiqueta flotante y estilos consistentes'),
           
           const SizedBox(height: 32),
           _buildUsageSection(theme, isMobile),
@@ -74,7 +74,7 @@ class _TextFieldsContentState extends State<TextFieldsContent> {
         _buildSectionTitle(theme, 'Uso'),
         const SizedBox(height: 16),
         Text(
-          'Los campos de texto se implementan mediante el widget AppTextField siguiendo esta sintaxis:',
+          'Los campos de texto se implementan mediante el widget CustomTextInput siguiendo esta sintaxis:',
           style: theme.textTheme.bodyLarge?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
           ),
@@ -82,13 +82,13 @@ class _TextFieldsContentState extends State<TextFieldsContent> {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Sintaxis básica\nAppTextField(\n  labelText: \'Etiqueta\',\n  hintText: \'Texto de ayuda\',\n)',
+          '// Sintaxis básica\nCustomTextInput(\n  hintText: \'Texto de ayuda\',\n)',
           isMobile,
         ),
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          '// Ejemplo con validación\nAppTextField(\n  controller: controller,\n  labelText: \'Email\',\n  validator: (value) {\n    if (value?.isEmpty ?? true) {\n      return \'Campo requerido\';\n    }\n    return null;\n  },\n)',
+          '// Ejemplo con controlador\nCustomTextInput(\n  controller: controller,\n  hintText: \'Email\',\n  keyboardType: TextInputType.emailAddress,\n)',
           isMobile,
         ),
       ],
@@ -110,7 +110,7 @@ class _TextFieldsContentState extends State<TextFieldsContent> {
         const SizedBox(height: 16),
         _buildCodeBlock(
           theme,
-          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Luego usa AppTextField\nAppTextField(\n  labelText: \'Mi campo\',\n  hintText: \'Texto de ayuda\',\n)',
+          'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';\n\n// Luego usa CustomTextInput\nCustomTextInput(\n  hintText: \'Mi campo\',\n)',
           isMobile,
         ),
       ],
@@ -201,62 +201,52 @@ class _TextFieldsContentState extends State<TextFieldsContent> {
         'category': 'Tipos de Campos',
         'tokens': [
           {
-            'token': 'AppTextField',
-            'descripcion': 'Campo de texto básico',
-            'ejemplo': AppTextField(
-              labelText: 'Campo básico',
-              hintText: 'Escribe aquí...',
+            'token': 'CustomTextInput',
+            'descripcion': 'Campo de texto básico con etiqueta flotante',
+            'ejemplo': CustomTextInput(
+              hintText: 'Campo básico',
             ),
           },
           {
-            'token': 'AppTextField (con icono)',
-            'descripcion': 'Campo con icono prefijo',
-            'ejemplo': AppTextField(
-              labelText: 'Con icono',
-              hintText: 'Buscar...',
-              prefixIcon: const Icon(Icons.search),
+            'token': 'CustomTextInput (email)',
+            'descripcion': 'Campo para correo electrónico',
+            'ejemplo': CustomTextInput(
+              hintText: 'ejemplo@correo.com',
+              keyboardType: TextInputType.emailAddress,
             ),
           },
           {
-            'token': 'AppTextField (password)',
-            'descripcion': 'Campo de contraseña',
-            'ejemplo': AppTextField(
-              labelText: 'Contraseña',
-              hintText: 'Ingresa tu contraseña',
-              obscureText: true,
-              prefixIcon: const Icon(Icons.lock),
+            'token': 'CustomTextInput (con controlador)',
+            'descripcion': 'Campo con controlador personalizado',
+            'ejemplo': CustomTextInput(
+              hintText: 'Con controlador',
+              controller: _emailController,
             ),
           },
         ]
       },
       {
-        'category': 'Tamaños',
+        'category': 'Características',
         'tokens': [
           {
-            'token': 'AppTextFieldSize.small',
-            'descripcion': 'Tamaño pequeño',
-            'ejemplo': AppTextField(
-              labelText: 'Pequeño',
-              hintText: 'Tamaño small',
-              size: AppTextFieldSize.small,
+            'token': 'Etiqueta flotante',
+            'descripcion': 'La etiqueta aparece cuando el campo tiene foco o contenido',
+            'ejemplo': CustomTextInput(
+              hintText: 'Etiqueta flotante',
             ),
           },
           {
-            'token': 'AppTextFieldSize.medium',
-            'descripcion': 'Tamaño mediano (por defecto)',
-            'ejemplo': AppTextField(
-              labelText: 'Mediano',
-              hintText: 'Tamaño medium',
-              size: AppTextFieldSize.medium,
+            'token': 'Bordes redondeados',
+            'descripcion': 'Bordes con radio de 10px para un diseño moderno',
+            'ejemplo': CustomTextInput(
+              hintText: 'Bordes redondeados',
             ),
           },
           {
-            'token': 'AppTextFieldSize.large',
-            'descripcion': 'Tamaño grande',
-            'ejemplo': AppTextField(
-              labelText: 'Grande',
-              hintText: 'Tamaño large',
-              size: AppTextFieldSize.large,
+            'token': 'Estados de foco',
+            'descripcion': 'Cambio visual cuando el campo recibe foco',
+            'ejemplo': CustomTextInput(
+              hintText: 'Estados de foco',
             ),
           },
         ]

@@ -23,6 +23,16 @@ import '../widgets/component_content/content_app_bar_content.dart';
 import '../widgets/component_content/product_card_content.dart';
 import '../widgets/component_content/bienestar_banner_content.dart';
 import '../widgets/component_content/promotions_carousel_content.dart';
+import '../widgets/component_content/category_item_content.dart';
+import '../widgets/component_content/product_tabs_widget_content.dart';
+import '../widgets/component_content/expandable_menu_item_content.dart';
+import '../widgets/component_content/home_header_content.dart';
+import '../widgets/component_content/menu_lateral_content.dart';
+import '../widgets/component_content/presentation_selector_content.dart';
+import '../widgets/component_content/featured_reviews_widget_content.dart';
+import '../widgets/component_content/product_info_widget_content.dart';
+import '../widgets/component_content/rating_stars_content.dart';
+import '../widgets/component_content/favorite_icon_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -247,6 +257,86 @@ class DesignSystemData {
       icon: Icons.view_carousel,
       category: NavigationCategory.uiComponents,
       content: PromotionsCarouselContent(),
+    ),
+    NavigationItem.material(
+      id: 'category-item',
+      title: 'Category Item',
+      description: 'Elemento de categoría con tres variantes: básico, con icono y colorido',
+      icon: Icons.category,
+      category: NavigationCategory.uiComponents,
+      content: CategoryItemContent(),
+    ),
+    NavigationItem.material(
+      id: 'product-tabs-widget',
+      title: 'Product Tabs Widget',
+      description: 'Widget de pestañas de producto dinámico y personalizable',
+      icon: Icons.tab,
+      category: NavigationCategory.uiComponents,
+      content: ProductTabsWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'expandable-menu-item',
+      title: 'Expandable Menu Item',
+      description: 'Widget de menú expandible personalizable con subcategorías, colores editables e iconos Material',
+      icon: Icons.expand_more,
+      category: NavigationCategory.uiComponents,
+      content: ExpandableMenuItemContent(),
+    ),
+    NavigationItem.material(
+      id: 'home-header',
+      title: 'Home Header',
+      description: 'Widget de header personalizable para la pantalla de inicio con opciones de colores, iconos y acciones',
+      icon: Icons.view_headline,
+      category: NavigationCategory.uiComponents,
+      content: HomeHeaderContent(),
+    ),
+    NavigationItem.material(
+      id: 'menu-lateral',
+      title: 'Menu Lateral',
+      description: 'Widget de menú lateral personalizable con elementos expandibles, categorías y perfil de usuario',
+      icon: Icons.menu_open,
+      category: NavigationCategory.uiComponents,
+      content: MenuLateralContent(),
+    ),
+    NavigationItem.material(
+      id: 'presentation-selector',
+      title: 'Presentation Selector',
+      description: 'Widget personalizable para seleccionar tipo de presentación de producto con imagen, precios, descuentos y cápsulas',
+      icon: Icons.view_module,
+      category: NavigationCategory.uiComponents,
+      content: PresentationSelectorContent(),
+    ),
+    NavigationItem.material(
+      id: 'featured-reviews-widget',
+      title: 'Featured Reviews Widget',
+      description: 'Widget personalizable de reseñas destacadas con carrusel automático, estrellas y indicadores de página',
+      icon: Icons.star_rate,
+      category: NavigationCategory.uiComponents,
+      content: FeaturedReviewsWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'product-info-widget',
+      title: 'Product Info Widget',
+      description: 'Widget personalizable de información de producto con texto expandible, formato rico y efecto de gradiente',
+      icon: Icons.info_outline,
+      category: NavigationCategory.uiComponents,
+      content: ProductInfoWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'rating-stars',
+      title: 'Rating Stars',
+      description: 'Widget personalizable de estrellas de calificación con soporte para estrellas completas, medias y vacías',
+      icon: Icons.star,
+      category: NavigationCategory.uiComponents,
+      content: RatingStarsContent(),
+    ),
+    NavigationItem.material(
+      id: 'favorite-icon',
+      title: 'Favorite Icon',
+      description: 'Widget personalizable de icono de favorito con animación de escala y temas predefinidos',
+      icon: Icons.favorite,
+      category: NavigationCategory.uiComponents,
+      content: FavoriteIconContent(),
     ),
   ];
 

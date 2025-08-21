@@ -1,7 +1,0 @@
-dependency_overrides:
-  flutter_package_app_mayoreo:
-    path: ../
-  flutter_svg: ^2.0.10+1
-  vector_graphics: ^1.2.0
-  vector_graphics_codec: ^1.2.0
-  vector_graphics_compiler: ^1.2.0

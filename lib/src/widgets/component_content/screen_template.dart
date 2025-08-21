@@ -170,6 +170,8 @@ class _ComponentScreenTemplateState extends State<ComponentScreenTemplate> {
                 ),
               ],
               variant: TabVariant.underlined,
+              centerTabs: true,
+              fixedTabWidth: 120,
               onTabChanged: (tabId) {
                 setState(() {
                   _showCodeStates[example.id] = (tabId == 'code');

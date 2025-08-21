@@ -44,17 +44,17 @@ class _TabsContentState extends State<TabsContent> {
             tabs: [
               const TabItem(
                 id: 'info',
-                title: 'Información',
+                title: 'Tab #1',
                 isSelected: true,
               ),
               const TabItem(
                 id: 'config',
-                title: 'Configuración',
+                title: 'Tab #2',
                 isSelected: false,
               ),
               const TabItem(
                 id: 'help',
-                title: 'Ayuda',
+                title: 'Tab #3',
                 isSelected: false,
               ),
             ],

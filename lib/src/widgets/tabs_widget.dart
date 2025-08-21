@@ -44,6 +44,8 @@ class CustomTabsWidget extends StatelessWidget {
   final bool showAddButton;
   final VoidCallback? onAddTab;
   final String? addButtonTooltip;
+  final bool centerTabs;
+  final double? fixedTabWidth;
 
   const CustomTabsWidget({
     super.key,
@@ -55,40 +57,67 @@ class CustomTabsWidget extends StatelessWidget {
     this.showAddButton = false,
     this.onAddTab,
     this.addButtonTooltip,
+    this.centerTabs = false,
+    this.fixedTabWidth,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      child: Row(
-        children: [
-          // Tabs
-          ...tabs.map((tab) => _buildTab(tab)),
-          
-          // Spacing between tabs and add button
-          if (showAddButton && tabs.isNotEmpty)
-            SizedBox(width: spacing ?? 24),
-          
-          // Add button (optional)
-          if (showAddButton) _buildAddButton(),
-        ],
-      ),
+      child: centerTabs
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Tabs
+                ...tabs.map((tab) => _buildTab(tab)),
+                
+                // Spacing between tabs and add button
+                if (showAddButton && tabs.isNotEmpty)
+                  SizedBox(width: spacing ?? 24),
+                
+                // Add button (optional)
+                if (showAddButton) _buildAddButton(),
+              ],
+            )
+          : Row(
+              children: [
+                // Tabs
+                ...tabs.map((tab) => _buildTab(tab)),
+                
+                // Spacing between tabs and add button
+                if (showAddButton && tabs.isNotEmpty)
+                  SizedBox(width: spacing ?? 24),
+                
+                // Add button (optional)
+                if (showAddButton) _buildAddButton(),
+              ],
+            ),
     );
   }
 
   Widget _buildTab(TabItem tab) {
+    Widget tabWidget = _TabItemWidget(
+      tab: tab,
+      variant: variant,
+      onTap: () => onTabChanged?.call(tab.id),
+    );
+
+    // Aplicar ancho fijo si está especificado
+    if (fixedTabWidth != null) {
+      tabWidget = SizedBox(
+        width: fixedTabWidth,
+        child: tabWidget,
+      );
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         right: tabs.indexOf(tab) < tabs.length - 1 
             ? (spacing ?? 24) 
             : 0,
       ),
-      child: _TabItemWidget(
-        tab: tab,
-        variant: variant,
-        onTap: () => onTabChanged?.call(tab.id),
-      ),
+      child: tabWidget,
     );
   }
 
@@ -147,9 +176,12 @@ class _TabItemWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: _getDecoration(isSelected),
-        child: Text(
-          tab.title,
-          style: _getTextStyle(theme, isSelected),
+        child: Center(
+          child: Text(
+            tab.title,
+            style: _getTextStyle(theme, isSelected),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
@@ -363,17 +395,17 @@ class _TabsVariantsShowcaseState extends State<TabsVariantsShowcase> {
   final List<TabItem> _tabs = [
     const TabItem(
       id: 'personal_info',
-      title: 'Información personal',
+      title: 'Tab #1',
       isSelected: true,
     ),
     const TabItem(
       id: 'payment_methods',
-      title: 'Métodos de pago',
+      title: 'Tab #2',
       isSelected: false,
     ),
     const TabItem(
       id: 'account_settings',
-      title: 'Configuración de cuenta',
+      title: 'Tab #3',
       isSelected: false,
     ),
   ];
@@ -430,16 +462,6 @@ class _TabsVariantsShowcaseState extends State<TabsVariantsShowcase> {
                 const TextSpan(text: ' para cambiar el estilo visual.'),
               ],
             ),
-          ),
-          
-          const SizedBox(height: 24),
-          
-          // Preview/Code tabs
-          PreviewCodeTabs(
-            showPreview: true,
-            onPreviewTap: () {},
-            onCodeTap: () {},
-            variant: TabVariant.underlined,
           ),
           
           const SizedBox(height: 24),

@@ -351,13 +351,13 @@ class _DocumentationScreenState extends State<DocumentationScreen> {
         ),
         const SizedBox(height: 24),
         _buildContentCard(
-          'AppTextField',
-          'Campo de texto personalizado con estados y validación.\n\n**Características:**\n• Etiquetas y placeholders\n• Iconos prefix y suffix\n• Estados de error\n• Diferentes tamaños\n• Validación integrada',
+          'CustomTextInput',
+          'Campo de texto personalizado con etiqueta flotante y comportamiento moderno.\n\n**Características:**\n• Etiqueta flotante cuando tiene foco o contenido\n• Bordes redondeados (10px)\n• Estados de foco visuales\n• Controlador interno opcional\n• Diseño limpio y moderno',
         ),
         const SizedBox(height: 24),
         _buildContentCard(
           'Uso básico',
-          '```dart\n// Botón primario\nUiButton(\n  onPressed: () {},\n  label: \'Mi Botón\',\n  type: UiButtonType.primary,\n)\n\n// Campo de texto\nAppTextField(\n  labelText: \'Email\',\n  hintText: \'ejemplo@correo.com\',\n  prefixIcon: Icon(Icons.email),\n)\n```',
+          '```dart\n// Botón primario\nUiButton(\n  onPressed: () {},\n  label: \'Mi Botón\',\n  type: UiButtonType.primary,\n)\n\n// Campo de texto\nCustomTextInput(\n  hintText: \'ejemplo@correo.com\',\n  keyboardType: TextInputType.emailAddress,\n)\n```',
         ),
       ],
     );
@@ -419,7 +419,7 @@ class _DocumentationScreenState extends State<DocumentationScreen> {
         const SizedBox(height: 16),
         _buildContentCard(
           'Formulario de login',
-          '```dart\nColumn(\n  children: [\n    AppTextField(\n      labelText: \'Email\',\n      hintText: \'ejemplo@correo.com\',\n      prefixIcon: Icon(Icons.email),\n    ),\n    SizedBox(height: 16),\n    AppTextField(\n      labelText: \'Contraseña\',\n      hintText: \'Ingresa tu contraseña\',\n      obscureText: true,\n      prefixIcon: Icon(Icons.lock),\n    ),\n    SizedBox(height: 24),\n    UiButton(\n      onPressed: () {},\n      label: \'Iniciar Sesión\',\n      type: UiButtonType.primary,\n    ),\n  ],\n)\n```',
+          '```dart\nColumn(\n  children: [\n    CustomTextInput(\n      hintText: \'ejemplo@correo.com\',\n      keyboardType: TextInputType.emailAddress,\n    ),\n    SizedBox(height: 16),\n    CustomTextInput(\n      hintText: \'Ingresa tu contraseña\',\n      keyboardType: TextInputType.visiblePassword,\n    ),\n    SizedBox(height: 24),\n    UiButton(\n      onPressed: () {},\n      label: \'Iniciar Sesión\',\n      type: UiButtonType.primary,\n    ),\n  ],\n)\n```',
         ),
         const SizedBox(height: 24),
         _buildContentCard(
