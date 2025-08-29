@@ -8,168 +8,243 @@ class TypographyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return ComponentScreenTemplate(
       componentTitle: 'Tipografía',
-      componentDescription: 'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara',
+      componentDescription:
+          'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara. Incluye font features avanzadas para control tipográfico preciso.',
       examples: [
         ComponentExample(
-          id: 'typography-usage',
-          title: 'Uso de Tipografía',
-          description: 'Los estilos de tipografía se aplican mediante el ThemeData siguiendo esta sintaxis',
-          previewWidget: _buildTypographyUsagePreview(),
-          codeExample: _getTypographyUsageCode(),
+          id: 'typography-basic',
+          title: 'Tipografía Básica',
+          description: 'Estilos estándar: Sistema Material Design 3',
+          previewWidget: _buildBasicTypographyPreview(),
+          codeExample: _getBasicTypographyCode(),
         ),
         ComponentExample(
-          id: 'typography-import',
-          title: 'Importación',
-          description: 'La tipografía se configura automáticamente al usar el tema del paquete',
-          previewWidget: _buildTypographyImportPreview(),
-          codeExample: _getTypographyImportCode(),
+          id: 'typography-font-features',
+          title: 'Font Features Avanzadas',
+          description:
+              'Control avanzado de características tipográficas como ligaduras, kerning y alternativas de caracteres',
+          previewWidget: _buildFontFeaturesPreview(),
+          codeExample: _getFontFeaturesCode(),
+        ),
+        ComponentExample(
+          id: 'typography-custom',
+          title: 'Tipografía Personalizada',
+          description:
+              'Creación de estilos de texto personalizados con font features específicas',
+          previewWidget: _buildCustomTypographyPreview(),
+          codeExample: _getCustomTypographyCode(),
         ),
         ComponentExample(
           id: 'typography-tokens',
-          title: 'Tokens de Tipografía',
-          description: 'Lista completa de estilos de tipografía disponibles en el sistema',
+          title: 'Tokens del Sistema',
+          description:
+              'Lista completa de estilos de tipografía disponibles en el sistema',
           previewWidget: _buildTypographyTokensPreview(),
           codeExample: _getTypographyTokensCode(),
         ),
       ],
+
       properties: [
         ComponentProperty(
           name: 'displayLarge',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos principales muy grandes',
+          description:
+              'Estilo de texto para títulos principales muy grandes (57px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'displayMedium',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos principales medianos',
+          description:
+              'Estilo de texto para títulos principales medianos (45px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'displaySmall',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos principales pequeños',
+          description:
+              'Estilo de texto para títulos principales pequeños (36px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'headlineLarge',
           type: 'TextStyle',
-          description: 'Estilo de texto para encabezados grandes',
+          description: 'Estilo de texto para encabezados grandes (32px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'headlineMedium',
           type: 'TextStyle',
-          description: 'Estilo de texto para encabezados medianos',
+          description: 'Estilo de texto para encabezados medianos (28px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'headlineSmall',
           type: 'TextStyle',
-          description: 'Estilo de texto para encabezados pequeños',
+          description: 'Estilo de texto para encabezados pequeños (24px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'titleLarge',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos de sección grandes',
+          description:
+              'Estilo de texto para títulos de sección grandes (22px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'titleMedium',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos de sección medianos',
+          description:
+              'Estilo de texto para títulos de sección medianos (16px, w500)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'titleSmall',
           type: 'TextStyle',
-          description: 'Estilo de texto para títulos de sección pequeños',
+          description:
+              'Estilo de texto para títulos de sección pequeños (14px, w500)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'bodyLarge',
           type: 'TextStyle',
-          description: 'Estilo de texto para contenido principal grande',
+          description:
+              'Estilo de texto para contenido principal grande (16px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'bodyMedium',
           type: 'TextStyle',
-          description: 'Estilo de texto para contenido principal mediano',
+          description:
+              'Estilo de texto para contenido principal mediano (14px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'bodySmall',
           type: 'TextStyle',
-          description: 'Estilo de texto para contenido principal pequeño',
+          description:
+              'Estilo de texto para contenido principal pequeño (12px, w400)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'labelLarge',
           type: 'TextStyle',
-          description: 'Estilo de texto para etiquetas grandes',
+          description: 'Estilo de texto para etiquetas grandes (14px, w500)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'labelMedium',
           type: 'TextStyle',
-          description: 'Estilo de texto para etiquetas medianas',
+          description: 'Estilo de texto para etiquetas medianas (12px, w500)',
           required: false,
+          defaultValue: 'null',
         ),
         ComponentProperty(
           name: 'labelSmall',
           type: 'TextStyle',
-          description: 'Estilo de texto para etiquetas pequeñas',
+          description: 'Estilo de texto para etiquetas pequeñas (11px, w500)',
           required: false,
+          defaultValue: 'null',
         ),
       ],
-      usageNotes: 'La tipografía utiliza la fuente Inter con pesos variables (wght) de 100 a 900. Los estilos se organizan en jerarquías: display (títulos principales), headline (encabezados), title (títulos de sección), body (contenido principal) y label (etiquetas). Usa los estilos apropiados para mantener la consistencia visual.',
+      usageNotes:
+          'La tipografía utiliza la fuente Inter con pesos variables (wght) de 100 a 900. Los estilos se organizan en jerarquías: display (títulos principales), headline (encabezados), title (títulos de sección), body (contenido principal) y label (etiquetas). El sistema incluye font features avanzadas para control tipográfico preciso como ligaduras, kerning y alternativas de caracteres. Usa los estilos apropiados para mantener la consistencia visual.',
     );
   }
 
-  Widget _buildTypographyUsagePreview() {
+  Widget _buildBasicTypographyPreview() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.backCards,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sintaxis:',
+            'Display Large',
             style: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontSize: 40,
+              fontWeight: FontWeight.w700,
               color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Theme.of(context).textTheme.[estilo]',
-            style: TextStyle(
-              fontFamily: 'RobotoMono',
-              color: AppColors.orangeBrand,
-              fontWeight: FontWeight.w500,
+              fontFamily: 'InterVariable',
+              fontFeatures: const [
+                FontFeature.enable('cv11'),
+                FontFeature.enable('ss01'),
+              ],
             ),
           ),
           const SizedBox(height: 16),
           Text(
-            'Ejemplo:',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Mi texto',
+            'Headline Large',
             style: TextStyle(
               fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: AppColors.orangeBrand,
+              fontWeight: FontWeight.w500,
+              color: AppColors.black,
+              fontFamily: 'InterVariable',
+              fontFeatures: const [
+                FontFeature.enable('cv11'),
+                FontFeature.enable('ss01'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Title Large',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+              color: AppColors.black,
+              fontFamily: 'InterVariable',
+              fontFeatures: const [
+                FontFeature.enable('cv11'),
+                FontFeature.enable('ss01'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Body Large - Texto de ejemplo.',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: AppColors.darkGray,
+              height: 1.5,
+              fontFamily: 'InterVariable',
+              fontFeatures: const [
+                FontFeature.enable('cv11'),
+                FontFeature.enable('ss01'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Label Medium',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: AppColors.grayMedium,
+              fontFamily: 'InterVariable',
+              fontFeatures: const [
+                FontFeature.enable('cv11'),
+                FontFeature.enable('ss01'),
+              ],
             ),
           ),
         ],
@@ -177,48 +252,207 @@ class TypographyContent extends StatelessWidget {
     );
   }
 
-  Widget _buildTypographyImportPreview() {
+  Widget _buildFontFeaturesPreview() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.softGray,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Configuración automática:',
+            'Font Features Avanzadas',
             style: TextStyle(
+              fontSize: 24,
               fontWeight: FontWeight.w600,
               color: AppColors.black,
             ),
           ),
+          const SizedBox(height: 20),
+          _buildFeatureExample(
+            'Sin font features',
+            'a g 1 0',
+            'Texto sin modificaciones',
+          ),
+          const SizedBox(height: 20),
+          _buildFeatureExample(
+            'Ligaduras (liga)',
+            'fi fl ff ffi ffl',
+            'Ligaduras automáticas entre caracteres',
+          ),
+          const SizedBox(height: 16),
+          _buildFeatureExample(
+            'Kerning (kern)',
+            'AV Ta Wa',
+            'Espaciado optimizado entre pares de letras',
+          ),
+          const SizedBox(height: 16),
+          _buildFeatureExample('Solo ss01', 'a g 1 0', 'Solo ss01 habilitado'),
+          const SizedBox(height: 16),
+          _buildFeatureExample('Solo cv11', 'a g 1 0', 'Solo cv11 habilitado'),
+          const SizedBox(height: 16),
+          _buildFeatureExample('Solo ss02', 'a g 1 0', 'Solo ss02 habilitado'),
+          const SizedBox(height: 16),
+          _buildFeatureExample('Solo ss03', 'a g 1 0', 'Solo ss03 habilitado'),
+          const SizedBox(height: 16),
+          _buildFeatureExample(
+            'Ligaduras contextuales (calt)',
+            'st ct',
+            'Ligaduras que dependen del contexto',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeatureExample(String title, String text, String description) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.softGray,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+              fontSize: 14,
+            ),
+          ),
           const SizedBox(height: 8),
           Text(
-            'import \'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart\';',
+            text,
             style: TextStyle(
-              fontFamily: 'RobotoMono',
+              fontSize: 32,
+              fontWeight: FontWeight.w400,
+              color: AppColors.orangeBrand,
+              fontFeatures: _getFontFeaturesForExample(title),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            description,
+            style: TextStyle(
               fontSize: 12,
-              color: AppColors.greenFree,
+              color: AppColors.darkGray,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<FontFeature> _getFontFeaturesForExample(String title) {
+    switch (title) {
+      case 'Sin font features':
+        return [];
+      case 'Solo ss01':
+        return [FontFeature.enable('ss01')];
+      case 'Solo ss02':
+        return [FontFeature.enable('ss02')];
+      case 'Solo ss03':
+        return [FontFeature.enable('ss03')];
+      case 'Solo cv11':
+        return [FontFeature.enable('cv11')];
+      case 'Alternativas (ss01)':
+        return [
+          FontFeature.enable('ss01'),
+          FontFeature.enable('ss02'),
+          FontFeature.enable('ss03'),
+        ];
+      default:
+        return [
+          FontFeature.disable('case'),
+          FontFeature.disable('dlig'),
+          FontFeature.disable('frac'),
+          FontFeature.disable('dnom'),
+          FontFeature.disable('numr'),
+          FontFeature.disable('subs'),
+          FontFeature.disable('sups'),
+          FontFeature.disable('tnum'),
+          FontFeature.disable('zero'),
+          FontFeature.disable('ss01'),
+          FontFeature.enable('cv11'),
+          FontFeature.enable('calt'),
+          FontFeature.enable('ccmp'),
+          FontFeature.enable('locl'),
+          FontFeature.enable('kern'),
+        ];
+    }
+  }
+
+  Widget _buildCustomTypographyPreview() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.backCards,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Tipografía Personalizada',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: AppColors.orangeBrand.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Text(
+              'Texto con font features personalizadas',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: AppColors.orangeBrand,
+                fontFeatures: const [
+                  FontFeature.disable('case'),
+                  FontFeature.disable('dlig'),
+                  FontFeature.disable('frac'),
+                  FontFeature.disable('dnom'),
+                  FontFeature.disable('numr'),
+                  FontFeature.disable('subs'),
+                  FontFeature.disable('sups'),
+                  FontFeature.disable('tnum'),
+                  FontFeature.disable('zero'),
+                  FontFeature.disable('ss01'),
+                  FontFeature.enable('cv11'),
+                  FontFeature.enable('calt'),
+                  FontFeature.enable('ccmp'),
+                  FontFeature.enable('locl'),
+                  FontFeature.enable('kern'),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 16),
           Text(
-            'El tema incluye la tipografía automáticamente:',
+            'Este texto muestra cómo aplicar font features específicas para controlar aspectos tipográficos como ligaduras, kerning y alternativas de caracteres.',
             style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'MaterialApp(theme: AppTheme.lightTheme)',
-            style: TextStyle(
-              fontFamily: 'RobotoMono',
-              fontSize: 12,
-              color: AppColors.orangeBrand,
+              fontSize: 14,
+              color: AppColors.darkGray,
+              height: 1.4,
             ),
           ),
         ],
@@ -228,78 +462,193 @@ class TypographyContent extends StatelessWidget {
 
   Widget _buildTypographyTokensPreview() {
     final sampleStyles = [
-      {'name': 'displayLarge', 'style': TextStyle(fontSize: 57, fontWeight: FontWeight.w400)},
-      {'name': 'headlineLarge', 'style': TextStyle(fontSize: 32, fontWeight: FontWeight.w400)},
-      {'name': 'titleLarge', 'style': TextStyle(fontSize: 22, fontWeight: FontWeight.w400)},
-      {'name': 'bodyLarge', 'style': TextStyle(fontSize: 16, fontWeight: FontWeight.w400)},
-      {'name': 'labelMedium', 'style': TextStyle(fontSize: 12, fontWeight: FontWeight.w500)},
+      {'name': 'displayLarge', 'size': '57px', 'weight': 'w400'},
+      {'name': 'displayMedium', 'size': '45px', 'weight': 'w400'},
+      {'name': 'displaySmall', 'size': '36px', 'weight': 'w400'},
+      {'name': 'headlineLarge', 'size': '32px', 'weight': 'w400'},
+      {'name': 'headlineMedium', 'size': '28px', 'weight': 'w400'},
+      {'name': 'headlineSmall', 'size': '24px', 'weight': 'w400'},
+      {'name': 'titleLarge', 'size': '22px', 'weight': 'w400'},
+      {'name': 'titleMedium', 'size': '16px', 'weight': 'w500'},
+      {'name': 'titleSmall', 'size': '14px', 'weight': 'w500'},
+      {'name': 'bodyLarge', 'size': '16px', 'weight': 'w400'},
+      {'name': 'bodyMedium', 'size': '14px', 'weight': 'w400'},
+      {'name': 'bodySmall', 'size': '12px', 'weight': 'w400'},
+      {'name': 'labelLarge', 'size': '14px', 'weight': 'w500'},
+      {'name': 'labelMedium', 'size': '12px', 'weight': 'w500'},
+      {'name': 'labelSmall', 'size': '11px', 'weight': 'w500'},
     ];
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.grayMedium.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Estilos disponibles:',
+            'Tokens del Sistema',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: AppColors.black,
+              fontSize: 18,
             ),
           ),
-          const SizedBox(height: 12),
-          ...sampleStyles.map((style) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Row(
-              children: [
-                Text(
-                  style['name'] as String,
-                  style: TextStyle(
-                    fontFamily: 'RobotoMono',
-                    fontSize: 12,
-                    color: AppColors.black,
+          const SizedBox(height: 16),
+          ...sampleStyles.map(
+            (style) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                          style['name'] as String,
+                          style: TextStyle(
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      ),
+                      const SizedBox(width: 18),
+                      Text(
+                          style['size'] as String,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.orangeBrand,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      ),
+                      const SizedBox(width: 18),
+                      Text(
+                          style['weight'] as String,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.greenFree,
+                            fontWeight: FontWeight.w500,
+                          ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    'Texto de ejemplo',
-                    style: (style['style'] as TextStyle).copyWith(
-                      color: AppColors.orangeBrand,
-                    ),
-                  ),
-                ),
-              ],
+                  Text(
+                      'Ejemplo',
+                      style: TextStyle(
+                        fontSize: _getFontSize(style['size'] as String),
+                        fontWeight: _getFontWeight(style['weight'] as String),
+                        color: AppColors.darkGray,
+                      ),
+                    ),  
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
   }
 
-  String _getTypographyUsageCode() {
-    return '''// Sintaxis
-Theme.of(context).textTheme.[estilo]
+  double _getFontSize(String size) {
+    return double.parse(size.replaceAll('px', ''));
+  }
 
-// Ejemplo
+  FontWeight _getFontWeight(String weight) {
+    switch (weight) {
+      case 'w400':
+        return FontWeight.w400;
+      case 'w500':
+        return FontWeight.w500;
+      case 'w600':
+        return FontWeight.w600;
+      case 'w700':
+        return FontWeight.w700;
+      case 'w800':
+        return FontWeight.w800;
+      case 'w900':
+        return FontWeight.w900;
+      default:
+        return FontWeight.w400;
+    }
+  }
+
+  String _getBasicTypographyCode() {
+    return '''// Uso básico de tipografía del sistema
 Text(
-  'Mi texto',
-  style: theme.textTheme.headlineLarge,
+  'Display Large',
+  style: Theme.of(context).textTheme.displayLarge,
+)
+
+Text(
+  'Headline Large',
+  style: Theme.of(context).textTheme.headlineLarge,
+)
+
+Text(
+  'Body Large',
+  style: Theme.of(context).textTheme.bodyLarge,
 )''';
   }
 
-  String _getTypographyImportCode() {
-    return '''import 'package:flutter_package_app_mayoreo/flutter_package_app_mayoreo.dart';
+  String _getFontFeaturesCode() {
+    return '''// Font features avanzadas
+Text(
+  'Texto con ligaduras y kerning',
+  style: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontFeatures: const [
+      FontFeature.disable('case'),
+      FontFeature.disable('dlig'),
+      FontFeature.disable('frac'),
+      FontFeature.disable('dnom'),
+      FontFeature.disable('numr'),
+      FontFeature.disable('subs'),
+      FontFeature.disable('sups'),
+      FontFeature.disable('tnum'),
+      FontFeature.disable('zero'),
+      FontFeature.disable('ss01'),
+      FontFeature.enable('cv11'),
+      FontFeature.enable('calt'),
+      FontFeature.enable('ccmp'),
+      FontFeature.enable('locl'),
+      FontFeature.enable('kern'),
+    ],
+  ),
+)''';
+  }
 
-// El tema incluye la tipografía automáticamente
-MaterialApp(
-  theme: AppTheme.lightTheme,
-  // ...
+  String _getCustomTypographyCode() {
+    return '''// Tipografía personalizada con font features
+TextStyle customStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+  color: AppColors.orangeBrand,
+  fontFeatures: const [
+    FontFeature.disable('case'),
+    FontFeature.disable('dlig'),
+    FontFeature.disable('frac'),
+    FontFeature.disable('dnom'),
+    FontFeature.disable('numr'),
+    FontFeature.disable('subs'),
+    FontFeature.disable('sups'),
+    FontFeature.disable('tnum'),
+    FontFeature.disable('zero'),
+    FontFeature.disable('ss01'),
+    FontFeature.enable('cv11'),
+    FontFeature.enable('calt'),
+    FontFeature.enable('ccmp'),
+    FontFeature.enable('locl'),
+    FontFeature.enable('kern'),
+  ],
+);
+
+Text(
+  'Mi texto personalizado',
+  style: customStyle,
 )''';
   }
 
@@ -327,6 +676,23 @@ theme.textTheme.bodySmall       // 12px, w400
 // Estilos de label (etiquetas)
 theme.textTheme.labelLarge      // 14px, w500
 theme.textTheme.labelMedium     // 12px, w500
-theme.textTheme.labelSmall      // 11px, w500''';
+theme.textTheme.labelSmall      // 11px, w500
+
+// Font features disponibles
+FontFeature.disable('case')     // Deshabilita mayúsculas
+FontFeature.disable('dlig')     // Deshabilita ligaduras discretas
+FontFeature.disable('frac')     // Deshabilita fracciones
+FontFeature.disable('dnom')     // Deshabilita denominadores
+FontFeature.disable('numr')     // Deshabilita numeradores
+FontFeature.disable('subs')     // Deshabilita subíndices
+FontFeature.disable('sups')     // Deshabilita superíndices
+FontFeature.disable('tnum')     // Deshabilita números tabulares
+FontFeature.disable('zero')     // Deshabilita cero con barra
+FontFeature.disable('ss01')     // Deshabilita alternativas estilísticas
+FontFeature.enable('cv11')      // Habilita alternativas contextuales
+FontFeature.enable('calt')      // Habilita ligaduras alternativas
+FontFeature.enable('ccmp')      // Habilita composición de caracteres
+FontFeature.enable('locl')      // Habilita localización
+FontFeature.enable('kern')      // Habilita kerning''';
   }
-} 
+}

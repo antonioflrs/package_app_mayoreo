@@ -79,8 +79,10 @@ class ComponentDetailScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16,
               color: AppColors.darkGray,
-              height: 1.4,
+              height: 1.5,
             ),
+            maxLines: 2, // Limita el texto a 2 líneas
+  overflow: TextOverflow.ellipsis, // Muestra '...' si el texto se desborda
           ),
           const SizedBox(height: 20),
           _buildCategoryBadge(),

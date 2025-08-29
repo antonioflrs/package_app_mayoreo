@@ -168,7 +168,7 @@ class _ComponentsSummaryScreenState extends State<ComponentsSummaryScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.orangeBrand : AppColors.white,
           borderRadius: BorderRadius.circular(20),

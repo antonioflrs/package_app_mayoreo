@@ -35,7 +35,7 @@ class ComponentCardContent extends StatelessWidget {
   component: NavigationItem.material(
     id: 'typography',
     title: 'Tipografía',
-    description: 'Sistema de tipografía con Inter',
+    description: 'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara',
     icon: Icons.text_fields,
     category: NavigationCategory.designGuides,
   ),
@@ -105,7 +105,7 @@ class _PreviewWithoutCta extends StatelessWidget {
         component: const NavigationItem.material(
           id: 'typography',
           title: 'Tipografía',
-          description: 'Sistema de tipografía con Inter',
+          description: 'Sistema de tipografía que utiliza la fuente Inter con diferentes pesos y tamaños para crear una jerarquía visual clara',
           icon: Icons.text_fields,
           category: NavigationCategory.designGuides,
         ),
