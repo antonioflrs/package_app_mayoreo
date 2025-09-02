@@ -33,6 +33,12 @@ import '../widgets/component_content/featured_reviews_widget_content.dart';
 import '../widgets/component_content/product_info_widget_content.dart';
 import '../widgets/component_content/rating_stars_content.dart';
 import '../widgets/component_content/favorite_icon_content.dart';
+import '../widgets/component_content/stacked_cards_widget_content.dart';
+import '../widgets/component_content/options_menu_content.dart';
+import '../widgets/component_content/list_card_content.dart';
+import '../widgets/component_content/product_card_horizontal_content.dart';
+import '../widgets/component_content/discount_tiers_widget_content.dart';
+import '../widgets/component_content/product_card_horizontal_v2_content.dart';
 
 class DesignSystemData {
   static const List<NavigationItem> designGuides = [
@@ -337,6 +343,54 @@ class DesignSystemData {
       icon: Icons.favorite,
       category: NavigationCategory.uiComponents,
       content: FavoriteIconContent(),
+    ),
+    NavigationItem.material(
+      id: 'stacked-cards-widget',
+      title: 'Stacked Cards Widget',
+      description: 'Widget personalizable para mostrar tarjetas apiladas con efecto de rotación. Soporta dimensiones personalizadas, imágenes múltiples, textos personalizados y estilos completos',
+      icon: Icons.view_agenda,
+      category: NavigationCategory.uiComponents,
+      content: StackedCardsWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'options-menu',
+      title: 'Options Menu',
+      description: 'Widget personalizable de menú de opciones con overlay para acciones contextuales',
+      icon: Icons.more_vert,
+      category: NavigationCategory.uiComponents,
+      content: OptionsMenuContent(),
+    ),
+    NavigationItem.material(
+      id: 'list-card',
+      title: 'List Card',
+      description: 'Widget para mostrar cards de listas de favoritos con opciones de menú y tarjetas apiladas',
+      icon: Icons.list_alt,
+      category: NavigationCategory.uiComponents,
+      content: ListCardContent(),
+    ),
+    NavigationItem.material(
+      id: 'product-card-horizontal',
+      title: 'Product Card Horizontal',
+      description: 'Widget para mostrar tarjetas de productos en formato horizontal con opciones de menú, precios y botón de agregar',
+      icon: Icons.shopping_cart,
+      category: NavigationCategory.uiComponents,
+      content: ProductCardHorizontalContent(),
+    ),
+    NavigationItem.material(
+      id: 'discount-tiers-widget',
+      title: 'Discount Tiers Widget',
+      description: 'Widget personalizable para mostrar niveles de descuento con barra de progreso y selección interactiva',
+      icon: Icons.local_offer,
+      category: NavigationCategory.uiComponents,
+      content: DiscountTiersWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'product-card-horizontal-v2',
+      title: 'Product Card Horizontal V2',
+      description: 'Widget personalizable para mostrar tarjetas de productos en formato horizontal con controles de cantidad, precios y diferentes estados',
+      icon: Icons.shopping_cart_outlined,
+      category: NavigationCategory.uiComponents,
+      content: ProductCardHorizontalV2Content(),
     ),
   ];
 
