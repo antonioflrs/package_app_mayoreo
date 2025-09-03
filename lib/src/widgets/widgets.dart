@@ -73,4 +73,7 @@ export 'component_content/list_card_content.dart';
 export 'product_card_horizontal.dart';
 export 'component_content/product_card_horizontal_content.dart';
 export 'discount_tiers_widget.dart';
+export 'component_content/discount_tiers_widget_content.dart';
+export 'discount_tiers_widget_logout.dart';
+export 'component_content/discount_tiers_widget_logout_content.dart';
 export 'product_card_horizontal_v2.dart';

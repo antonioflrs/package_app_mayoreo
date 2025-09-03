@@ -38,6 +38,7 @@ import '../widgets/component_content/options_menu_content.dart';
 import '../widgets/component_content/list_card_content.dart';
 import '../widgets/component_content/product_card_horizontal_content.dart';
 import '../widgets/component_content/discount_tiers_widget_content.dart';
+import '../widgets/component_content/discount_tiers_widget_logout_content.dart';
 import '../widgets/component_content/product_card_horizontal_v2_content.dart';
 
 class DesignSystemData {
@@ -383,6 +384,14 @@ class DesignSystemData {
       icon: Icons.local_offer,
       category: NavigationCategory.uiComponents,
       content: DiscountTiersWidgetContent(),
+    ),
+    NavigationItem.material(
+      id: 'discount-tiers-widget-logout',
+      title: 'Discount Tiers Widget Logout',
+      description: 'Widget personalizable para mostrar niveles de descuento con banner de aplicación para usuarios no autenticados',
+      icon: Icons.logout,
+      category: NavigationCategory.uiComponents,
+      content: DiscountTiersWidgetLogoutContent(),
     ),
     NavigationItem.material(
       id: 'product-card-horizontal-v2',
